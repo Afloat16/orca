@@ -1,0 +1,90 @@
+name: Remaining contribution checks
+on:
+  push:
+    branches: [validation/orca-remaining-pr-checks-20261126]
+permissions:
+  contents: read
+concurrency:
+  group: remaining-contribution-checks-20261126
+  cancel-in-progress: true
+env:
+  ORCA_BACKGROUND_LAUNCH: '1'
+jobs:
+  changed-checks:
+    name: PR ${{ matrix.pr }} changed checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - pr: 49720
+            sha: c445ba05405a94ce894b720269ae17df3b941ece
+            base: 4e43dffdaca90950629735e77ccacb21f2513a1e
+          - pr: 49733
+            sha: 7cc354bc1701dc242d18abdcc4e835b495514575
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49724
+            sha: af251eaf492357573dcc8a441d2bd2fb037a5f0c
+            base: 6d72829b068cdf806fa9bc1f3c3c08c77b35a2ac
+          - pr: 49725
+            sha: 113eb3a71ec388a04bffb9bf8765de1c5d9b3c3c
+            base: 6e290778cd4e7edaaef1b7ab20f01a7d8a8e2892
+          - pr: 49730
+            sha: e602a73ff38e6a0c0118e8bb745f69f498ff5065
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49729
+            sha: 378a5782505470ece7de44abcbc7d38d03d06b5c
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49731
+            sha: 72372e0f7c01a860a67e36201c59c9b1a55c14dd
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49728
+            sha: b81c99b17f536c84b5bc5d1e9c8da5867c0a621a
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49738
+            sha: 59c786461112126a092ca5b047a987a765205b88
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49727
+            sha: b244044e049e23d5539e163c5976fd8b7ee3c1e4
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49737
+            sha: 087ab564a5b941d3f9b47e82a3828f0f3c083ce5
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49734
+            sha: 910e94c801f22da177e4b53619d097771ad91477
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49736
+            sha: 588977329cec390bf5ad2be409ca52ccb1cdd3ef
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49722
+            sha: 9dc199d84f06f8a095c1fcb938a07b5ee0859d67
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49723
+            sha: 0a72a7459b75c9216366e6c717acdbf613a50488
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+          - pr: 49732
+            sha: 5de0e4800491bb4b1fc5dfe32869cbd98f0cac07
+            base: 3e227259249d2daa02ce89f927036bb931fcd1b1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ matrix.sha }}
+          filter: blob:none
+          fetch-depth: 50
+          persist-credentials: false
+      - uses: ./.github/actions/install-node-dependencies
+        with:
+          native-runtime: node
+          node-version: '24'
+          cache-pnpm-store: 'false'
+          persist-native-cache: 'false'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version-file: config/.bun-version
+          no-cache: true
+      - name: Check the complete contribution
+        env:
+          CONTRIBUTION_BASE: ${{ matrix.base }}
+        run: timeout 900 pnpm check:changed --base="$CONTRIBUTION_BASE"
