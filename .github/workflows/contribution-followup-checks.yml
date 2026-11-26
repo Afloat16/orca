@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - pr: 49753
-            sha: 67b333514591c73bbf8adafc03090165771cceb5
+            sha: f1a4b24f1eef553401aca36230bf47f30166aea0
     steps:
       - uses: actions/checkout@v6
         with:
