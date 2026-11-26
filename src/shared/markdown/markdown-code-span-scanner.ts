@@ -50,12 +50,16 @@ function splitBlockquotePrefix(line: string): { depth: number; rest: string } {
   return { depth, rest: line.slice(prefix.length) }
 }
 
-function hasTableDelimiterAhead(content: string, start: number): boolean {
+function findTableDelimiterAhead(
+  content: string,
+  start: number
+): { depth: number; rest: string } | null {
   if (start >= content.length) {
-    return false
+    return null
   }
   const next = content.slice(start, findMarkdownLineEnd(content, start))
-  return TABLE_DELIMITER_ROW.test(splitBlockquotePrefix(next).rest)
+  const quote = splitBlockquotePrefix(next)
+  return TABLE_DELIMITER_ROW.test(quote.rest) ? quote : null
 }
 
 function isEscapedAt(content: string, index: number, lineStart: number): boolean {
@@ -64,6 +68,23 @@ function isEscapedAt(content: string, index: number, lineStart: number): boolean
     cursor -= 1
   }
   return (index - cursor) % 2 === 1
+}
+
+function countTableCells(line: string): number {
+  const trimmed = line.trim()
+  let count = 1
+  for (let index = 0; index < trimmed.length; index += 1) {
+    if (trimmed[index] === '|' && !isEscapedAt(trimmed, index, 0)) {
+      count += 1
+    }
+  }
+  if (trimmed.startsWith('|')) {
+    count -= 1
+  }
+  if (trimmed.endsWith('|') && !isEscapedAt(trimmed, trimmed.length - 1, 0)) {
+    count -= 1
+  }
+  return count
 }
 
 /** Index backtick runs once so each lookup binary-searches instead of rescanning the remaining document. */
@@ -80,6 +101,7 @@ export function createMarkdownCodeSpanScanner(content: string): MarkdownCodeSpan
   let previousWasBoundary = true
   let previousQuoteDepth = 0
   let insideTable = false
+  let insideTableCells = false
 
   forEachMarkdownLine(content, (lineStart, lineEnd, nextLineStart) => {
     const line = content.slice(lineStart, lineEnd)
@@ -91,10 +113,29 @@ export function createMarkdownCodeSpanScanner(content: string): MarkdownCodeSpan
     const quote = isBoundary ? null : splitBlockquotePrefix(line)
     const quoteDepth = quote ? quote.depth : previousQuoteDepth
     const isDelimiterRow = quote !== null && TABLE_DELIMITER_ROW.test(quote.rest)
-    const isTableHeader =
-      quote !== null && !isDelimiterRow && hasTableDelimiterAhead(content, nextLineStart)
+    const delimiter =
+      quote !== null && !isDelimiterRow ? findTableDelimiterAhead(content, nextLineStart) : null
+    const isTableHeader = delimiter !== null
+    const interruptsTable =
+      quote !== null &&
+      (SINGLE_LINE_BLOCK.test(quote.rest) ||
+        LEAF_BLOCK_START.test(quote.rest) ||
+        /^(?: {4}| {0,3}\t)/.test(quote.rest))
+    if (isBoundary || quoteDepth !== previousQuoteDepth || interruptsTable) {
+      insideTableCells = false
+    }
+    // A delimiter can interrupt a paragraph even when mismatched columns prevent a table.
+    if (
+      quote !== null &&
+      delimiter !== null &&
+      !interruptsTable &&
+      quote.depth === delimiter.depth &&
+      countTableCells(quote.rest) === countTableCells(delimiter.rest)
+    ) {
+      insideTableCells = true
+    }
     insideTable = insideTable || isDelimiterRow
-    // marked parses every cell on its own, so each row is its own inline context.
+    // marked parses every cell on its own; rows end the current inline context too.
     const endsWithLine =
       quote !== null && (SINGLE_LINE_BLOCK.test(quote.rest) || isTableHeader || insideTable)
     // A deeper quote opens a block; a shallower one can be a lazy continuation.
@@ -112,6 +153,9 @@ export function createMarkdownCodeSpanScanner(content: string): MarkdownCodeSpan
 
     let index = lineStart
     while (index < lineEnd) {
+      if (insideTableCells && content[index] === '|' && !isEscapedAt(content, index, lineStart)) {
+        blockId += 1
+      }
       if (content[index] !== '`') {
         index += 1
         continue
