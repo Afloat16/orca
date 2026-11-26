@@ -48,3 +48,8 @@ it('ends a quoted table at a quote-stripped blank line', () => {
     paragraph.indexOf('`', opener + 1) + 1
   )
 })
+
+it('recognizes delimiter-shaped headers before scanning table cells', () => {
+  const table = '---|---\n---|---\n| first ` | second ` |\n'
+  expect(createMarkdownCodeSpanScanner(table).findSpanEnd(table.indexOf('`'))).toBeNull()
+})

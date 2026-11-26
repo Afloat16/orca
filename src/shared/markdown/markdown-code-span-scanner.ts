@@ -118,8 +118,7 @@ export function createMarkdownCodeSpanScanner(content: string): MarkdownCodeSpan
     const quote = isBoundary ? null : lineQuote
     const quoteDepth = quote ? quote.depth : previousQuoteDepth
     const isDelimiterRow = quote !== null && TABLE_DELIMITER_ROW.test(quote.rest)
-    const delimiter =
-      quote !== null && !isDelimiterRow ? findTableDelimiterAhead(content, nextLineStart) : null
+    const delimiter = quote !== null ? findTableDelimiterAhead(content, nextLineStart) : null
     const isTableHeader = delimiter !== null
     const blocksTableHeader =
       quote !== null &&
