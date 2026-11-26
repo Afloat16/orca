@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - pr: 49753
-            sha: 64362958acd98137e714b46435f1600bae304542
+            sha: 53f55e3c5de39e509c71ca2d8330588d1e4afdba
     steps:
       - uses: actions/checkout@v6
         with:
@@ -40,3 +40,8 @@ jobs:
           no-cache: true
       - name: Check the complete contribution
         run: timeout 900 pnpm check:changed --base=3e227259249d2daa02ce89f927036bb931fcd1b1
+      - name: Show formatting diff if validation fails
+        if: failure()
+        run: |
+          pnpm exec oxfmt src/shared/markdown/markdown-block-containers.ts
+          git diff -- src/shared/markdown/markdown-block-containers.ts
