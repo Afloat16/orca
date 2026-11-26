@@ -19,14 +19,12 @@ jobs:
       max-parallel: 2
       matrix:
         include:
-          - pr: 49721
-            sha: b74dcab5f2057f27dc934116ce002a2cd70c50ac
-          - pr: 49726
-            sha: 9da1f917cec48b0f657c74ddd60dccc112b2910b
-          - pr: 49735
-            sha: 33df41a51ba6d3a59fe56d56037a8c6fcac94b6a
-          - pr: 49753
-            sha: b080d80c5353fe94837ea372ef4c58f685ef4860
+          - pr: 49727
+            sha: 7508091724fc699ac245a0c67c9362f42679e2f2
+          - pr: 49728
+            sha: a54f1e62beba431be0a8b11ad848ae4f9b155316
+          - pr: 49733
+            sha: 20cf1e3cf72a46f75b074cefbb77e60a409eeb76
     steps:
       - uses: actions/checkout@v6
         with:
