@@ -20,11 +20,9 @@ jobs:
       matrix:
         include:
           - pr: 49721
-            sha: 84617cc1dc529866f15feed6f17fc8312afba1e0
-          - pr: 49728
-            sha: 7307a90c875db6338ccbea90827beb8f2486e981
-          - pr: 49735
-            sha: cbb1a9ee5f971819749fdb0a9d2f320fca344c92
+            sha: dc112e9a702e241aea7c39f3237cefd6c5698703
+          - pr: 49753
+            sha: 932cbb93d5f1d6f8edf244e1972a01cbac0891f8
     steps:
       - uses: actions/checkout@v6
         with:
