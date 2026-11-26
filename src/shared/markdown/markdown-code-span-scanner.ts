@@ -33,6 +33,9 @@ const LEAF_BLOCK_START = new RegExp(
   'i'
 )
 
+// Only a literal ordinal 1 followed by whitespace interrupts an active table.
+const TABLE_BODY_ORDERED_ITEM = /^ {0,3}(?!1[.)][ \t])\d{1,9}[.)](?:[ \t]|$)/
+
 // marked recognizes a GFM delimiter row before validating cell counts and ends the preceding paragraph.
 const TABLE_DELIMITER_ROW = /^(?=[^\n]*[:|]) {0,3}(?:\| *)?:?-+:? *(?:\| *:?-+:? *)*(?:\| *)?$/
 
@@ -106,21 +109,25 @@ export function createMarkdownCodeSpanScanner(content: string): MarkdownCodeSpan
   forEachMarkdownLine(content, (lineStart, lineEnd, nextLineStart) => {
     const line = content.slice(lineStart, lineEnd)
     const wasInsideFence = fence.insideFence
-    const isBoundary = fence.consume(line) || wasInsideFence || BLANK_LINE.test(line)
+    const isFenceBoundary = fence.consume(line) || wasInsideFence
+    const lineQuote = isFenceBoundary ? null : splitBlockquotePrefix(line)
+    const isBoundary = isFenceBoundary || (lineQuote !== null && BLANK_LINE.test(lineQuote.rest))
     if (isBoundary) {
       insideTable = false
     }
-    const quote = isBoundary ? null : splitBlockquotePrefix(line)
+    const quote = isBoundary ? null : lineQuote
     const quoteDepth = quote ? quote.depth : previousQuoteDepth
     const isDelimiterRow = quote !== null && TABLE_DELIMITER_ROW.test(quote.rest)
     const delimiter =
       quote !== null && !isDelimiterRow ? findTableDelimiterAhead(content, nextLineStart) : null
     const isTableHeader = delimiter !== null
-    const interruptsTable =
+    const blocksTableHeader =
       quote !== null &&
       (SINGLE_LINE_BLOCK.test(quote.rest) ||
         LEAF_BLOCK_START.test(quote.rest) ||
         /^(?: {4}| {0,3}\t)/.test(quote.rest))
+    const interruptsTable =
+      blocksTableHeader && quote !== null && !TABLE_BODY_ORDERED_ITEM.test(quote.rest)
     if (isBoundary || quoteDepth !== previousQuoteDepth || interruptsTable) {
       insideTableCells = false
     }
@@ -128,7 +135,7 @@ export function createMarkdownCodeSpanScanner(content: string): MarkdownCodeSpan
     if (
       quote !== null &&
       delimiter !== null &&
-      !interruptsTable &&
+      !blocksTableHeader &&
       quote.depth === delimiter.depth &&
       countTableCells(quote.rest) === countTableCells(delimiter.rest)
     ) {
