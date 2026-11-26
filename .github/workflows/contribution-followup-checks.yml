@@ -1,0 +1,48 @@
+name: Contribution follow-up checks
+on:
+  push:
+    branches: [validation/orca-review-followups-20261126]
+permissions:
+  contents: read
+concurrency:
+  group: contribution-followups-20261126
+  cancel-in-progress: true
+env:
+  ORCA_BACKGROUND_LAUNCH: '1'
+jobs:
+  changed-checks:
+    name: PR ${{ matrix.pr }} changed checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - pr: 49721
+            sha: b74dcab5f2057f27dc934116ce002a2cd70c50ac
+          - pr: 49726
+            sha: 9da1f917cec48b0f657c74ddd60dccc112b2910b
+          - pr: 49735
+            sha: 33df41a51ba6d3a59fe56d56037a8c6fcac94b6a
+          - pr: 49753
+            sha: b080d80c5353fe94837ea372ef4c58f685ef4860
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ matrix.sha }}
+          filter: blob:none
+          fetch-depth: 50
+          persist-credentials: false
+      - uses: ./.github/actions/install-node-dependencies
+        with:
+          native-runtime: node
+          node-version: '24'
+          cache-pnpm-store: 'false'
+          persist-native-cache: 'false'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version-file: config/.bun-version
+          no-cache: true
+      - name: Check the complete contribution
+        run: timeout 900 pnpm check:changed --base=3e227259249d2daa02ce89f927036bb931fcd1b1
