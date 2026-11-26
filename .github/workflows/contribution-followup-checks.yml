@@ -19,10 +19,8 @@ jobs:
       max-parallel: 2
       matrix:
         include:
-          - pr: 49721
-            sha: dc112e9a702e241aea7c39f3237cefd6c5698703
           - pr: 49753
-            sha: 932cbb93d5f1d6f8edf244e1972a01cbac0891f8
+            sha: 67b333514591c73bbf8adafc03090165771cceb5
     steps:
       - uses: actions/checkout@v6
         with:
