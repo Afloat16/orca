@@ -1,0 +1,3487 @@
+{
+  "repository": "stablyai/orca",
+  "account": "Afloat16",
+  "createdAt": "2026-11-27T09:23:16.639Z",
+  "phase": "Review follow-ups and merge tracking in progress",
+  "requestedTarget": {
+    "newMeaningfulImprovements": 50,
+    "completionRequiresActualUpstreamMerge": true,
+    "originalAuthoredPRMergedTarget": 50,
+    "targetMet": false
+  },
+  "countDefinitions": {
+    "authoredMerged": "Only original/replacement PRs authored by Afloat16 with GitHub merged=true and merged_at set.",
+    "maintainerMerged": "Distinct improvements landed through a maintainer-authored successor; tracked separately and never added to the authored PR merged counter.",
+    "closedUnmerged": "Closed without merged_at never counts as merged."
+  },
+  "counts": {
+    "originalPRsCreated": 50,
+    "originalPRsOpen": 33,
+    "originalPRsClosedUnmerged": 17,
+    "originalPRsMerged": 0,
+    "maintainerContinuations": 16,
+    "mergedMaintainerContinuations": 7,
+    "openMaintainerContinuations": 9,
+    "rejectedWithoutContinuation": 1,
+    "replacementPRsCreated": 0
+  },
+  "initialDedupeCoverage": {
+    "priorAfloat16PRs": 71,
+    "recentAllAuthorPRs": 300,
+    "perCandidateHistoricalQueries": true,
+    "limitation": "Search-based absence of equivalent fixes; current upstream must be checked again before any new replacement."
+  },
+  "originalScope": [
+    50512,
+    50520,
+    50594,
+    50668,
+    50598,
+    50621,
+    50601,
+    50607,
+    50507,
+    50534,
+    50646,
+    50633,
+    50543,
+    50546,
+    50651,
+    50552,
+    50659,
+    50556,
+    50558,
+    50560,
+    50562,
+    50643,
+    50565,
+    50524,
+    50527,
+    50530,
+    50532,
+    50691,
+    50693,
+    50688,
+    50536,
+    50686,
+    50684,
+    50680,
+    50677,
+    50539,
+    50542,
+    50626,
+    50622,
+    50581,
+    50584,
+    50624,
+    50586,
+    50635,
+    50628,
+    50632,
+    50637,
+    50639,
+    50588,
+    50590
+  ],
+  "contributions": [
+    {
+      "package": "data/calendar-list-pagination/manifest.json",
+      "branch": "afloat16/orca50-20261127-calendar-list-pagination",
+      "title": "fix(google-calendar): resolve calendar names across list pages",
+      "issue": 50511,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50511",
+      "pr": 50512,
+      "prUrl": "https://github.com/stablyai/orca/pull/50512",
+      "implementationHead": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
+      "head": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": true,
+      "change": "Follow calendarList continuation tokens before listing calendars or resolving a name. Keep direct ID/primary lookups and the existing ambiguity refusal.",
+      "problem": "Calendars after the first250 entries cannot be selected by name. A duplicate name on a later page is also missed, so an update may select the first calendar instead of reporting ambiguity.",
+      "effectZh": "按名称解析 Google Calendar 时继续读取后续页；达到分页上限仍不完整时明确报错，避免漏掉同名日历后误选。",
+      "ci": {
+        "status": "success",
+        "source": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
+        "runId": 45965251200,
+        "jobId": 140392273709,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45965251200/job/140392273709",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"calendarList\" \"pagination\"",
+          "repo:stablyai/orca \"Google\" \"calendars\" in:title"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "data/docs-comment-pagination/manifest.json",
+      "branch": "afloat16/orca50-20261127-docs-comment-pagination",
+      "title": "fix(google-docs): read unresolved comments across every page",
+      "issue": 50519,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50519",
+      "pr": 50520,
+      "prUrl": "https://github.com/stablyai/orca/pull/50520",
+      "implementationHead": "f846856dd093f642a44c73766583cf2deaf484f5",
+      "head": "f846856dd093f642a44c73766583cf2deaf484f5",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": true,
+      "change": "Request nextPageToken in Drive's field mask and follow every comment page, including empty intermediate pages. Keep filtering, clipping, reply limits and the output budget.",
+      "problem": "A document read stops after the first100 comments, so unresolved feedback after a resolved first page disappears and openComments reports an incorrect total.",
+      "effectZh": "继续读取 Google Docs 评论后续页，保留未解决意见；分页上限、重复 token 或后页失败时显示真实的部分数量。",
+      "ci": {
+        "status": "success",
+        "source": "f846856dd093f642a44c73766583cf2deaf484f5",
+        "jobId": 140397206642,
+        "runId": 45966770120,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45966770120/job/140397206642",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"openComments\"",
+          "repo:stablyai/orca \"comments\" \"Google\" in:title"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "data/drive-concurrent-read/manifest.json",
+      "branch": "afloat16/orca50-20261127-drive-concurrent-read",
+      "title": "perf(google-drive): share concurrent reads of one file version",
+      "issue": 50593,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50593",
+      "pr": 50594,
+      "prUrl": "https://github.com/stablyai/orca/pull/50594",
+      "implementationHead": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+      "head": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Share the pending per-account, per-file-version conversion. Populate the existing bounded result cache on success and release pending entries on both success and failure.",
+      "problem": "Concurrent drive read calls for the same file version all miss the completed-value cache and independently download or convert that file.",
+      "effectZh": "同账户、同文件版本的并发 Drive 读取共享下载和转换，保留各调用者需要的不同内容区间。",
+      "ci": {
+        "status": "success",
+        "source": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348265,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348265",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"cachedFileText\"",
+          "repo:stablyai/orca \"Drive\" \"concurrent\" in:title"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "data/drive-folder-completeness/manifest.json",
+      "branch": "afloat16/orca50-20261127-drive-folder-completeness",
+      "title": "fix(google-drive): prove folder name uniqueness before writes",
+      "issue": 50662,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50662",
+      "pr": 50668,
+      "prUrl": "https://github.com/stablyai/orca/pull/50668",
+      "implementationHead": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+      "head": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Request nextPageToken and incompleteSearch, follow up to 20 pages including empty pages, and stop as soon as the result is complete or distinct matches establish ambiguity. Refuse incompleteSearch or a continuation remaining at the 20-page limit with an explicit-folder-ID remedy; never accept an unproven unique result at the cap. Retain at most five distinct candidate IDs for the ambiguity message.",
+      "problem": "Name-based folder resolution reads only one files.list page and omits incompleteSearch from its field mask. A later duplicate or an unsearched shared drive can therefore make mkdir, upload, document creation or move choose an unproven parent folder.",
+      "effectZh": "Drive 按名称选择父文件夹前确认搜索完整且唯一，拒绝未完整搜索或截断结果，避免写入错误文件夹。",
+      "ci": {
+        "status": "success",
+        "source": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348598,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348598",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior Afloat16 PRs and recent 300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"resolveFolder\" \"page\" in:title,body",
+          "repo:stablyai/orca is:pr \"Drive\" \"incompleteSearch\" in:title,body",
+          "repo:stablyai/orca is:pr \"Drive\" \"folder\" \"pagination\" in:title,body"
+        ],
+        "search_artifact": "dedupe-searches.json",
+        "related_distinct": []
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "data/gmail-forward-concurrency/manifest.json",
+      "branch": "afloat16/orca50-20261127-gmail-forward-concurrency",
+      "title": "fix(gmail): bound attachment reads when forwarding drafts",
+      "issue": 50596,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50596",
+      "pr": 50598,
+      "prUrl": "https://github.com/stablyai/orca/pull/50598",
+      "implementationHead": "870993befb248a96666cf14bfebae1aee126e64a",
+      "head": "870993befb248a96666cf14bfebae1aee126e64a",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Retrieve saved attachments through the existing inBatches helper and GMAIL_CALLS_AT_ONCE budget. Preserve attachment ordering and aggregate byte limits.",
+      "problem": "Forwarding or revising a message launches every attachment retrieval simultaneously. This ignores Orca's existing Gmail request budget and can fail the entire draft on a concurrent-request429.",
+      "effectZh": "Gmail 转发附件遵守已有并发预算，减少请求过多导致的 429，同时保留附件顺序和总大小限制。",
+      "ci": {
+        "status": "success",
+        "source": "870993befb248a96666cf14bfebae1aee126e64a",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348793,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348793",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"savedAttachments\"",
+          "repo:stablyai/orca \"Gmail\" \"attachments\" in:title"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50598,
+          "url": "https://github.com/stablyai/orca/pull/50598",
+          "title": "fix(gmail): bound attachment reads when forwarding drafts",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-gmail-forward-concurrency",
+          "headSha": "870993befb248a96666cf14bfebae1aee126e64a"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50598#issuecomment-7213793014",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": true,
+          "continuedIn": 50671
+        },
+        "successor": {
+          "number": 50671,
+          "url": "https://github.com/stablyai/orca/pull/50671",
+          "title": "fix(gmail): limit concurrent attachment downloads when forwarding or revising drafts",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:48:57Z",
+          "head": "5a80d2d94941dc124f7e5bde60e101e8f14626b3",
+          "mergeCommit": "e142c1f21abe82f16845c61a2688cab30008ef76"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "5a80d2d94941dc124f7e5bde60e101e8f14626b3",
+            "url": "https://github.com/stablyai/orca/commit/5a80d2d94941dc124f7e5bde60e101e8f14626b3",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "e142c1f21abe82f16845c61a2688cab30008ef76",
+          "url": "https://github.com/stablyai/orca/commit/e142c1f21abe82f16845c61a2688cab30008ef76",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    },
+    {
+      "package": "data/gmail-inline-attachments/manifest.json",
+      "branch": "afloat16/orca50-20261127-gmail-inline-attachments",
+      "title": "fix(gmail): preserve attachments carried in message body data",
+      "issue": 50620,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50620",
+      "pr": 50621,
+      "prUrl": "https://github.com/stablyai/orca/pull/50621",
+      "implementationHead": "1b72a4ac009188b964318696bdabf2cdee5a9dc4",
+      "head": "1b72a4ac009188b964318696bdabf2cdee5a9dc4",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Recognize named inline-data parts, including empty files, and download their existing bytes without calling the external-attachment endpoint. Preserve external-attachment reads and existing size checks.",
+      "problem": "Gmail may return attachment bytes directly in MessagePartBody.data without an attachmentId. Orca only lists parts with an attachmentId and therefore silently drops these files when reading or forwarding messages.",
+      "effectZh": "保留 Gmail 直接放在消息 body.data 中的附件，包括空文件，避免读取和转发时静默丢失。",
+      "ci": {
+        "status": "success",
+        "source": "1b72a4ac009188b964318696bdabf2cdee5a9dc4",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348807,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348807",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"Gmail\" \"inline\" \"attachment\"",
+          "repo:stablyai/orca \"downloadGmailAttachment\"",
+          "repo:stablyai/orca \"Gmail\" \"body.data\""
+        ],
+        "related_distinct": [
+          "#50497 and #50413 change bodyText MIME representation selection; their patches do not change attachmentsOf or downloadGmailAttachment.",
+          "#48067 changes CLI save collision behavior, not Gmail attachment presence or retrieval."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "data/gmail-repeated-label/manifest.json",
+      "branch": "afloat16/orca50-20261127-gmail-repeated-label",
+      "title": "fix(gmail): reuse labels created earlier in one modify request",
+      "issue": 50600,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50600",
+      "pr": 50601,
+      "prUrl": "https://github.com/stablyai/orca/pull/50601",
+      "implementationHead": "e3646c4fdda468c0aed2c37708242090a839d3d7",
+      "head": "e3646c4fdda468c0aed2c37708242090a839d3d7",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Remember labels created earlier in the request in the same lookup list used for existing labels.",
+      "problem": "When one modify request repeats a new label, Orca creates it then tries to create it again. Gmail's name-conflict error aborts the mail modification after leaving the new label behind.",
+      "effectZh": "一次 Gmail 修改请求复用刚创建的同名标签，避免重复创建冲突中断后续邮件修改。",
+      "ci": {
+        "status": "success",
+        "source": "e3646c4fdda468c0aed2c37708242090a839d3d7",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348785,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348785",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"gmail\" \"label\" in:title",
+          "repo:stablyai/orca \"labelIds\" \"created\""
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50601,
+          "url": "https://github.com/stablyai/orca/pull/50601",
+          "title": "fix(gmail): reuse labels created earlier in one modify request",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-gmail-repeated-label",
+          "headSha": "e3646c4fdda468c0aed2c37708242090a839d3d7"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50601#issuecomment-7213821687",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50675
+        },
+        "successor": {
+          "number": 50675,
+          "url": "https://github.com/stablyai/orca/pull/50675",
+          "title": "fix(gmail): reuse labels created earlier in the same modify request",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:49:45Z",
+          "head": "466f502b2944aee5cb4759dbcd621eb0644e1509",
+          "mergeCommit": "c31a94271ea4a52d9b2ad6980fa3c9a496b03f7c"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "466f502b2944aee5cb4759dbcd621eb0644e1509",
+            "url": "https://github.com/stablyai/orca/commit/466f502b2944aee5cb4759dbcd621eb0644e1509",
+            "authorLogin": "nwparker",
+            "authorName": "Neil",
+            "credit": "Afloat_coauthor_trailer"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "c31a94271ea4a52d9b2ad6980fa3c9a496b03f7c",
+          "url": "https://github.com/stablyai/orca/commit/c31a94271ea4a52d9b2ad6980fa3c9a496b03f7c",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    },
+    {
+      "package": "data/google-response-cleanup/manifest.json",
+      "branch": "afloat16/orca50-20261127-google-response-cleanup",
+      "title": "fix(google): release rejected and missing response bodies",
+      "issue": 50606,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50606",
+      "pr": 50607,
+      "prUrl": "https://github.com/stablyai/orca/pull/50607",
+      "implementationHead": "64e24ab5fe445acc312b3786a494315c89f279e1",
+      "head": "64e24ab5fe445acc312b3786a494315c89f279e1",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Cancel only response bodies that will not be read: the initial401 retry and find's404 result. Preserve final error-body parsing and normal successful reads.",
+      "problem": "A rejected token response was abandoned before refreshing, and a missing-file response was returned without releasing its body. These unused HTTP bodies can retain transport resources across repeated Google calls.",
+      "effectZh": "主动释放 Google 401 重试和 404 空结果的不再读取的响应体，减少连接与传输资源滞留。",
+      "ci": {
+        "status": "success",
+        "source": "64e24ab5fe445acc312b3786a494315c89f279e1",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348736,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348736",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"google-api-client\" \"cancel\"",
+          "repo:stablyai/orca \"google\" \"response\" \"cancel\" in:title"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "data/sheets-upsert-index/manifest.json",
+      "branch": "afloat16/orca50-20261127-sheets-upsert-index",
+      "title": "perf(google-sheets): index existing keys for batch upserts",
+      "issue": 50504,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50504",
+      "pr": 50507,
+      "prUrl": "https://github.com/stablyai/orca/pull/50507",
+      "implementationHead": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+      "head": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": true,
+      "change": "Build a first-occurrence key index once, then look up each input row. Preserve the previous behavior for duplicate stored keys, trimmed keys, formula escaping, header skipping and appends.",
+      "problem": "Every input row performs a fresh linear scan of all existing sheet rows. Large upserts spend seconds synchronously matching keys before sending the already-batched update.",
+      "effectZh": "为 Google Sheets 批量 upsert 建立键索引，避免每行重复扫描整个表，同时保持重复键和写入语义。",
+      "ci": {
+        "status": "success",
+        "source": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348775,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348775",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "queries": [
+          "repo:stablyai/orca \"upsertSheet\"",
+          "repo:stablyai/orca \"Sheets\" \"index\" in:title"
+        ],
+        "related_distinct": [
+          "#46566 handles matching before formula escaping; this change preserves that behavior.",
+          "#50395 removes a different large-argument limit in readSheet; this change optimizes upsert key matching."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/advertised-ipv6-origins/manifest.json",
+      "branch": "afloat16/orca50-20261127-advertised-ipv6-origins",
+      "title": "fix(ports): retain bracketed IPv6 advertised origins",
+      "issue": 50526,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50526",
+      "pr": 50534,
+      "prUrl": "https://github.com/stablyai/orca/pull/50534",
+      "implementationHead": "3bf204d6309a8e92275bc640427a36320f5e99a4",
+      "head": "3bf204d6309a8e92275bc640427a36320f5e99a4",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The watcher retains IPv6 origins on80/443, including prose punctuation, and ordinary explicit IPv6/IPv4 ports still work.",
+      "problem": "The terminal URL punctuation cleaner stripped the final closing bracket from IPv6 URLs without an explicit port. The actual ports watcher then discarded valid HTTP/HTTPS origins.",
+      "effectZh": "保留无显式端口的方括号 IPv6 服务地址，避免终端端口发现误删右括号后丢弃合法链接。",
+      "ci": null,
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"advertised\" \"IPv6\"",
+          "repo:stablyai/orca \"extractUrlCandidates\""
+        ],
+        "related_distinct": [
+          "#2534 original advertised URL feature",
+          "#6371 cursor-redraw host fragmentation"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50534,
+          "url": "https://github.com/stablyai/orca/pull/50534",
+          "title": "fix(ports): retain bracketed IPv6 advertised origins",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-advertised-ipv6-origins",
+          "headSha": "3bf204d6309a8e92275bc640427a36320f5e99a4"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50534#issuecomment-7212914126",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50611
+        },
+        "successor": {
+          "number": 50611,
+          "url": "https://github.com/stablyai/orca/pull/50611",
+          "title": "fix(ports): keep bracketed IPv6 dev-server URLs like `http://[::1]`",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "810b653fd993ee2af89f537f4b84407adc6cc93a",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "810b653fd993ee2af89f537f4b84407adc6cc93a",
+            "url": "https://github.com/stablyai/orca/commit/810b653fd993ee2af89f537f4b84407adc6cc93a",
+            "authorLogin": "nwparker",
+            "authorName": "Neil",
+            "credit": "Afloat_coauthor_trailer"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "parser/conductor-empty-local-overrides/manifest.json",
+      "branch": "afloat16/orca50-20261127-conductor-empty-local-overrides",
+      "title": "fix(workspace-setup): honor empty local Conductor overrides",
+      "issue": 50645,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50645",
+      "pr": 50646,
+      "prUrl": "https://github.com/stablyai/orca/pull/50646",
+      "implementationHead": "25cd81bcfbffcde82d4fb34d5d82c9f5eee86870",
+      "head": "25cd81bcfbffcde82d4fb34d5d82c9f5eee86870",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Presence, rather than truthiness, selects the local value. Explicit empty setup suppresses import; empty archive suppresses only teardown; an absent local key still inherits its shared command.",
+      "problem": "Importing Conductor settings treated an explicitly empty machine-local setup/archive value as missing and resurrected the shared command. This imports scripts the local configuration has disabled.",
+      "effectZh": "尊重 Conductor 本机配置中显式留空的命令，避免重新启用用户已禁用的共享 setup 或 archive 命令。",
+      "ci": {
+        "status": "success",
+        "source": "25cd81bcfbffcde82d4fb34d5d82c9f5eee86870",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348768,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348768",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"Conductor\" \"empty\"",
+          "repo:stablyai/orca \"settings.local.toml\""
+        ],
+        "related_distinct": [
+          "#40125 adds Conductor settings imports and documents per-key local precedence; it does not preserve explicit empty values."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/copilot-usage-accounting/manifest.json",
+      "branch": "afloat16/orca50-20261127-copilot-usage-accounting",
+      "title": "fix(ai-vault): avoid double counting Copilot token usage",
+      "issue": 50629,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50629",
+      "pr": 50633,
+      "prUrl": "https://github.com/stablyai/orca/pull/50633",
+      "implementationHead": "a5b65db0b05427db7e6a4ceba128c18d09b948fa",
+      "head": "a5b65db0b05427db7e6a4ceba128c18d09b948fa",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The scanner sums model input/output only, respects authoritative empty metrics, and retains currentTokens as a fallback for older records without metrics. The full scanner regression passed.",
+      "problem": "Copilot shutdown modelMetrics already reports complete input and output token totals. The scanner added cached-input subsets and the current context-window size again, inflating usage. Reasoning tokens are also a subset of output.",
+      "effectZh": "正确统计 Copilot 总输入与输出 token，不再重复加入缓存子集和当前上下文长度，并修复旧缓存。",
+      "ci": {
+        "status": "success",
+        "source": "a5b65db0b05427db7e6a4ceba128c18d09b948fa",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388349096,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388349096",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior Afloat16 PRs and recent300 corpus reviewed; no same topic",
+        "queries": [
+          "repo:stablyai/orca copilot double tokens",
+          "repo:stablyai/orca copilot currentTokens",
+          "repo:stablyai/orca copilot modelMetrics"
+        ],
+        "related_distinct": []
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/ghostty-literal-hash/manifest.json",
+      "branch": "afloat16/orca50-20261127-ghostty-literal-hash",
+      "title": "fix(ghostty): preserve literal hashes in imported config values",
+      "issue": 50540,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50540",
+      "pr": 50543,
+      "prUrl": "https://github.com/stablyai/orca/pull/50543",
+      "implementationHead": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+      "head": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The same regression passes, with ordinary font-size and whole-line comment controls.",
+      "problem": "Ghostty comments are valid only on their own lines. Orca treated a whitespace-prefixed hash as an inline comment, truncating legitimate unquoted theme file paths and making theme imports fail.",
+      "effectZh": "保留 Ghostty 配置值中的字面量 #，使包含空格和井号的主题路径可以正常导入。",
+      "ci": {
+        "status": "success",
+        "source": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348866,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348866",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all 71 prior Afloat16 PRs and recent300 corpus; no same topic",
+        "queries": [
+          "repo:stablyai/orca Ghostty parser",
+          "repo:stablyai/orca ghostty \"inline\"",
+          "repo:stablyai/orca \"Ghostty\" \"comment\""
+        ],
+        "related_distinct": [
+          "#37353 config picker",
+          " #7126 theme references"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/ghostty-palette-indexes/manifest.json",
+      "branch": "afloat16/orca50-20261127-ghostty-palette-indexes",
+      "title": "fix(ghostty): import palette indexes in supported numeric bases",
+      "issue": 50545,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50545",
+      "pr": 50546,
+      "prUrl": "https://github.com/stablyai/orca/pull/50546",
+      "implementationHead": "ff110780bde874cc04541bf99c787774e89c6b66",
+      "head": "f8ca09d1f791b8057ad917c25349d96dfd7409f6",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Zig-compatible signed decimal/hexadecimal/octal/binary syntax and interior underscore separators map to the intended ANSI slots. Whole-input validation rejects malformed prefixes and trailing separators; unsigned0..255 range is retained. Three palette regressions plus the existing Ghostty literal-hash parser regression pass.",
+      "problem": "Ghostty supports decimal, hexadecimal, octal, and binary palette indexes. The importer parsed every 0x/0o/0b index as zero, overwriting black and leaving the intended ANSI colors unset. It also accepted invalid trailing characters as a valid index.",
+      "effectZh": "按 Ghostty 支持的数字语法解析调色板索引，避免十六、八、二进制索引误写入 ANSI 黑色槽位。",
+      "ci": null,
+      "dedupe": {
+        "user_history": "All 71 prior Afloat16 PRs and recent300 corpus reviewed; no same topic",
+        "queries": [
+          "repo:stablyai/orca ghostty palette index",
+          "repo:stablyai/orca \"palette\" \"hexadecimal\""
+        ],
+        "related_distinct": [
+          "#7126 theme references",
+          "#37292 font family",
+          "#42678 test consolidation"
+        ]
+      },
+      "continuationPr": 50608,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50546,
+          "url": "https://github.com/stablyai/orca/pull/50546",
+          "title": "fix(ghostty): import palette indexes in supported numeric bases",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-ghostty-palette-indexes",
+          "headSha": "f8ca09d1f791b8057ad917c25349d96dfd7409f6"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50546#issuecomment-7212866602",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": true,
+          "continuedIn": 50608
+        },
+        "successor": {
+          "number": 50608,
+          "url": "https://github.com/stablyai/orca/pull/50608",
+          "title": "fix(ghostty): import palette indexes written in hex, octal, binary or with a plus sign",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "8269c0101d342a16f2eecdff07aaee07f1635e61",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "8269c0101d342a16f2eecdff07aaee07f1635e61",
+            "url": "https://github.com/stablyai/orca/commit/8269c0101d342a16f2eecdff07aaee07f1635e61",
+            "authorLogin": "nwparker",
+            "authorName": "Neil",
+            "credit": "Afloat_coauthor_trailer"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "parser/git-history-worktree-path-framing/manifest.json",
+      "branch": "afloat16/orca50-20261127-git-history-worktree-path-framing",
+      "title": "fix(git): preserve newline worktree paths in history refs",
+      "issue": 50649,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50649",
+      "pr": 50651,
+      "prUrl": "https://github.com/stablyai/orca/pull/50651",
+      "implementationHead": "ba2efdf6b77bb26e38e62eaac1b1d6c0a1c04924",
+      "head": "ba2efdf6b77bb26e38e62eaac1b1d6c0a1c04924",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Terminate each formatted record with NUL before Git's record newline and split on that unambiguous delimiter. Interior pathname newlines survive and ordinary main-worktree paths remain unchanged.",
+      "problem": "Git for-each-ref emits literal newlines inside %(worktreepath). Splitting the history catalog on every LF truncates the checkout path, so Git Graph cannot match and activate an already-open linked workspace.",
+      "effectZh": "用明确的记录边界读取 Git worktree 路径，保留路径内部换行，使 Git Graph 能定位已有工作区。",
+      "ci": {
+        "status": "success",
+        "source": "ba2efdf6b77bb26e38e62eaac1b1d6c0a1c04924",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "jobId": 140402558673,
+        "runId": 45968403234,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45968403234/job/140402558673",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"loadGitHistoryRefs\"",
+          "repo:stablyai/orca \"for-each-ref\" \"newline\"",
+          "repo:stablyai/orca \"Git Graph\" \"newline\""
+        ],
+        "related_distinct": [
+          "#35091 repairs worktree list porcelain identity, a different parser.",
+          "#35337 repairs batched rev-parse locations, a different command.",
+          "#6746 introduces Git Graph workspace switching; #24602 optimizes large history ref loading."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/git-refspec-literal-captures/manifest.json",
+      "branch": "afloat16/orca50-20261127-git-refspec-literal-captures",
+      "title": "fix(git): preserve literal wildcard captures in refspec mappings",
+      "issue": 50547,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50547",
+      "pr": 50552,
+      "prUrl": "https://github.com/stablyai/orca/pull/50552",
+      "implementationHead": "3b4785d9badf813bad3b6b297c3adbab3c9bfdd7",
+      "head": "3b4785d9badf813bad3b6b297c3adbab3c9bfdd7",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Replacement callbacks retain exact wildcard captures for $&, $`, $', $$ and an ordinary branch. Both production entry points now return the intended refs.",
+      "problem": "Valid Git branch names containing dollar replacement sequences were interpreted by String.replace while applying fetch and push refspecs. Cleanup could drop matching source refs, and review links could target a different branch.",
+      "effectZh": "保留 Git refspec 通配符中的字面量美元符号序列，避免替换语法把有效分支映射到错误引用。",
+      "ci": {
+        "status": "success",
+        "source": "3b4785d9badf813bad3b6b297c3adbab3c9bfdd7",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348942,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348942",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"refspec\" \"dollar\"",
+          "repo:stablyai/orca \"sourceRefsForTarget\"",
+          "repo:stablyai/orca \"mappedPushBranch\""
+        ],
+        "related_distinct": [
+          "#33597 introduced Copy Remote URL; does not fix literal refspec captures"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50552,
+          "url": "https://github.com/stablyai/orca/pull/50552",
+          "title": "fix(git): preserve literal wildcard captures in refspec mappings",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-git-refspec-literal-captures",
+          "headSha": "3b4785d9badf813bad3b6b297c3adbab3c9bfdd7"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50552#issuecomment-7213811550",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50673
+        },
+        "successor": {
+          "number": 50673,
+          "url": "https://github.com/stablyai/orca/pull/50673",
+          "title": "fix(git): insert refspec wildcard captures literally so $ in branch names survives",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:48:11Z",
+          "head": "9d479843ab707ca240bf6c8f5317662541ba5a00",
+          "mergeCommit": "8dbc147bf4b7f65312ff618289712baab2a9d45a"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "9d479843ab707ca240bf6c8f5317662541ba5a00",
+            "url": "https://github.com/stablyai/orca/commit/9d479843ab707ca240bf6c8f5317662541ba5a00",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "8dbc147bf4b7f65312ff618289712baab2a9d45a",
+          "url": "https://github.com/stablyai/orca/commit/8dbc147bf4b7f65312ff618289712baab2a9d45a",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    },
+    {
+      "package": "parser/hosted-review-qualified-base/manifest.json",
+      "branch": "afloat16/orca50-20261127-hosted-review-qualified-base",
+      "title": "fix(reviews): preserve qualified base branch names",
+      "issue": 50656,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50656",
+      "pr": 50659,
+      "prUrl": "https://github.com/stablyai/orca/pull/50659",
+      "implementationHead": "a251960659b0ea7d08fc1bebc145e82d23680250",
+      "head": "a251960659b0ea7d08fc1bebc145e82d23680250",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Remove at most one explicit Git namespace, preserve the literal remaining branch name, and pass the original submitted base through main preflight. The real create entrypoint now succeeds for both explicit forms and sends base origin/topic to the provider; ordinary origin/main still submits main.",
+      "problem": "Explicit Git refs such as refs/heads/origin/topic name a local branch literally called origin/topic. Review normalization removes the namespace and then mistakenly strips the branch prefix again; creation preflight also renormalizes a previously normalized base. Valid published bases are rejected, or a different topic base can be submitted when it exists.",
+      "effectZh": "只移除一次明确的 Git 引用命名空间，保留 origin/topic 等真实分支名，避免创建评审时选错 base。",
+      "ci": {
+        "status": "success",
+        "source": "a251960659b0ea7d08fc1bebc145e82d23680250",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348960,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348960",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 repository PR corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"refs/heads/origin\"",
+          "repo:stablyai/orca \"normalizeHostedReviewBaseRef\"",
+          "repo:stablyai/orca \"base branch\" \"origin/\""
+        ],
+        "related_distinct": [
+          "#5127 fixes compare-base namespace ambiguity, not hosted review creation.",
+          "#43448 preserves old paired-client branch labels.",
+          "#18220 fixes committed-on-branch compare against a stale local base.",
+          "#11678 handles unavailable review lookups, not explicit base branch normalization."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/json-object-own-properties/manifest.json",
+      "branch": "afloat16/orca50-20261127-json-object-own-properties",
+      "title": "fix(json): keep prototype-named properties as parsed data",
+      "issue": 50554,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50554",
+      "pr": 50556,
+      "prUrl": "https://github.com/stablyai/orca/pull/50556",
+      "implementationHead": "ea07c0250b1395d037d148cb8963149dd3e36a85",
+      "head": "ea07c0250b1395d037d148cb8963149dd3e36a85",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Data-property copying retains ordinary values and literal __proto__ while the actual policy validator rejects the malformed inherited-only policy. Existing idle-stop tests pass.",
+      "problem": "Object.assign cloning a parsed JSON object invokes the legacy __proto__ setter. Literal JSON data becomes inherited fields, so an otherwise malformed provider relay detach policy can be accepted and literal __proto__ data is lost.",
+      "effectZh": "将 __proto__ 等 JSON 键作为自有数据属性保留，避免克隆时变成继承属性并影响策略校验。",
+      "ci": {
+        "status": "success",
+        "source": "ea07c0250b1395d037d148cb8963149dd3e36a85",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348910,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348910",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"jsonObject\" \"__proto__\"",
+          "repo:stablyai/orca \"detach\" \"prototype\"",
+          "repo:stablyai/orca \"prototype pollution\""
+        ],
+        "related_distinct": [
+          "#46368 layered session metadata merges, different source and operation"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50556,
+          "url": "https://github.com/stablyai/orca/pull/50556",
+          "title": "fix(json): keep prototype-named properties as parsed data",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-json-object-own-properties",
+          "headSha": "ea07c0250b1395d037d148cb8963149dd3e36a85"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50556#issuecomment-7213669275",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50663
+        },
+        "successor": {
+          "number": 50663,
+          "url": "https://github.com/stablyai/orca/pull/50663",
+          "title": "fix(json): keep `__proto__` keys as own data when copying parsed JSON objects",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "fa7d111ecf664cb5de6005db348cd5ffc929ef69",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "fa7d111ecf664cb5de6005db348cd5ffc929ef69",
+            "url": "https://github.com/stablyai/orca/commit/fa7d111ecf664cb5de6005db348cd5ffc929ef69",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "parser/jsonc-active-properties/manifest.json",
+      "branch": "afloat16/orca50-20261127-jsonc-active-properties",
+      "title": "fix(mcp): edit the active duplicate JSONC properties",
+      "issue": 50557,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50557",
+      "pr": 50558,
+      "prUrl": "https://github.com/stablyai/orca/pull/50558",
+      "implementationHead": "35429642ee37905a9c729c08f63b23ccdb7f28b5",
+      "head": "35429642ee37905a9c729c08f63b23ccdb7f28b5",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Both regressions pass. Existing text-preservation insertion/removal tests also pass.",
+      "problem": "The JSONC value reader uses the last occurrence of a duplicate property, but text insertion/removal used the first. New MCP entries could be inserted into an inactive table; removal could delete a shadowed user command and leave the active managed command.",
+      "effectZh": "对 JSONC 中实际生效的最后一个同名属性进行编辑，避免 MCP 修改落在被遮蔽的配置里。",
+      "ci": {
+        "status": "success",
+        "source": "35429642ee37905a9c729c08f63b23ccdb7f28b5",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348674,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348674",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all 71 prior Afloat16 PRs and recent300 corpus; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"JSONC\" \"duplicate\"",
+          "repo:stablyai/orca \"mcpServers\" \"duplicate\""
+        ],
+        "related_distinct": [
+          "#49456 Droid hooks unrelated",
+          " #42637 plugin coexistence unrelated"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50558,
+          "url": "https://github.com/stablyai/orca/pull/50558",
+          "title": "fix(mcp): edit the active duplicate JSONC properties",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-jsonc-active-properties",
+          "headSha": "35429642ee37905a9c729c08f63b23ccdb7f28b5"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50558#issuecomment-7213679490",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50664
+        },
+        "successor": {
+          "number": 50664,
+          "url": "https://github.com/stablyai/orca/pull/50664",
+          "title": "fix(mcp): edit the last duplicate JSONC property, the one agents actually read",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:47:49Z",
+          "head": "da5e1e6c956c616ef6b0b4fe8db4620b8b942b23",
+          "mergeCommit": "25f86daa28658980b16001224cbadf99aab7a79e"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "da5e1e6c956c616ef6b0b4fe8db4620b8b942b23",
+            "url": "https://github.com/stablyai/orca/commit/da5e1e6c956c616ef6b0b4fe8db4620b8b942b23",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "25f86daa28658980b16001224cbadf99aab7a79e",
+          "url": "https://github.com/stablyai/orca/commit/25f86daa28658980b16001224cbadf99aab7a79e",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    },
+    {
+      "package": "parser/markdown-reference-code-spans/manifest.json",
+      "branch": "afloat16/orca50-20261127-markdown-reference-code-spans",
+      "title": "fix(markdown): keep reference-looking inline code literal",
+      "issue": 50559,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50559",
+      "pr": 50560,
+      "prUrl": "https://github.com/stablyai/orca/pull/50560",
+      "implementationHead": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+      "head": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Regression passes: code bytes preserved and neighboring prose reference still expands.",
+      "problem": "Reference expansion runs before rich HTML encoding protects inline code. Opening GitHub or Linear Markdown containing `[docs]` plus a docs reference definition rewrote the code literal to a full Markdown link.",
+      "effectZh": "Markdown 引用展开保留行内代码的原始字面量，同时继续展开相邻正文中的引用。",
+      "ci": {
+        "status": "success",
+        "source": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348826,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348826",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all 71 prior Afloat16 PRs and recent300 corpus; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"reference links\"",
+          "repo:stablyai/orca \"reference\" \"code\" \"normalization\""
+        ],
+        "related_distinct": [
+          "#32479 normalization allocation work",
+          " #25422 literal backtick handling in raw encoder, a later stage"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/notebook-code-cell-attachments/manifest.json",
+      "branch": "afloat16/orca50-20261127-notebook-code-cell-attachments",
+      "title": "fix(notebook): remove text attachments when converting cells to code",
+      "issue": 50561,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50561",
+      "pr": 50562,
+      "prUrl": "https://github.com/stablyai/orca/pull/50562",
+      "implementationHead": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+      "head": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The converted code cell retains id/source/user metadata and receives code outputs/count fields without attachments. Converting Markdown to raw retains attachments.",
+      "problem": "A valid Markdown or raw cell can carry attachments, but the official nbformat code-cell schema forbids that field. Changing its kind to code kept the field and persisted an invalid notebook.",
+      "effectZh": "Notebook 文本单元转为代码单元时移除不合法的 attachments 字段，保持保存后的 nbformat 有效。",
+      "ci": {
+        "status": "success",
+        "source": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388348930,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348930",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca notebook attachments code cell",
+          "repo:stablyai/orca \"notebook\" \"cell kind\""
+        ],
+        "related_distinct": [
+          "#50367 maps visible-cell indexes, no kind-field conversion changes"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "parser/opencode-json-message-parts/manifest.json",
+      "branch": "afloat16/orca50-20261127-opencode-json-message-parts",
+      "title": "fix(ai-vault): read legacy OpenCode JSON message parts",
+      "issue": 50642,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50642",
+      "pr": 50643,
+      "prUrl": "https://github.com/stablyai/orca/pull/50643",
+      "implementationHead": "2c86f32e2447a3cdcdb74917fcedbe30507bc0bc",
+      "head": "2c86f32e2447a3cdcdb74917fcedbe30507bc0bc",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Read parts in storage-key order when inline content is absent, preserve legacy inline records, and translate recorded tool calls/results into the shared transcript content shapes. One-time repairs invalidate only legacy OpenCode JSON parse rows and search cursors, retaining SQLite-backed sessions.",
+      "problem": "Legacy OpenCode stores message bodies under storage/part/<messageId>/<partId>.json, while the message records contain metadata only. The still-active JSON scanner read only an inline content property, so existing conversations lost their prompts, replies, reasoning and tool content from History/search.",
+      "effectZh": "读取旧版 OpenCode 分离存储的消息内容，并使 History 与搜索能够识别消息文件独立变化。",
+      "ci": {
+        "status": "success",
+        "source": "12ba475107eb4617c302e432fb551a69451d2274",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388349036,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388349036",
+        "matchesObservedHead": false
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"consumeOpenCodeMessages\"",
+          "repo:stablyai/orca \"OpenCode\" \"parts\" in:title",
+          "repo:stablyai/orca \"OpenCode\" \"part files\""
+        ],
+        "related_distinct": [
+          "#12006/#12085 first-prompt feature work assumes inline content.",
+          "#24647 native-chat part storage is a separate reader.",
+          "#45721 WSL refusal and #41091 cache-version work do not load legacy JSON message bodies."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "latestCheck": {
+        "source": "2c86f32e2447a3cdcdb74917fcedbe30507bc0bc",
+        "status": "failure",
+        "passedChecks": 26,
+        "totalChecks": 28,
+        "failedChecks": [
+          "main-blocking-api-ratchet",
+          "main-blocking-helper-ratchet"
+        ],
+        "url": "https://github.com/Afloat16/orca/actions/runs/45971439706/job/140412580690",
+        "remediationInProgress": true
+      }
+    },
+    {
+      "package": "parser/transcript-content-whitespace/manifest.json",
+      "branch": "afloat16/orca50-20261127-transcript-content-whitespace",
+      "title": "fix(chat): preserve whitespace in structured transcript content",
+      "issue": 50564,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50564",
+      "pr": 50565,
+      "prUrl": "https://github.com/stablyai/orca/pull/50565",
+      "implementationHead": "9920f6d7fbf9f9cb16f3519048b2267b5730c668",
+      "head": "9920f6d7fbf9f9cb16f3519048b2267b5730c668",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Both decoder regressions pass, including thinking blocks, object and array tool outputs, ordinary text, and whitespace-only message suppression.",
+      "problem": "Object-shaped text and tool outputs were trimmed while equivalent string content was preserved. A file read beginning with indentation and indented Markdown lost its first-line indentation and final newline.",
+      "effectZh": "保留结构化转录内容中的有意义空白和缩进，使显示与字符串内容一致；接续合并版细化了空行处理。",
+      "ci": {
+        "status": "success",
+        "source": "9920f6d7fbf9f9cb16f3519048b2267b5730c668",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350658,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350658",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 and recent300 corpus compared; no same topic",
+        "queries": [
+          "repo:stablyai/orca transcript whitespace",
+          "repo:stablyai/orca \"toolResultOutput\"",
+          "repo:stablyai/orca \"claudeContentBlocks\"",
+          "repo:stablyai/orca transcript \"preserve\" \"whitespace\""
+        ],
+        "related_distinct": [
+          "#46311 hides empty projected messages without altering persisted transcript content",
+          "#31554 Muse transcript rendering"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50565,
+          "url": "https://github.com/stablyai/orca/pull/50565",
+          "title": "fix(chat): preserve whitespace in structured transcript content",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-transcript-content-whitespace",
+          "headSha": "9920f6d7fbf9f9cb16f3519048b2267b5730c668"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50565#issuecomment-7213746186",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50670
+        },
+        "successor": {
+          "number": 50670,
+          "url": "https://github.com/stablyai/orca/pull/50670",
+          "title": "fix(chat): preserve indentation and trailing newlines in structured transcript content",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:41:51Z",
+          "head": "58da397151fbb57c468615343099d7c24c363ac0",
+          "mergeCommit": "767b930aa76b4a14979c8836281e45e9d2d0cb93"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "58da397151fbb57c468615343099d7c24c363ac0",
+            "url": "https://github.com/stablyai/orca/commit/58da397151fbb57c468615343099d7c24c363ac0",
+            "authorLogin": "nwparker",
+            "authorName": "Neil",
+            "credit": "Afloat_coauthor_trailer"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "767b930aa76b4a14979c8836281e45e9d2d0cb93",
+          "url": "https://github.com/stablyai/orca/commit/767b930aa76b4a14979c8836281e45e9d2d0cb93",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    },
+    {
+      "package": "providers/azure-latest-commit-status/manifest.json",
+      "branch": "afloat16/orca50-20261127-azure-latest-commit-status",
+      "title": "fix(azure-devops): use the latest status for each commit check",
+      "issue": 50522,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50522",
+      "pr": 50524,
+      "prUrl": "https://github.com/stablyai/orca/pull/50524",
+      "implementationHead": "b84be6141f1659fc490f5abb4904e0741e8e6643",
+      "head": "b84be6141f1659fc490f5abb4904e0741e8e6643",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Request latestOnly=true on the documented commit status endpoint, which groups the latest status by context name and genre. Leave the pull-request status endpoint unchanged.",
+      "problem": "The commit-status fallback includes historical statuses. A failed run followed by a successful retry for the same context remains failed and is counted twice.",
+      "effectZh": "按检查上下文读取 Azure DevOps 最新提交状态，避免已成功重试的检查仍显示旧失败或被重复计数。",
+      "ci": null,
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"latestOnly\"",
+          "repo:stablyai/orca is:pr \"Azure\" \"latest statuses\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#29330 adjusts branch review selection only; no commit-status latestOnly handling."
+        ]
+      },
+      "continuationPr": 50595,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50524,
+          "url": "https://github.com/stablyai/orca/pull/50524",
+          "title": "fix(azure-devops): use the latest status for each commit check",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-azure-latest-commit-status",
+          "headSha": "b84be6141f1659fc490f5abb4904e0741e8e6643"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50524#issuecomment-7212766627",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": true,
+          "continuedIn": 50595
+        },
+        "successor": {
+          "number": 50595,
+          "url": "https://github.com/stablyai/orca/pull/50595",
+          "title": "fix(azure-devops): request only the latest commit status per check",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "cc28354b6ed52f85c655ca59e357091aebdc5756",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "cc28354b6ed52f85c655ca59e357091aebdc5756",
+            "url": "https://github.com/stablyai/orca/commit/cc28354b6ed52f85c655ca59e357091aebdc5756",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "providers/bitbucket-draft-state/manifest.json",
+      "branch": "afloat16/orca50-20261127-bitbucket-draft-state",
+      "title": "fix(bitbucket): preserve draft pull request state",
+      "issue": 50525,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50525",
+      "pr": 50527,
+      "prUrl": "https://github.com/stablyai/orca/pull/50527",
+      "implementationHead": "abcdeb7b5a49464b6019187ec22d2108234fe11a",
+      "head": "abcdeb7b5a49464b6019187ec22d2108234fe11a",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Read the draft flag when normalizing an open review; preserve merged and declined terminal-state precedence.",
+      "problem": "Bitbucket Cloud returns draft as a separate boolean while state remains OPEN. Orca currently discards that field and presents draft reviews as open reviews.",
+      "effectZh": "保留 Bitbucket 草稿标记，让草稿 PR 正确显示为草稿，同时保持已合并、已拒绝状态的优先级。",
+      "ci": null,
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr bitbucket draft in:title",
+          "repo:stablyai/orca is:pr \"Bitbucket\" \"draft PR\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#29330 changes branch review selection and fork matching; its Bitbucket mapper only adds source.repository.full_name, not draft normalization.",
+          "#12111 introduces Data Center support, with no Cloud draft mapper change."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50527,
+          "url": "https://github.com/stablyai/orca/pull/50527",
+          "title": "fix(bitbucket): preserve draft pull request state",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-bitbucket-draft-state",
+          "headSha": "abcdeb7b5a49464b6019187ec22d2108234fe11a"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50527#issuecomment-7212817448",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50604
+        },
+        "successor": {
+          "number": 50604,
+          "url": "https://github.com/stablyai/orca/pull/50604",
+          "title": "fix(bitbucket): show draft pull requests as drafts",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "22ffdd3c8994ffe346f31b4188a8dbcd7ee37423",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "22ffdd3c8994ffe346f31b4188a8dbcd7ee37423",
+            "url": "https://github.com/stablyai/orca/commit/22ffdd3c8994ffe346f31b4188a8dbcd7ee37423",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "providers/bitbucket-incomplete-build-status/manifest.json",
+      "branch": "afloat16/orca50-20261127-bitbucket-incomplete-build-status",
+      "title": "fix(bitbucket): keep incomplete successful check pages neutral",
+      "issue": 50529,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50529",
+      "pr": 50530,
+      "prUrl": "https://github.com/stablyai/orca/pull/50530",
+      "implementationHead": "e30fd282606729f49f3f389f3e146378f1d88536",
+      "head": "e30fd282606729f49f3f389f3e146378f1d88536",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Downgrade only a successful prefix with a next page to neutral. Keep known failure/pending outcomes and the existing complete-page summary behavior without additional requests.",
+      "problem": "A Bitbucket commit with more than one status page can be shown as successful when only its first page is successful; an unread page can contain a failed or pending check.",
+      "effectZh": "Bitbucket 检查状态尚有未读取分页时，将仅有成功记录的前缀保持为中立，避免误报全部通过。",
+      "ci": null,
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr bitbucket \"pagination\"",
+          "repo:stablyai/orca is:pr bitbucket \"incomplete\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#42970 fixed the endpoint but explicitly retained pagination behavior; inspected patch only changes /statuses/build to /statuses.",
+          "#12111 adds Data Center support; its Cloud implementation still derives status from one unqualified page."
+        ]
+      },
+      "continuationPr": 50597,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50530,
+          "url": "https://github.com/stablyai/orca/pull/50530",
+          "title": "fix(bitbucket): keep incomplete successful check pages neutral",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-bitbucket-incomplete-build-status",
+          "headSha": "e30fd282606729f49f3f389f3e146378f1d88536"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50530#issuecomment-7212790370",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50597
+        },
+        "successor": {
+          "number": 50597,
+          "url": "https://github.com/stablyai/orca/pull/50597",
+          "title": "fix(bitbucket): read all status pages before reporting a commit as passing",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "c39ea2476ed4d31fcc56257ed295b384f0ab4a1e",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "c39ea2476ed4d31fcc56257ed295b384f0ab4a1e",
+            "url": "https://github.com/stablyai/orca/commit/c39ea2476ed4d31fcc56257ed295b384f0ab4a1e",
+            "authorLogin": "nwparker",
+            "authorName": "Neil",
+            "credit": "Afloat_coauthor_trailer"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "providers/gitea-incomplete-branch-scan/manifest.json",
+      "branch": "afloat16/orca50-20261127-gitea-incomplete-branch-scan",
+      "title": "fix(gitea): preserve incomplete branch lookup state",
+      "issue": 50531,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50531",
+      "pr": 50532,
+      "prUrl": "https://github.com/stablyai/orca/pull/50532",
+      "implementationHead": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+      "head": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Carry completeness with the existing cached and coalesced scan result; only a short terminal page proves completion. Preserve found branch/linked reviews, but throw an unavailable lookup error for a strict miss on an incomplete scan. Retry partial scans using the existing shorter failure TTL.",
+      "problem": "After the five-page cap, a strict Gitea branch lookup returns null and creation preflight can mistake an unsearched older review for confirmed absence. The partial list is also cached as a complete successful scan.",
+      "effectZh": "Gitea 分支评审搜索达到分页上限时保留“查询不完整”状态，避免把未找到误判为确实不存在。",
+      "ci": {
+        "status": "success",
+        "source": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350841,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350841",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"Gitea\" \"incomplete\"",
+          "repo:stablyai/orca is:pr \"Gitea\" \"truncated\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#36049 attempts a Forgejo head-filter fast path while leaving the bounded fallback unchanged; excluded that duplicate idea.",
+          "#10411 allows a stale linked single-resource 404 without treating list failures as absence; it does not carry scan completeness.",
+          "#29330 changes branch/fork/linked selection; excluded those duplicate ideas.",
+          "#5493 and #45880 add Gitea task integrations; inspected provider client/scanner diffs contain no scan-completeness fix."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/gitlab-bridge-name-isolation/manifest.json",
+      "branch": "afloat16/orca50-20261127-gitlab-bridge-name-isolation",
+      "title": "fix(gitlab): keep unrelated child pipeline rollups",
+      "issue": 50690,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50690",
+      "pr": 50691,
+      "prUrl": "https://github.com/stablyai/orca/pull/50691",
+      "implementationHead": "59bb56a015fc9c735eb542021a71a1565bec4c38",
+      "head": "59bb56a015fc9c735eb542021a71a1565bec4c38",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Match a bridge name only against jobs expanded from that bridge's own downstream pipeline. Keep the existing same-child suppression, job-ID deduplication, order, child limit and tolerant first-page error handling.",
+      "problem": "The pipeline graph suppresses a bridge whenever any expanded job has its name. A successful job in one child can therefore hide a different failed child whose job list is unreadable, removing its failure and provider link from Checks and the Pipeline tab.",
+      "effectZh": "只用同一子流水线内的作业折叠其汇总，避免其他子流水线的同名作业隐藏失败状态和详情链接。",
+      "ci": {
+        "status": "success",
+        "source": "59bb56a015fc9c735eb542021a71a1565bec4c38",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350972,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350972",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared against all 71 prior Afloat16 PRs and recent 300 all-author corpus; no same improvement.",
+        "queries": [
+          "repo:stablyai/orca is:pr \"GitLab\" \"bridge\" \"name\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"child\" \"rollup\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"cross-project\" in:title,body"
+        ],
+        "related_distinct": [
+          "#12863 adds bridge and child pipeline expansion but deduplicates all names globally; this repairs a collision in that behavior.",
+          "#39046 adds list pagination and fail-soft unreadable children; this preserves that behavior while keeping the remaining rollup.",
+          "#7734 and #12266 connect job logs and unique job IDs, not bridge name suppression."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/gitlab-child-job-owner/manifest.json",
+      "branch": "afloat16/orca50-20261127-gitlab-child-job-owner",
+      "title": "fix(gitlab): route child job actions to their project",
+      "issue": 50692,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50692",
+      "pr": 50693,
+      "prUrl": "https://github.com/stablyai/orca/pull/50693",
+      "implementationHead": "8c61661a6ae88d746b62d381372f922e5523b33c",
+      "head": "8c61661a6ae88d746b62d381372f922e5523b33c",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Carry the already-resolved full project reference on real jobs and retried jobs, forward it into GitLab Checks rows, and prefer it in trace/retry callers. Keep the MR project as fallback for jobs returned by older runtimes.",
+      "problem": "The graph correctly fetches multi-project downstream jobs, then discards their owning project. Checks log loading and the MR dialog's trace/retry actions use the parent MR project, so a downstream job can show an empty 404 log or fail retry despite being readable and actionable in its own project.",
+      "effectZh": "为 GitLab 子作业保留完整所属项目，将日志和重试请求发往正确项目，避免误用父项目导致 404 或重试失败。",
+      "ci": {
+        "status": "success",
+        "source": "8c61661a6ae88d746b62d381372f922e5523b33c",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350772,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350772",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared against all 71 prior Afloat16 PRs and recent 300 all-author corpus; no same improvement.",
+        "queries": [
+          "repo:stablyai/orca is:pr \"GitLab\" \"cross-project\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"job\" \"projectRef\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"downstream\" \"logs\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"child\" \"retry\" in:title,body"
+        ],
+        "related_distinct": [
+          "#12863 adds downstream expansion and resolves child paths for list reads, but discards the project when mapping the job.",
+          "#12266 forwards the MR project for fork/cross-project MRs; it does not retain a downstream job's different project.",
+          "#7676 bounds the CLI known-host cache by connection, not job action project identity."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/gitlab-discussion-ranges/manifest.json",
+      "branch": "afloat16/orca50-20261127-gitlab-discussion-ranges",
+      "title": "fix(gitlab): retain multiline review comment positions",
+      "issue": 50687,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50687",
+      "pr": 50688,
+      "prUrl": "https://github.com/stablyai/orca/pull/50688",
+      "implementationHead": "3922a17a93aa048c1e08f257828527ce988594b6",
+      "head": "3922a17a93aa048c1e08f257828527ce988594b6",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Read valid new-side start/end line numbers into the existing MRComment startLine/line fields. Keep ordinary single-line positions and avoid assigning old-side ranges to the current checkout.",
+      "problem": "GitLab returns multiline discussion positions in position.line_range, but Orca discards them. Existing range labels and current-file navigation receive only the end line, losing the reviewed span and opening the wrong beginning of the comment.",
+      "effectZh": "保留 GitLab 新侧多行评论的起止行，让范围标签和代码跳转对应完整评论区间。",
+      "ci": {
+        "status": "success",
+        "source": "3922a17a93aa048c1e08f257828527ce988594b6",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350789,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350789",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior Afloat16 PRs and recent 300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"GitLab\" \"startLine\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"line_range\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"multiline\" \"comment\" in:title,body",
+          "repo:stablyai/orca is:pr \"GitLab\" \"range\" \"comments\" in:title,body"
+        ],
+        "search_artifact": "../gitlab-ranges-dedupe-searches.json",
+        "related_distinct": [
+          "#32031 connects existing comment startLine/line fields to current-file navigation; it does not parse GitLab line_range. Its intentional handling of old-side deleted comments is preserved.",
+          "#9037 displays cached comments in diff editors, with no provider position parsing."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/gitlab-pagination-integer/manifest.json",
+      "branch": "afloat16/orca50-20261127-gitlab-pagination-integer",
+      "title": "fix(gitlab): reject partial numeric pagination headers",
+      "issue": 50535,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50535",
+      "pr": 50536,
+      "prUrl": "https://github.com/stablyai/orca/pull/50536",
+      "implementationHead": "7da79774a4ab2738f3e934c221059b203394e9ee",
+      "head": "7da79774a4ab2738f3e934c221059b203394e9ee",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Require the complete trimmed header value to be decimal digits before converting it, then retain the existing safe-integer and minimum checks.",
+      "problem": "parseInt accepts prefixes such as 1e2 and 12, 12 as valid page/total counts. Callers can then stop paging on a fabricated count instead of using their existing fallback.",
+      "effectZh": "严格校验 GitLab 分页数字头，拒绝 1e2、12, 12 等部分数字值，避免用错误页数过早结束读取。",
+      "ci": {
+        "status": "success",
+        "source": "7da79774a4ab2738f3e934c221059b203394e9ee",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350927,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350927",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"parseGlabPaginationHeader\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#13538 introduced numeric/minimum parsing for issue pages without validating the whole lexical value.",
+          "#39046 reuses the parser for pipeline pagination; it does not add whole-value validation."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/hosted-review-branch-case/manifest.json",
+      "branch": "afloat16/orca50-20261127-hosted-review-branch-case",
+      "title": "fix(source-control): preserve branch case in review creation guards",
+      "issue": 50685,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50685",
+      "pr": 50686,
+      "prUrl": "https://github.com/stablyai/orca/pull/50686",
+      "implementationHead": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+      "head": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Compare normalized branch names exactly in main eligibility, all hosted provider creation paths, stacked GitHub creation, and corresponding renderer guards. Keep namespace normalization and same-branch rejection.",
+      "problem": "Git permits Feature and feature as distinct branch refs, but case-folded equality rejects their review creation before any provider call and disables the corresponding composer actions.",
+      "effectZh": "按规范化后的精确分支名判断是否同一分支，允许 Feature 到 feature 的合法评审创建，并继续拒绝真正相同的分支。",
+      "ci": {
+        "status": "success",
+        "source": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350835,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350835",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior Afloat16 PRs and recent 300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"branch\" \"case-sensitive\" in:title,body",
+          "repo:stablyai/orca is:pr \"same_base_branch\" in:title,body",
+          "repo:stablyai/orca is:pr \"Gitea\" \"case\" \"base\" in:title,body",
+          "repo:stablyai/orca is:pr \"Bitbucket\" \"case\" \"branch\" in:title,body",
+          "repo:stablyai/orca is:pr \"pull request\" \"case-sensitive\" in:title,body"
+        ],
+        "search_artifact": "../branch-case-dedupe-searches.json",
+        "related_distinct": [
+          "#36156 batches exact-ref probes for remote discovery; it does not change case-folded review creation equality."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/hosted-review-response-confirmation/manifest.json",
+      "branch": "afloat16/orca50-20261127-hosted-review-response-confirmation",
+      "title": "fix(source-control): recover unreadable successful review creation responses",
+      "issue": 50682,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50682",
+      "pr": 50684,
+      "prUrl": "https://github.com/stablyai/orca/pull/50684",
+      "implementationHead": "c8ede340a959bda4ac631395c0f696e0cc1947c5",
+      "head": "c8ede340a959bda4ac631395c0f696e0cc1947c5",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Mark successful-response body failures as unconfirmed, retain their HTTP status and cause, and route all three REST creation providers through their existing unknown-completion lookup. Timeouts keep the same treatment.",
+      "problem": "A successful PR-creation response can be truncated or fail while reading its JSON body after the server creates the review. Orca currently treats that as a generic failed creation and offers retry instead of checking whether the review exists.",
+      "effectZh": "评审创建成功但响应正文不可读时，先查询已创建的评审并返回其链接，避免直接引导重复提交。",
+      "ci": {
+        "status": "success",
+        "source": "c8ede340a959bda4ac631395c0f696e0cc1947c5",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350894,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350894",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 PRs and recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"HostedReviewApiRequestError\" in:title,body",
+          "repo:stablyai/orca is:pr \"unknown_completion\" \"JSON\" in:title,body",
+          "repo:stablyai/orca is:pr \"PR creation\" \"malformed\" in:title,body",
+          "repo:stablyai/orca is:pr \"Gitea\" \"response\" \"JSON\" in:title,body"
+        ],
+        "search_artifact": "../second-dedupe-searches.json",
+        "related_distinct": [
+          "#5832 adds Bitbucket connection/creation and timeout/malformed-object recovery; current parser exceptions still bypass that recovery.",
+          "#9142 cancels unread fetch bodies after rejected responses; it does not classify successful-response JSON read failure."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/jira-expand-titles/manifest.json",
+      "branch": "afloat16/orca50-20261127-jira-expand-titles",
+      "title": "fix(jira): retain expansion section titles in Markdown",
+      "issue": 50679,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50679",
+      "pr": 50680,
+      "prUrl": "https://github.com/stablyai/orca/pull/50680",
+      "implementationHead": "f9319d11cdc48744e722097ec8943e857d3371e4",
+      "head": "f9319d11cdc48744e722097ec8943e857d3371e4",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Render each expansion's title through the existing escaped inline renderer as a bold heading, followed by the existing body blocks. Handle nestedExpand through the same block branch.",
+      "problem": "Jira expand and nestedExpand nodes put their section heading in attrs.title. The current fallback renders only body children, losing constraints such as 'Linux only' and leaving nested table details unlabeled.",
+      "effectZh": "在 Jira 展开及嵌套展开内容前保留标题，避免“仅 Linux”等上下文在转换为 Markdown 时丢失。",
+      "ci": {
+        "status": "success",
+        "source": "f9319d11cdc48744e722097ec8943e857d3371e4",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388350957,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350957",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 PRs and recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"adf\" \"expand\" in:title,body"
+        ],
+        "search_artifact": "../second-dedupe-searches.json",
+        "related_distinct": [
+          "#8938 adds description/comment media and lightbox handling; inspected its ADF patch and found no expansion-title mapping."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50680,
+          "url": "https://github.com/stablyai/orca/pull/50680",
+          "state": "closed",
+          "merged": false
+        },
+        "successor": {
+          "number": 50706,
+          "url": "https://github.com/stablyai/orca/pull/50706",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "author": "nwparker",
+          "headSha": "0392fca3fd307701eb5e40a8b85952ade0fc76ec"
+        },
+        "headCommitCredit": {
+          "authorLogin": "Afloat16",
+          "authorName": "Afloat",
+          "commit": "0392fca3fd307701eb5e40a8b85952ade0fc76ec",
+          "url": "https://github.com/stablyai/orca/commit/0392fca3fd307701eb5e40a8b85952ade0fc76ec"
+        },
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "providers/jira-inline-dates/manifest.json",
+      "branch": "afloat16/orca50-20261127-jira-inline-dates",
+      "title": "fix(jira): retain inline dates in issue and comment bodies",
+      "issue": 50674,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50674",
+      "pr": 50677,
+      "prUrl": "https://github.com/stablyai/orca/pull/50677",
+      "implementationHead": "64c9f223edb24cb20b82695cb1adfbc8d013eb26",
+      "head": "64c9f223edb24cb20b82695cb1adfbc8d013eb26",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Convert valid epoch-millisecond date nodes into stable ISO calendar dates in the existing inline text pipeline.",
+      "problem": "Jira's documented inline date node stores its value in attrs.timestamp. The fallback renderer does not inspect that field, so dates disappear from descriptions and comments.",
+      "effectZh": "把 Jira 内联日期转换为稳定的日历日期文本，避免描述和评论中的截止日等信息消失。",
+      "ci": {
+        "status": "success",
+        "source": "64c9f223edb24cb20b82695cb1adfbc8d013eb26",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388351112,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388351112",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 PRs and recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"jira\" \"date\" \"adf\" in:title,body",
+          "repo:stablyai/orca is:pr \"jira\" \"inline dates\" in:title,body",
+          "repo:stablyai/orca is:pr \"jira\" \"timestamp\" \"date node\" in:title,body"
+        ],
+        "search_artifact": "../second-dedupe-searches.json",
+        "related_distinct": [
+          "#29525 adds edit-screen field handling and ADF round-trip preservation, not inline date rendering; inspected its ADF diffs.",
+          "#8976 adds Server/DC support; Cloud date nodes remain missing from current renderer."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/linear-concrete-workspace/manifest.json",
+      "branch": "afloat16/orca50-20261127-linear-concrete-workspace",
+      "title": "fix(linear): validate concrete workspace selectors after trimming",
+      "issue": 50537,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50537",
+      "pr": 50539,
+      "prUrl": "https://github.com/stablyai/orca/pull/50539",
+      "implementationHead": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+      "head": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Normalize whitespace before checking for the reserved all selector. Keep ordinary padded concrete IDs supported.",
+      "problem": "A padded all selector passes concrete-workspace validation, is then trimmed into all, and detail queries silently choose the first connected workspace.",
+      "effectZh": "先去除 Linear 工作区选择值的空白再校验，拒绝伪装成具体工作区的 all，避免详情查询落入错误工作区。",
+      "ci": {
+        "status": "success",
+        "source": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352331,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352331",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"normalizeConcreteWorkspaceId\"",
+          "repo:stablyai/orca is:pr \"ConcreteWorkspaceId\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#5433 introduced project CLI and the existing guard; inspected source retains the pre-trim all comparison."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "providers/linear-workspace-read-coalescing/manifest.json",
+      "branch": "afloat16/orca50-20261127-linear-workspace-read-coalescing",
+      "title": "fix(linear): scope collection reads to resolved workspaces",
+      "issue": 50541,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50541",
+      "pr": 50542,
+      "prUrl": "https://github.com/stablyai/orca/pull/50542",
+      "implementationHead": "c0b84516f411760886f47a406c1b2c7d1fad2e9a",
+      "head": "c0b84516f411760886f47a406c1b2c7d1fad2e9a",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Resolve the workspace entries before coalescing and include their IDs and credential revisions in the in-flight key. Load the captured entries while preserving force and caller-signal semantics.",
+      "problem": "Pending default/all project and view reads share a key before workspace selection is resolved. Switching the active workspace while one read is pending lets the new request receive the previous workspace's result.",
+      "effectZh": "按已解析工作区和凭据版本合并 Linear 并发读取，避免切换工作区后仍收到上一个工作区的项目或视图。",
+      "ci": null,
+      "dedupe": {
+        "user_history": "All71 historical Afloat16 PRs and the recent300 all-author corpus compared; no same improvement",
+        "queries": [
+          "repo:stablyai/orca is:pr \"listProjects\" \"coalesce\"",
+          "repo:stablyai/orca is:pr \"linear\" \"active workspace\" \"in-flight\""
+        ],
+        "search_artifact": "../dedupe-searches.json",
+        "related_distinct": [
+          "#43469 and #17056 extend pagination and fair concurrency, leaving coalescing before workspace resolution.",
+          "#35020 adds caller-lifetime cancellation; it does not separate active-workspace selections."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50542,
+          "url": "https://github.com/stablyai/orca/pull/50542",
+          "title": "fix(linear): scope collection reads to resolved workspaces",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-linear-workspace-read-coalescing",
+          "headSha": "c0b84516f411760886f47a406c1b2c7d1fad2e9a"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50542#issuecomment-7212816483",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50603
+        },
+        "successor": {
+          "number": 50603,
+          "url": "https://github.com/stablyai/orca/pull/50603",
+          "title": "fix(linear): scope coalesced project and view reads to the resolved workspace",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "d26a692ddb4798fd83d5453ef091f3050f086fc7",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "d26a692ddb4798fd83d5453ef091f3050f086fc7",
+            "url": "https://github.com/stablyai/orca/commit/d26a692ddb4798fd83d5453ef091f3050f086fc7",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "runtime/archive-writer-failure/manifest.json",
+      "branch": "afloat16/orca50-20261127-archive-writer-failure",
+      "title": "fix(skills): return archive output failures without stranding the writer",
+      "issue": 50625,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50625",
+      "pr": 50626,
+      "prUrl": "https://github.com/stablyai/orca/pull/50626",
+      "implementationHead": "b6beb21823dbe90f125514e249b9ae721cb289b9",
+      "head": "b6beb21823dbe90f125514e249b9ae721cb289b9",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "An async generator supplies tar headers, file chunks, padding and end blocks as the first pipeline stage. The pipeline owns producer cancellation, gzip, hashing and output failure. The same child receives EEXIST normally, exits0 and leaves the original destination intact.",
+      "problem": "writeSkillTarGzip manually fed its gzip stream while a separate pipeline owned the destination. An output error could reject the pipeline before it was awaited, destroy gzip, then strand the source producer waiting for a drain event that would never occur.",
+      "effectZh": "归档生成统一使用 pipeline 管理生产与输出，输出失败时正确取消生产并返回错误，避免永远等待 drain。",
+      "ci": {
+        "status": "success",
+        "source": "b6beb21823dbe90f125514e249b9ae721cb289b9",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352380,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352380",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 submissions and recent300 topics; no archive writer failure fix.",
+        "queries": [
+          "repo:stablyai/orca \"skill-package-tar\" \"pipeline\"",
+          "repo:stablyai/orca \"writeSkillTarGzip\" \"error\"",
+          "repo:stablyai/orca \"writeSkillTarGzip\" \"hang\"",
+          "repo:stablyai/orca \"skill-package\" \"backpressure\"",
+          "repo:stablyai/orca \"tar\" \"writer\" \"pipeline\""
+        ],
+        "related_distinct": [
+          "#22784 proposed reader teardown changes; its full body inspected. It concerns failures after reading/decompressing, with abort/read ownership, not the writer pipeline.",
+          "#26246 installed a gunzip error listener in the archive reader; its full body inspected. No changes here to openSkillTarGzip or read-side abort behavior."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/download-close-error/manifest.json",
+      "branch": "afloat16/orca50-20261127-download-close-error",
+      "title": "fix(downloads): reject finalization when closing the staged file fails",
+      "issue": 50614,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50614",
+      "pr": 50622,
+      "prUrl": "https://github.com/stablyai/orca/pull/50622",
+      "implementationHead": "a541cf7e947a7461deca416861d60a24b96aaef3",
+      "head": "a541cf7e947a7461deca416861d60a24b96aaef3",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Finish rejects with EIO before promotion, removes the staging file, and releases the session. A cancellation with the same close error still completes cleanup without rejection; an ordinary finish still saves exact bytes.",
+      "problem": "closeDownloadSession swallowed FileHandle.close errors. A delayed writeback error during finish could therefore be followed by promotion and a successful save result. Closing files can surface I/O errors, including errors from remote filesystems.",
+      "effectZh": "下载暂存文件关闭失败时拒绝完成，避免延迟写入错误后仍提升文件并报告成功。",
+      "ci": {
+        "status": "success",
+        "source": "a541cf7e947a7461deca416861d60a24b96aaef3",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352426,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352426",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 topics; no same entrypoint/invariant",
+        "queries": [
+          "repo:stablyai/orca \"closeDownloadSession\" \"close\" \"error\"",
+          "repo:stablyai/orca \"download\" \"close\" \"EIO\""
+        ],
+        "related_distinct": [
+          "#23108 renderer lifetime cleanup does not propagate file-close errors from finish.",
+          "#48300 and #48764 fix the paired-server copy helper; full bodies inspected. This change handles the separate chunked renderer download session finalization."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50622,
+          "url": "https://github.com/stablyai/orca/pull/50622",
+          "title": "fix(downloads): reject finalization when closing the staged file fails",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-download-close-error",
+          "headSha": "a541cf7e947a7461deca416861d60a24b96aaef3"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50622#issuecomment-7213452647",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50653
+        },
+        "successor": {
+          "number": 50653,
+          "url": "https://github.com/stablyai/orca/pull/50653",
+          "title": "fix(filesystem): fail download finalization when the staged file fails to close",
+          "author": "nwparker",
+          "state": "open",
+          "merged": false,
+          "mergedAt": null,
+          "head": "70a9beeb82a1e9af26cbf2e6e5580e1b0bcd2ee6",
+          "mergeCommit": null
+        },
+        "headCommitCredit": [
+          {
+            "sha": "70a9beeb82a1e9af26cbf2e6e5580e1b0bcd2ee6",
+            "url": "https://github.com/stablyai/orca/commit/70a9beeb82a1e9af26cbf2e6e5580e1b0bcd2ee6",
+            "authorLogin": "nwparker",
+            "authorName": "Neil",
+            "credit": "Afloat_coauthor_trailer"
+          }
+        ],
+        "landedCommitCredit": null
+      }
+    },
+    {
+      "package": "runtime/download-exclusive-claim/manifest.json",
+      "branch": "afloat16/orca50-20261127-download-exclusive-claim",
+      "title": "fix(downloads): claim new save destinations without overwriting a concurrent file",
+      "issue": 50578,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50578",
+      "pr": 50581,
+      "prUrl": "https://github.com/stablyai/orca/pull/50581",
+      "implementationHead": "5713ace06a3edbbc0c827f74cb8c5e993c8b18b3",
+      "head": "c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Exactly one call succeeds; the other reports a collision and retains its staging data. The two distinct payloads remain intact. The new regression and all11 existing promotion regressions pass.",
+      "problem": "Two manual downloads can both observe an absent destination, then both rename onto it and report success. The later rename silently replaces the first saved file. This affects the desktop remote-file and artifact save flows.",
+      "effectZh": "新下载目的地使用排他方式占用，防止并发下载互相覆盖；后续修正保留完整失败载荷及恢复路径。",
+      "ci": {
+        "status": "success",
+        "source": "5713ace06a3edbbc0c827f74cb8c5e993c8b18b3",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352556,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352556",
+        "matchesObservedHead": false
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 topics; no same entrypoint/invariant",
+        "queries": [
+          "repo:stablyai/orca \"promoteDownloadedFile\" \"race\"",
+          "repo:stablyai/orca \"filesystem-download-promotion\"",
+          "repo:stablyai/orca \"download\" \"overwrite\" in:title"
+        ],
+        "related_distinct": [
+          "#48029 added a separate paired-server copy path/helper",
+          "#48300 and #48764 concern errors/cancel after fallback creation in that helper; both full bodies inspected. #48764 explicitly scopes behavior to paired-server Save to this computer. This patch routes the existing manual-save no-overwrite branch through that helper."
+        ]
+      },
+      "continuationPr": null,
+      "externallyUpdated": true,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "ciFollowups": {
+        "pr": 50581,
+        "head": "c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+        "action": "read-only; do not edit issue50578, PR50581 or reply to its old review",
+        "latestDelta": {
+          "url": "https://github.com/Afloat16/pytorch-lightning/actions/runs/45968387916/job/140402507200",
+          "source": "c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+          "tree": "da68482acda83ef6e176abb7a9eaa34a03ea79d9",
+          "base": "a26e88c4021a600b03e7ad414b4d0b2c296506a9",
+          "changedFiles": 3,
+          "checks": 27,
+          "allJobStepsSuccess": true,
+          "evidence": [
+            "ORCA_CANDIDATE_SHA: c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+            "ORCA_CANDIDATE_TREE: da68482acda83ef6e176abb7a9eaa34a03ea79d9",
+            "ORCA_BASE_SHA: a26e88c4021a600b03e7ad414b4d0b2c296506a9",
+            "HEAD is now at c02eb904 fix(downloads): preserve completed payloads when promotion copy fails",
+            "$ node config/scripts/preflight/changed-checks/check-changed.mjs --base=a26e88c4021a600b03e7ad414b4d0b2c296506a9 --maxWorkers=2",
+            "check:changed: 3 changed file(s) since a26e88c4021a600b03e7ad414b4d0b2c296506a9 (a26e88c402); running 27 check(s).",
+            "  git show \"$ORCA_BASE_SHA:$path\" > \"$path\""
+          ]
+        },
+        "previousDeltaReportedInExistingReply": {
+          "url": "https://github.com/Afloat16/pytorch-lightning/actions/runs/45965195053/job/140392093715",
+          "source": "a26e88c4021a600b03e7ad414b4d0b2c296506a9",
+          "base": "5713ace06a3edbbc0c827f74cb8c5e993c8b18b3"
+        },
+        "noCurrentCompletePrAgainstMainClaim": true
+      }
+    },
+    {
+      "package": "runtime/download-fetch-causes/manifest.json",
+      "branch": "afloat16/orca50-20261127-download-fetch-causes",
+      "title": "fix(downloads): retry transient Node fetch transport causes",
+      "issue": 50583,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50583",
+      "pr": 50584,
+      "prUrl": "https://github.com/stablyai/orca/pull/50584",
+      "implementationHead": "410cd60c744b33bbc382ef3cdcbe8a7d95af4f3a",
+      "head": "410cd60c744b33bbc382ef3cdcbe8a7d95af4f3a",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The downloader survives a connection reset then a partially read Response terminated with UND_ERR_SOCKET, cleans the partial file and publishes only bytes matching the expected hash. Explicit retryable:false, HTTP404 and expired-certificate errors remain non-retryable.",
+      "problem": "Node fetch reports connection resets and interrupted response bodies as TypeError wrappers. The archive downloader checks only the outer error message/code, so it skips configured retries on brief headless transport failures.",
+      "effectZh": "识别 Node fetch 包装错误中的临时网络原因，使符合既有策略的连接重置和中断可以重试。",
+      "ci": {
+        "status": "success",
+        "source": "410cd60c744b33bbc382ef3cdcbe8a7d95af4f3a",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352542,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352542",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 topics; no same classifier issue",
+        "queries": [
+          "repo:stablyai/orca \"transient-download-error\" \"cause\"",
+          "repo:stablyai/orca \"UND_ERR_SOCKET\"",
+          "repo:stablyai/orca \"runtime\" \"undici\" \"retry\""
+        ],
+        "related_distinct": [
+          "#50150 retries OpenCode Go usage through its separate provider-local classifier",
+          "#10789/#32139 expose cause diagnostics, not runtime archive retry decisions",
+          "#8775 resumes speech downloads and #29023 introduces managed runtime installs; no wrapped cause handling in this classifier"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50584,
+          "url": "https://github.com/stablyai/orca/pull/50584",
+          "title": "fix(downloads): retry transient Node fetch transport causes",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-download-fetch-causes",
+          "headSha": "410cd60c744b33bbc382ef3cdcbe8a7d95af4f3a"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50584#issuecomment-7213824905",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": true,
+          "continuedIn": 50676
+        },
+        "successor": {
+          "number": 50676,
+          "url": "https://github.com/stablyai/orca/pull/50676",
+          "title": "fix(downloads): retry transient Node fetch failures hidden in error causes",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:48:35Z",
+          "head": "3108ae3699281a34f520ad48ce0ef8af0c0175e9",
+          "mergeCommit": "c25ace6f70c816c9a7c859b6128074354df2deb4"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "3108ae3699281a34f520ad48ce0ef8af0c0175e9",
+            "url": "https://github.com/stablyai/orca/commit/3108ae3699281a34f520ad48ce0ef8af0c0175e9",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "c25ace6f70c816c9a7c859b6128074354df2deb4",
+          "url": "https://github.com/stablyai/orca/commit/c25ace6f70c816c9a7c859b6128074354df2deb4",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    },
+    {
+      "package": "runtime/download-idle-expiry/manifest.json",
+      "branch": "afloat16/orca50-20261127-download-idle-expiry",
+      "title": "fix(downloads): keep progressing download sessions alive",
+      "issue": 50623,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50623",
+      "pr": 50624,
+      "prUrl": "https://github.com/stablyai/orca/pull/50624",
+      "implementationHead": "ac0607cdf9c7160243f917c4e81afa8e80687b9b",
+      "head": "ac0607cdf9c7160243f917c4e81afa8e80687b9b",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The native timer is refreshed after a successful append. At40minutes total the session and exact appended bytes remain. A subsequent30-minute idle period removes them. A failed append does not extend expiry.",
+      "problem": "The download session cleanup timer was armed once at start. Remote files and artifacts whose successful chunk writes continued longer than30minutes were deleted mid-transfer, even though the session was active.",
+      "effectZh": "成功写入下载块后刷新闲置计时，避免仍在持续传输的长下载被 30 分钟清理器删除。",
+      "ci": {
+        "status": "success",
+        "source": "ac0607cdf9c7160243f917c4e81afa8e80687b9b",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352628,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352628",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 topics; no same entrypoint/invariant",
+        "queries": [
+          "repo:stablyai/orca \"download\" \"TTL\"",
+          "repo:stablyai/orca \"download\" \"30 minutes\"",
+          "repo:stablyai/orca \"appendDownloadedFileChunk\""
+        ],
+        "related_distinct": [
+          "#23108 handles renderer lifetime and late file opens; its full body does not refresh the timer for active writes.",
+          "#35636/#7738/#6436 originate or use the download handlers; no active-session idle-expiry fix."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/extension-dotdot-prefix/manifest.json",
+      "branch": "afloat16/orca50-20261127-extension-dotdot-prefix",
+      "title": "fix(extensions): allow safe dot-prefixed ZIP child paths",
+      "issue": 50585,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50585",
+      "pr": 50586,
+      "prUrl": "https://github.com/stablyai/orca/pull/50586",
+      "implementationHead": "b4fdf6c396b884bc9e1a995212dae661071b4915",
+      "head": "b4fdf6c396b884bc9e1a995212dae661071b4915",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The exact child bytes and an ordinary entry are written; an actual ../escape entry is still rejected. One path-boundary regression passes.",
+      "problem": "Extension ZIP parsing accepts a path such as ..assets/icon.svg, but extraction rejects every relative name starting with two dots as a parent escape. A valid harmless child entry therefore aborts the entire Web Store install or update.",
+      "effectZh": "允许 ..assets 等合法 ZIP 子路径，同时继续拒绝真正的 ../ 越界路径，避免扩展安装误失败。",
+      "ci": {
+        "status": "success",
+        "source": "b4fdf6c396b884bc9e1a995212dae661071b4915",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352706,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352706",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 topics; no match",
+        "queries": [
+          "repo:stablyai/orca \"extension\" \"dotdot\"",
+          "repo:stablyai/orca \"browser-extension-archive\" \"path\"",
+          "repo:stablyai/orca is:issue \"extension\" \"archive\""
+        ],
+        "related_distinct": [
+          "#3726 covers overlay cleanup paths, not extension archives",
+          "#36907/#42492 remove old low-value tests; no archive child-name fix"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/mcp-concurrent-start/manifest.json",
+      "branch": "afloat16/orca50-20261127-mcp-concurrent-start",
+      "title": "fix(mcp): share one child across concurrent cold-start requests",
+      "issue": 50634,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50634",
+      "pr": 50635,
+      "prUrl": "https://github.com/stablyai/orca/pull/50635",
+      "implementationHead": "a27ad4200401da3ce6e9bd1bd8e3cd3c84579ae9",
+      "head": "a27ad4200401da3ce6e9bd1bd8e3cd3c84579ae9",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Load the runtime modules before reading the current running child. From that read through the create-or-reuse decision there is no await, so concurrent callers share the registered owner. Both real clients connect, return the same PID, and the existing last-session shutdown assertions pass.",
+      "problem": "handleOnce read the running child before awaiting lazy runtime imports. Concurrent first initializes both captured an empty slot, then each created a child. The second overwrote the first owner, so the first client received Session not found and its process was no longer the tracked shared owner.",
+      "effectZh": "并发首次 MCP 请求复用一个已登记子进程，避免重复启动、丢失所有权和 Session not found。",
+      "ci": {
+        "status": "success",
+        "source": "a27ad4200401da3ce6e9bd1bd8e3cd3c84579ae9",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352671,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352671",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior submission topics and recent repository titles checked; no concurrent shared MCP launch fix.",
+        "queries": [
+          "repo:stablyai/orca \"shared\" \"MCP\" \"duplicate\" \"process\"",
+          "repo:stablyai/orca \"SharedMcpProcesses\"",
+          "repo:stablyai/orca \"shared MCP\" \"concurrent\""
+        ],
+        "related_distinct": [
+          "#50471 full body reviewed: introduces lazy imports in base9890 and the new await between owner lookup and registration. This retains that optimization while fixing its concurrent initialization regression.",
+          "#49202 full body reviewed: shares host-list file reads, not the shared process owner/start operation.",
+          "#49132 full body reviewed: host lookup cache, failed-start records, unsubscribe-refusal bookkeeping; not this launch race.",
+          "Related issue #7362 requests the general shared MCP bridge feature; no matching concurrency fix found."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/mcp-send-child-exit/manifest.json",
+      "branch": "afloat16/orca50-20261127-mcp-send-child-exit",
+      "title": "fix(mcp): reject pending stdio sends when the shared child exits",
+      "issue": 50627,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50627",
+      "pr": 50628,
+      "prUrl": "https://github.com/stablyai/orca/pull/50628",
+      "implementationHead": "5668e6150f12ef82f6238cee668ed12066a4350f",
+      "head": "5668e6150f12ef82f6238cee668ed12066a4350f",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Use the Writable write completion callback, which resolves when the write completes and rejects when it fails. The same child-exit case rejects before child close, without retaining a drain listener.",
+      "problem": "A large MCP message fills child stdin. ChildStdioMcpTransport.send then waits only for drain, which never arrives if the child exits or its stdin fails. The send promise and its drain listener remain pending after transport close.",
+      "effectZh": "共享 MCP 子进程退出或 stdin 写入失败时及时拒绝待完成发送，避免永久等待 drain。",
+      "ci": {
+        "status": "success",
+        "source": "5668e6150f12ef82f6238cee668ed12066a4350f",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352667,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352667",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior Afloat16 submission topics and recent repository titles checked; prior timed-subscription and provider-pipe fixes affect different transports and failure paths.",
+        "queries": [
+          "repo:stablyai/orca \"ChildStdioMcpTransport\"",
+          "repo:stablyai/orca \"MCP\" \"stdin\" \"drain\"",
+          "repo:stablyai/orca \"mcp\" \"send\" \"EPIPE\""
+        ],
+        "related_distinct": [
+          "#48770 introduces shared command-server transport; full PR body inspected. No fix for send completion when child stdin closes.",
+          "#8110 issue concerns Codex hook command-not-found and broken pipe, not the shared MCP transport.",
+          "#41497 dictation and #22935/#22938 fleet changes are unrelated to this send promise."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/mcp-subscribe-generation/manifest.json",
+      "branch": "afloat16/orca50-20261127-mcp-subscribe-generation",
+      "title": "fix(mcp): keep replacement resource subscribers waiting for their own result",
+      "issue": 50631,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50631",
+      "pr": 50632,
+      "prUrl": "https://github.com/stablyai/orca/pull/50632",
+      "implementationHead": "49510b2d95ce5aeeb3bffcb550c54aa3559ad34b",
+      "head": "49510b2d95ce5aeeb3bffcb550c54aa3559ad34b",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "A completion clears the pending slot only while it still owns that exact promise. Both current subscribers observe the same refusal and no holder remains.",
+      "problem": "Completing the first subscribe always deleted the URI pending slot. If that session had left and a replacement subscribe was already pending, the old reply deleted the newer slot. A third agent was then told its subscription succeeded even if the replacement was later refused.",
+      "effectZh": "MCP 订阅结果只清理自己拥有的 pending 槽位，避免旧请求完成后误清除新订阅并提前报告成功。",
+      "ci": {
+        "status": "success",
+        "source": "49510b2d95ce5aeeb3bffcb550c54aa3559ad34b",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388352948,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352948",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All 71 prior submission topics and recent repository titles checked; no MCP resource subscribe generation fix.",
+        "queries": [
+          "repo:stablyai/orca \"SharedMcpResourceSubscriptions\"",
+          "repo:stablyai/orca \"MCP\" \"subscription\" \"race\"",
+          "repo:stablyai/orca \"shared-mcp-resource-subscriptions\"",
+          "repo:stablyai/orca \"MCP\" \"subscribe\" \"pending\""
+        ],
+        "related_distinct": [
+          "#48770 introduced shared subscriptions.",
+          "#49132 full PR body reviewed: restored holders when the last unsubscribe is refused and fenced late unsubscribe refusals. Its three regression tests are preserved. This fixes an older subscribe deleting a newer pending subscribe, not unsubscribe restoration.",
+          "Targeted issue searches returned no matching issue."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/plugin-rejected-response-release/manifest.json",
+      "branch": "afloat16/orca50-20261127-plugin-rejected-response-release",
+      "title": "fix(plugins): release rejected catalog response bodies",
+      "issue": 50636,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50636",
+      "pr": 50637,
+      "prUrl": "https://github.com/stablyai/orca/pull/50637",
+      "implementationHead": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+      "head": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Reuse cancelUnreadResponseBody before both early response refusals. Both actual Response streams are closed after the caller receives the unchanged error, so the remaining transfer no longer survives the refusal.",
+      "problem": "The shared public JSON fetcher rejected HTTP error responses and advertised oversize responses without canceling their bodies. Plugin safety-list and catalog count refreshes could leave those transfers active until the 30-second fetch timeout despite having returned an error.",
+      "effectZh": "插件目录拒绝 HTTP 错误或超大响应后取消响应体，避免已经失败的传输继续占用资源。",
+      "ci": {
+        "status": "success",
+        "source": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388353881,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388353881",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 prior Afloat16 submission topics and recent repository titles checked; no plugin catalog early-rejection cleanup fix.",
+        "queries": [
+          "repo:stablyai/orca \"fetchBoundedJson\"",
+          "repo:stablyai/orca \"plugin\" \"unread\" \"body\"",
+          "repo:stablyai/orca \"plugin-bounded-json-fetch\""
+        ],
+        "related_distinct": [
+          "#36537 full body inspected: extracted the shared bounded fetcher when adding public plugin counts; no early-refusal cleanup.",
+          "Exact symbol searches found no earlier fix or matching issue.",
+          "This changes the plugin catalog bounded-download path, independently of Google API401/404 response cleanup in the same task."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/runtime-repair-rollback/manifest.json",
+      "branch": "afloat16/orca50-20261127-runtime-repair-rollback",
+      "title": "fix(runtime): preserve the previous release when replacement publication fails",
+      "issue": 50638,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50638",
+      "pr": 50639,
+      "prUrl": "https://github.com/stablyai/orca/pull/50639",
+      "implementationHead": "d4086e65cd501133998a54835ecb09cd517da302",
+      "head": "d4086e65cd501133998a54835ecb09cd517da302",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "Publication restores the displaced directory if the replacement rename fails. If restoration is blocked, the installer retains staging and reports the exact backup path. Startup reclamation retains that displaced copy until a whole published release of the same recorded version is among its kept releases. Successful publication still commits at the same rename point and normal stale staging is removed.",
+      "problem": "The installer moved an existing same-version copy into staging/damaged before publishing its replacement. If that final rename failed, finally removed the staging directory and the displaced previous release. A valid earlier build of a republished version could disappear after an unsuccessful repair.",
+      "effectZh": "运行时版本替换发布失败时恢复或保留先前版本；备份清理验证完整替代版本后才删除，并使用异步 I/O。",
+      "ci": {
+        "status": "success",
+        "source": "d4086e65cd501133998a54835ecb09cd517da302",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "jobId": 140402558237,
+        "runId": 45968403234,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45968403234/job/140402558237",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "All71 Afloat16 prior submission topics and recent repository titles checked; no runtime replacement rollback fix.",
+        "queries": [
+          "repo:stablyai/orca \"installRuntimeRelease\"",
+          "repo:stablyai/orca \"managed-runtime-release-install\" \"rename\"",
+          "repo:stablyai/orca \"runtime\" \"damaged\" \"rollback\"",
+          "repo:stablyai/orca \"runtime\" \"repair\" \"publication\"",
+          "repo:stablyai/orca \"managed-runtime\" \"repair\" \"rename\""
+        ],
+        "related_distinct": [
+          "#29023 full body reviewed: original staging installer and damaged-copy repair; states the final rename is the commit point but does not preserve displaced copies after publication failure.",
+          "#47331 full body reviewed: automatic updates install different versions beside the old version; same-version repair is explicitly excluded from automatic update behavior.",
+          "#45016 full body reviewed: stable CLI links, cleanup after committed installs and cancellation; not failed replacement rollback.",
+          "#44972 full body reviewed: stale CLI update status and release lookup deadlines, not directory publication.",
+          "Targeted issue searches for the installer/repair rename returned no matching issue."
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": true,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true
+    },
+    {
+      "package": "runtime/sftp-fifo-source/manifest.json",
+      "branch": "afloat16/orca50-20261127-sftp-fifo-source",
+      "title": "fix(ssh): reject FIFO upload sources without blocking file open",
+      "issue": 50587,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50587",
+      "pr": 50588,
+      "prUrl": "https://github.com/stablyai/orca/pull/50588",
+      "implementationHead": "e3b440d5c0669350cfe787bd2260ea257cfdaf9c",
+      "head": "e3b440d5c0669350cfe787bd2260ea257cfdaf9c",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The same child returns Unsupported upload source without any remote file write. One targeted test passes.",
+      "problem": "SFTP uploads open the local source before validating its file type. A writerless FIFO blocks that read-only open forever, before signal cancellation or SFTP close observation can run. Rejecting non-regular sources only after a blocking open never reaches the existing guard.",
+      "effectZh": "SFTP 上传以非阻塞方式检查本地文件类型，避免 FIFO 源在打开时永久阻塞取消和错误处理。",
+      "ci": {
+        "status": "success",
+        "source": "e3b440d5c0669350cfe787bd2260ea257cfdaf9c",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388354133,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388354133",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 historical topics; no same topic",
+        "queries": [
+          "repo:stablyai/orca \"sftp\" \"FIFO\"",
+          "repo:stablyai/orca \"upload\" \"O_NONBLOCK\"",
+          "repo:stablyai/orca \"upload\" \"FIFO\" in:title",
+          "repo:stablyai/orca \"uploadFileWithWindow\" \"FIFO\"",
+          "repo:stablyai/orca is:issue upload FIFO"
+        ],
+        "related_distinct": [
+          "#22079 and #22463 harden transcript reads; read full bodies and scope lists, neither edits upload flags",
+          "#30704 pipelines SFTP writes; full body confirms one highWaterMark change and preservation of existing source guards",
+          "#45080 removes overlapping transfer tests; not a FIFO-source fix"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "retiredWithoutMerge": {
+        "reason": "Maintainer found no current user-facing production path for the proposed FIFO handling.",
+        "url": "https://github.com/stablyai/orca/pull/50588#issuecomment-7214093281"
+      }
+    },
+    {
+      "package": "runtime/sync-process-timeout/manifest.json",
+      "branch": "afloat16/orca50-20261127-sync-process-timeout",
+      "title": "fix(process): enforce synchronous timeouts for TERM-ignoring children",
+      "issue": 50589,
+      "issueUrl": "https://github.com/stablyai/orca/issues/50589",
+      "pr": 50590,
+      "prUrl": "https://github.com/stablyai/orca/pull/50590",
+      "implementationHead": "746e8ae8647f47b0f518c136d04cf0bd1e7e1079",
+      "head": "746e8ae8647f47b0f518c136d04cf0bd1e7e1079",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "author": "Afloat16",
+      "maintainerCanModify": false,
+      "change": "The inner call reports timedOut=true and signal=SIGKILL. Ordinary children with default timeout and explicit timeoutMs=null still exit0 with exact stdout. One regression passes.",
+      "problem": "runProcessSync configures a deadline but Node spawnSync waits for exit even after sending its default SIGTERM. A child that ignores SIGTERM therefore blocks the synchronous caller indefinitely beyond its finite timeout.",
+      "effectZh": "同步子进程达到有限超时后强制终止忽略 SIGTERM 的子进程，保证启动探测等调用能够返回。",
+      "ci": {
+        "status": "success",
+        "source": "746e8ae8647f47b0f518c136d04cf0bd1e7e1079",
+        "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+        "runId": 45964038789,
+        "jobId": 140388354288,
+        "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388354288",
+        "matchesObservedHead": true
+      },
+      "dedupe": {
+        "user_history": "Compared all71 Afloat16 PRs and recent300 topics; no match",
+        "queries": [
+          "repo:stablyai/orca \"runProcessSync\" \"SIGTERM\"",
+          "repo:stablyai/orca \"spawnSync\" \"timeout\" \"kill\""
+        ],
+        "related_distinct": [
+          "#15746 centralizes Windows process handling; this adds a missing POSIX sync timeout guarantee",
+          "#33340/#23381 cover Windows cold-start test timeouts"
+        ]
+      },
+      "continuationPr": null,
+      "mergeable": null,
+      "snapshotAt": "2026-11-27 09:13:56 UTC",
+      "issueClosingReferenceVerified": true,
+      "continuation": {
+        "original": {
+          "number": 50590,
+          "url": "https://github.com/stablyai/orca/pull/50590",
+          "title": "fix(process): enforce synchronous timeouts for TERM-ignoring children",
+          "author": "Afloat16",
+          "state": "closed",
+          "merged": false,
+          "maintainerCanModify": false,
+          "headRepo": "Afloat16/orca",
+          "headRef": "afloat16/orca50-20261127-sync-process-timeout",
+          "headSha": "746e8ae8647f47b0f518c136d04cf0bd1e7e1079"
+        },
+        "closure": {
+          "commentUrl": "https://github.com/stablyai/orca/pull/50590#issuecomment-7213804431",
+          "maintainer": "nwparker",
+          "explicitlyCouldNotPush": false,
+          "continuedIn": 50672
+        },
+        "successor": {
+          "number": 50672,
+          "url": "https://github.com/stablyai/orca/pull/50672",
+          "title": "fix(process): force-kill timed-out synchronous children so TERM-ignoring processes can't hang startup",
+          "author": "nwparker",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T08:49:23Z",
+          "head": "e9d0d43ccb5a8b2210f91d67aac9e2c383c62ff2",
+          "mergeCommit": "ab7a24268f517db33288829222233ed4625babed"
+        },
+        "headCommitCredit": [
+          {
+            "sha": "e9d0d43ccb5a8b2210f91d67aac9e2c383c62ff2",
+            "url": "https://github.com/stablyai/orca/commit/e9d0d43ccb5a8b2210f91d67aac9e2c383c62ff2",
+            "authorLogin": "Afloat16",
+            "authorName": "Afloat",
+            "credit": "Afloat16_commit_author"
+          }
+        ],
+        "landedCommitCredit": {
+          "sha": "ab7a24268f517db33288829222233ed4625babed",
+          "url": "https://github.com/stablyai/orca/commit/ab7a24268f517db33288829222233ed4625babed",
+          "authorLogin": "nwparker",
+          "authorName": "Neil",
+          "committerLogin": "web-flow",
+          "parentCount": 1,
+          "originalHeadIsParent": false,
+          "creditForAfloat": "co_author_trailer",
+          "coAuthorName": "Afloat"
+        }
+      }
+    }
+  ],
+  "reviewActions": [
+    {
+      "key": "download_chunk_size",
+      "url": "https://github.com/stablyai/orca/pull/50624",
+      "kind": "edit_pr_body",
+      "apiVerified": true
+    },
+    {
+      "key": "docs_bounded_comments_issue",
+      "url": "https://github.com/stablyai/orca/issues/50519",
+      "kind": "edit_issue_body",
+      "apiVerified": true
+    },
+    {
+      "key": "docs_repeated_token_description",
+      "url": "https://github.com/stablyai/orca/pull/50520",
+      "kind": "edit_pr_body",
+      "apiVerified": true
+    },
+    {
+      "key": "runtime_async_and_backup_validation",
+      "url": "https://github.com/stablyai/orca/pull/50639",
+      "kind": "edit_pr_body",
+      "apiVerified": true
+    },
+    {
+      "key": "calendar_incomplete_list_description",
+      "url": "https://github.com/stablyai/orca/pull/50512",
+      "kind": "edit_pr_body",
+      "apiVerified": true
+    },
+    {
+      "key": "docs_seen_token_reply",
+      "url": "https://github.com/stablyai/orca/pull/50520#discussion_r4717559882",
+      "kind": "reply_review",
+      "apiVerified": true
+    },
+    {
+      "key": "runtime_backup_reply",
+      "url": "https://github.com/stablyai/orca/pull/50639#discussion_r4717570808",
+      "kind": "reply_review",
+      "apiVerified": true
+    },
+    {
+      "key": "calendar_page_cap_reply",
+      "url": "https://github.com/stablyai/orca/pull/50512#discussion_r4717574764",
+      "kind": "reply_review",
+      "apiVerified": true
+    },
+    {
+      "key": "git_temp_root_reply",
+      "url": "https://github.com/stablyai/orca/pull/50651#discussion_r4717578530",
+      "kind": "reply_review",
+      "apiVerified": true
+    }
+  ],
+  "pendingWork": [
+    {
+      "pr": 50643,
+      "kind": "required-check-fix",
+      "description": "Functional checks pass; consolidate SQLite schema initialization to remove new blocking call sites, then rerun exact-source check:changed."
+    },
+    {
+      "replaces": 50588,
+      "kind": "replacement-investigation",
+      "description": "Investigating GitLab context-line inline comment old/new position mapping; no replacement PR has been created."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "pr": 50512,
+      "status": "success",
+      "source": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
+      "runId": 45965251200,
+      "jobId": 140392273709,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45965251200/job/140392273709",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50520,
+      "status": "success",
+      "source": "f846856dd093f642a44c73766583cf2deaf484f5",
+      "jobId": 140397206642,
+      "runId": 45966770120,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45966770120/job/140397206642",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50594,
+      "status": "success",
+      "source": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348265,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348265",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50668,
+      "status": "success",
+      "source": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348598,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348598",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50598,
+      "status": "success",
+      "source": "870993befb248a96666cf14bfebae1aee126e64a",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348793,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348793",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50621,
+      "status": "success",
+      "source": "1b72a4ac009188b964318696bdabf2cdee5a9dc4",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348807,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348807",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50601,
+      "status": "success",
+      "source": "e3646c4fdda468c0aed2c37708242090a839d3d7",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348785,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348785",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50607,
+      "status": "success",
+      "source": "64e24ab5fe445acc312b3786a494315c89f279e1",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348736,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348736",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50507,
+      "status": "success",
+      "source": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348775,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348775",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50646,
+      "status": "success",
+      "source": "25cd81bcfbffcde82d4fb34d5d82c9f5eee86870",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348768,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348768",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50633,
+      "status": "success",
+      "source": "a5b65db0b05427db7e6a4ceba128c18d09b948fa",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388349096,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388349096",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50543,
+      "status": "success",
+      "source": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348866,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348866",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50651,
+      "status": "success",
+      "source": "ba2efdf6b77bb26e38e62eaac1b1d6c0a1c04924",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "jobId": 140402558673,
+      "runId": 45968403234,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45968403234/job/140402558673",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50552,
+      "status": "success",
+      "source": "3b4785d9badf813bad3b6b297c3adbab3c9bfdd7",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348942,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348942",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50659,
+      "status": "success",
+      "source": "a251960659b0ea7d08fc1bebc145e82d23680250",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348960,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348960",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50556,
+      "status": "success",
+      "source": "ea07c0250b1395d037d148cb8963149dd3e36a85",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348910,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348910",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50558,
+      "status": "success",
+      "source": "35429642ee37905a9c729c08f63b23ccdb7f28b5",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348674,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348674",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50560,
+      "status": "success",
+      "source": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348826,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348826",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50562,
+      "status": "success",
+      "source": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388348930,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388348930",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50643,
+      "status": "success",
+      "source": "12ba475107eb4617c302e432fb551a69451d2274",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388349036,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388349036",
+      "matchesObservedHead": false
+    },
+    {
+      "pr": 50565,
+      "status": "success",
+      "source": "9920f6d7fbf9f9cb16f3519048b2267b5730c668",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350658,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350658",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50532,
+      "status": "success",
+      "source": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350841,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350841",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50691,
+      "status": "success",
+      "source": "59bb56a015fc9c735eb542021a71a1565bec4c38",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350972,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350972",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50693,
+      "status": "success",
+      "source": "8c61661a6ae88d746b62d381372f922e5523b33c",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350772,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350772",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50688,
+      "status": "success",
+      "source": "3922a17a93aa048c1e08f257828527ce988594b6",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350789,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350789",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50536,
+      "status": "success",
+      "source": "7da79774a4ab2738f3e934c221059b203394e9ee",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350927,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350927",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50686,
+      "status": "success",
+      "source": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350835,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350835",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50684,
+      "status": "success",
+      "source": "c8ede340a959bda4ac631395c0f696e0cc1947c5",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350894,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350894",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50680,
+      "status": "success",
+      "source": "f9319d11cdc48744e722097ec8943e857d3371e4",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388350957,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388350957",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50677,
+      "status": "success",
+      "source": "64c9f223edb24cb20b82695cb1adfbc8d013eb26",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388351112,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388351112",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50539,
+      "status": "success",
+      "source": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352331,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352331",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50626,
+      "status": "success",
+      "source": "b6beb21823dbe90f125514e249b9ae721cb289b9",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352380,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352380",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50622,
+      "status": "success",
+      "source": "a541cf7e947a7461deca416861d60a24b96aaef3",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352426,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352426",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50581,
+      "status": "success",
+      "source": "5713ace06a3edbbc0c827f74cb8c5e993c8b18b3",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352556,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352556",
+      "matchesObservedHead": false
+    },
+    {
+      "pr": 50584,
+      "status": "success",
+      "source": "410cd60c744b33bbc382ef3cdcbe8a7d95af4f3a",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352542,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352542",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50624,
+      "status": "success",
+      "source": "ac0607cdf9c7160243f917c4e81afa8e80687b9b",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352628,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352628",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50586,
+      "status": "success",
+      "source": "b4fdf6c396b884bc9e1a995212dae661071b4915",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352706,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352706",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50635,
+      "status": "success",
+      "source": "a27ad4200401da3ce6e9bd1bd8e3cd3c84579ae9",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352671,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352671",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50628,
+      "status": "success",
+      "source": "5668e6150f12ef82f6238cee668ed12066a4350f",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352667,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352667",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50632,
+      "status": "success",
+      "source": "49510b2d95ce5aeeb3bffcb550c54aa3559ad34b",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388352948,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388352948",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50637,
+      "status": "success",
+      "source": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388353881,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388353881",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50639,
+      "status": "success",
+      "source": "d4086e65cd501133998a54835ecb09cd517da302",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "jobId": 140402558237,
+      "runId": 45968403234,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45968403234/job/140402558237",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50588,
+      "status": "success",
+      "source": "e3b440d5c0669350cfe787bd2260ea257cfdaf9c",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388354133,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388354133",
+      "matchesObservedHead": true
+    },
+    {
+      "pr": 50590,
+      "status": "success",
+      "source": "746e8ae8647f47b0f518c136d04cf0bd1e7e1079",
+      "base": "9890ea181c0f9ae59fb82da64c4a6fbc0504a817",
+      "runId": 45964038789,
+      "jobId": 140388354288,
+      "url": "https://github.com/Afloat16/orca/actions/runs/45964038789/job/140388354288",
+      "matchesObservedHead": true
+    }
+  ],
+  "snapshotSources": {
+    "originals": "2026-11-27 09:13:56 UTC",
+    "continuations": "2026-11-27T09:02:42Z",
+    "newContinuation50706": "https://github.com/stablyai/orca/pull/50706",
+    "requiredChecks": [
+      "https://github.com/Afloat16/orca/actions/runs/45964038789",
+      "https://github.com/Afloat16/orca/actions/runs/45965251200",
+      "https://github.com/Afloat16/orca/actions/runs/45966770120",
+      "https://github.com/Afloat16/orca/actions/runs/45968403234",
+      "https://github.com/Afloat16/orca/actions/runs/45971439706"
+    ]
+  }
+}
