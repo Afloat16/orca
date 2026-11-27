@@ -1,0 +1,275 @@
+[
+  {
+    "originalPr": 50524,
+    "successorPr": 50595,
+    "commit": "4d69094a44dfac479c0e1f6bf0ad1b216a6456bb",
+    "url": "https://github.com/stablyai/orca/commit/4d69094a44dfac479c0e1f6bf0ad1b216a6456bb",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50527,
+    "successorPr": 50604,
+    "commit": "341717b0bf9171fe46f97a52a60e5fa83785aab8",
+    "url": "https://github.com/stablyai/orca/commit/341717b0bf9171fe46f97a52a60e5fa83785aab8",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50530,
+    "successorPr": 50597,
+    "commit": "b29462feb1785b80c057a6977d988153adc534fa",
+    "url": "https://github.com/stablyai/orca/commit/b29462feb1785b80c057a6977d988153adc534fa",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50542,
+    "successorPr": 50603,
+    "commit": "90dc851cedabb03c27a6a2e929227cd2102cbe33",
+    "url": "https://github.com/stablyai/orca/commit/90dc851cedabb03c27a6a2e929227cd2102cbe33",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50546,
+    "successorPr": 50608,
+    "commit": "a567ac6ece623fe924494d0e44f31eb26be1dba2",
+    "url": "https://github.com/stablyai/orca/commit/a567ac6ece623fe924494d0e44f31eb26be1dba2",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50534,
+    "successorPr": 50611,
+    "commit": "b49f516664d6e4861b6d3714720fe3c14908dcc8",
+    "url": "https://github.com/stablyai/orca/commit/b49f516664d6e4861b6d3714720fe3c14908dcc8",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50622,
+    "successorPr": 50653,
+    "commit": "362fd0ca5c588f8ef78fb58e6c372ba3fdd63a75",
+    "url": "https://github.com/stablyai/orca/commit/362fd0ca5c588f8ef78fb58e6c372ba3fdd63a75",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50598,
+    "successorPr": 50671,
+    "commit": "e142c1f21abe82f16845c61a2688cab30008ef76",
+    "url": "https://github.com/stablyai/orca/commit/e142c1f21abe82f16845c61a2688cab30008ef76",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50601,
+    "successorPr": 50675,
+    "commit": "c31a94271ea4a52d9b2ad6980fa3c9a496b03f7c",
+    "url": "https://github.com/stablyai/orca/commit/c31a94271ea4a52d9b2ad6980fa3c9a496b03f7c",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50552,
+    "successorPr": 50673,
+    "commit": "8dbc147bf4b7f65312ff618289712baab2a9d45a",
+    "url": "https://github.com/stablyai/orca/commit/8dbc147bf4b7f65312ff618289712baab2a9d45a",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50556,
+    "successorPr": 50663,
+    "commit": "f4a9017a6b706c77becf510904a4d8f14ef2b820",
+    "url": "https://github.com/stablyai/orca/commit/f4a9017a6b706c77becf510904a4d8f14ef2b820",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50558,
+    "successorPr": 50664,
+    "commit": "25f86daa28658980b16001224cbadf99aab7a79e",
+    "url": "https://github.com/stablyai/orca/commit/25f86daa28658980b16001224cbadf99aab7a79e",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50565,
+    "successorPr": 50670,
+    "commit": "767b930aa76b4a14979c8836281e45e9d2d0cb93",
+    "url": "https://github.com/stablyai/orca/commit/767b930aa76b4a14979c8836281e45e9d2d0cb93",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50584,
+    "successorPr": 50676,
+    "commit": "c25ace6f70c816c9a7c859b6128074354df2deb4",
+    "url": "https://github.com/stablyai/orca/commit/c25ace6f70c816c9a7c859b6128074354df2deb4",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50590,
+    "successorPr": 50672,
+    "commit": "ab7a24268f517db33288829222233ed4625babed",
+    "url": "https://github.com/stablyai/orca/commit/ab7a24268f517db33288829222233ed4625babed",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50680,
+    "successorPr": 50706,
+    "commit": "bb5f6912a2f174dc99b7ff7b5c6589dbd26b309c",
+    "url": "https://github.com/stablyai/orca/commit/bb5f6912a2f174dc99b7ff7b5c6589dbd26b309c",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50684,
+    "successorPr": 50708,
+    "commit": "4ef999cb58cb72f26a642b9cb6c9cd180469f911",
+    "url": "https://github.com/stablyai/orca/commit/4ef999cb58cb72f26a642b9cb6c9cd180469f911",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50677,
+    "successorPr": 50710,
+    "commit": "e256c787191113d8715d3422644f0acede31ab3b",
+    "url": "https://github.com/stablyai/orca/commit/e256c787191113d8715d3422644f0acede31ab3b",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50586,
+    "successorPr": 50714,
+    "commit": "779280800fc299b289ea642aa386d3de2ff54588",
+    "url": "https://github.com/stablyai/orca/commit/779280800fc299b289ea642aa386d3de2ff54588",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50691,
+    "successorPr": 50745,
+    "commit": "6e70d9f8c20b5e813ee2510ce3338c6bfcd12157",
+    "url": "https://github.com/stablyai/orca/commit/6e70d9f8c20b5e813ee2510ce3338c6bfcd12157",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  },
+  {
+    "originalPr": 50626,
+    "successorPr": 50762,
+    "commit": "71b5782c8a431b4ebe2ac5cdde8cf5e9457cde6a",
+    "url": "https://github.com/stablyai/orca/commit/71b5782c8a431b4ebe2ac5cdde8cf5e9457cde6a",
+    "author": "nwparker",
+    "committer": "web-flow",
+    "parentCount": 1,
+    "coauthors": [
+      "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+    ],
+    "hasAfloatCoauthor": true
+  }
+]
