@@ -1,0 +1,137 @@
+name: Orca contribution source checks
+on:
+  push:
+    branches: [validation/orca50-exact-candidates-20261127]
+permissions:
+  contents: read
+concurrency:
+  group: orca50-exact-candidates-20261127
+  cancel-in-progress: false
+env:
+  ORCA_BACKGROUND_LAUNCH: '1'
+jobs:
+  changed-checks:
+    name: ${{ matrix.slug }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        include:
+          - slug: drive-concurrent-read
+            sha: af94d11b764a4c2cb290f36ee7e19013e1cd6104
+          - slug: drive-folder-completeness
+            sha: 46f894534a81d6e33939c9fc6ee64a2eeed1d8c9
+          - slug: gmail-forward-concurrency
+            sha: 870993befb248a96666cf14bfebae1aee126e64a
+          - slug: gmail-inline-attachments
+            sha: 1b72a4ac009188b964318696bdabf2cdee5a9dc4
+          - slug: gmail-repeated-label
+            sha: e3646c4fdda468c0aed2c37708242090a839d3d7
+          - slug: google-response-cleanup
+            sha: 64e24ab5fe445acc312b3786a494315c89f279e1
+          - slug: sheets-upsert-index
+            sha: 9e2acd9f3ea62b265b87af9904adcfa7c18dde5c
+          - slug: conductor-empty-local-overrides
+            sha: 25cd81bcfbffcde82d4fb34d5d82c9f5eee86870
+          - slug: copilot-usage-accounting
+            sha: a5b65db0b05427db7e6a4ceba128c18d09b948fa
+          - slug: ghostty-literal-hash
+            sha: 91a0e6cd9e92c75ddead94d3081737ec0d383d8a
+          - slug: git-history-worktree-path-framing
+            sha: 0fa111efbe21c2efeb0b2c000eea4a6753693c07
+          - slug: git-refspec-literal-captures
+            sha: 3b4785d9badf813bad3b6b297c3adbab3c9bfdd7
+          - slug: hosted-review-qualified-base
+            sha: a251960659b0ea7d08fc1bebc145e82d23680250
+          - slug: json-object-own-properties
+            sha: ea07c0250b1395d037d148cb8963149dd3e36a85
+          - slug: jsonc-active-properties
+            sha: 35429642ee37905a9c729c08f63b23ccdb7f28b5
+          - slug: markdown-reference-code-spans
+            sha: a623014fc8481d882cdb169bd280b5e1a3bb18b7
+          - slug: notebook-code-cell-attachments
+            sha: aeddc318ba144a52a1d70adc3691ee56cd546ea6
+          - slug: opencode-json-message-parts
+            sha: 12ba475107eb4617c302e432fb551a69451d2274
+          - slug: transcript-content-whitespace
+            sha: 9920f6d7fbf9f9cb16f3519048b2267b5730c668
+          - slug: gitea-incomplete-branch-scan
+            sha: 41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1
+          - slug: gitlab-bridge-name-isolation
+            sha: 59bb56a015fc9c735eb542021a71a1565bec4c38
+          - slug: gitlab-child-job-owner
+            sha: 8c61661a6ae88d746b62d381372f922e5523b33c
+          - slug: gitlab-discussion-ranges
+            sha: 3922a17a93aa048c1e08f257828527ce988594b6
+          - slug: gitlab-pagination-integer
+            sha: 7da79774a4ab2738f3e934c221059b203394e9ee
+          - slug: hosted-review-branch-case
+            sha: c2a8d5ed8388a6abc879ce38c59267127d80e276
+          - slug: hosted-review-response-confirmation
+            sha: c8ede340a959bda4ac631395c0f696e0cc1947c5
+          - slug: jira-expand-titles
+            sha: f9319d11cdc48744e722097ec8943e857d3371e4
+          - slug: jira-inline-dates
+            sha: 64c9f223edb24cb20b82695cb1adfbc8d013eb26
+          - slug: linear-concrete-workspace
+            sha: 8e7c2464e6c9feeedb9c0099dce2d01e5addf231
+          - slug: archive-writer-failure
+            sha: b6beb21823dbe90f125514e249b9ae721cb289b9
+          - slug: download-close-error
+            sha: a541cf7e947a7461deca416861d60a24b96aaef3
+          - slug: download-exclusive-claim
+            sha: 5713ace06a3edbbc0c827f74cb8c5e993c8b18b3
+          - slug: download-fetch-causes
+            sha: 410cd60c744b33bbc382ef3cdcbe8a7d95af4f3a
+          - slug: download-idle-expiry
+            sha: ac0607cdf9c7160243f917c4e81afa8e80687b9b
+          - slug: extension-dotdot-prefix
+            sha: b4fdf6c396b884bc9e1a995212dae661071b4915
+          - slug: mcp-concurrent-start
+            sha: a27ad4200401da3ce6e9bd1bd8e3cd3c84579ae9
+          - slug: mcp-send-child-exit
+            sha: 5668e6150f12ef82f6238cee668ed12066a4350f
+          - slug: mcp-subscribe-generation
+            sha: 49510b2d95ce5aeeb3bffcb550c54aa3559ad34b
+          - slug: plugin-rejected-response-release
+            sha: 8952b3137320118e0b119a5845296f9a2d6fcffc
+          - slug: runtime-repair-rollback
+            sha: f1b2826b75415244699e59e94252674e8ae7ad93
+          - slug: sftp-fifo-source
+            sha: e3b440d5c0669350cfe787bd2260ea257cfdaf9c
+          - slug: sync-process-timeout
+            sha: 746e8ae8647f47b0f518c136d04cf0bd1e7e1079
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ matrix.sha }}
+          filter: blob:none
+          fetch-depth: 50
+          persist-credentials: false
+      - name: Verify exact candidate and base
+        env:
+          CANDIDATE_SHA: ${{ matrix.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+          git cat-file -e 9890ea181c0f9ae59fb82da64c4a6fbc0504a817^{commit}
+          git diff --exit-code
+      - uses: ./.github/actions/install-node-dependencies
+        with:
+          native-runtime: node
+          node-version: '24'
+          cache-pnpm-store: 'false'
+          persist-native-cache: 'false'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version-file: config/.bun-version
+          no-cache: true
+      - name: Check the complete contribution
+        run: timeout 900 pnpm check:changed --base=9890ea181c0f9ae59fb82da64c4a6fbc0504a817 --maxWorkers=2
+      - name: Check the Drive concurrency performance contract
+        if: matrix.slug == 'drive-concurrent-read'
+        run: timeout 900 node config/scripts/test-runtime/execution-policy/run-vitest.mjs run --config config/vitest.performance.config.ts src/main/google/google-drive-concurrent-read.performance.test.ts --maxWorkers=2
+      - name: Confirm validation did not modify tracked sources
+        if: always()
+        run: git diff --exit-code
