@@ -101,6 +101,7 @@ it('retries History and search after part I/O errors without a source-stat chang
   blocked = true
   code = 'EACCES'
   await pass()
+  expect(matches('Recovered')).toEqual([])
   blocked = false
   await pass()
   expect.soft(matches('Recovered')).toEqual(['ses_retry'])
