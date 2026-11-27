@@ -130,11 +130,14 @@ export function mapGhosttyToOrca(
         }
         const idxStr = entry.slice(0, eqIdx).trim()
         const color = entry.slice(eqIdx + 1).trim()
-        // Ghostty accepts decimal and 0x/0o/0b indices; parseInt(..., 10) maps each prefix to black.
-        const index = /^(?:\d+|0x[\da-f]+|0o[0-7]+|0b[01]+)$/i.test(idxStr)
-          ? Number(idxStr)
-          : Number.NaN
-        if (!Number.isInteger(index) || index > 255 || !HEX_COLOR_RE.test(color)) {
+        // Ghostty's Zig integer parser accepts signs, radix prefixes and interior separators.
+        const magnitude = idxStr.replace(/^[+-]/, '')
+        const index =
+          !magnitude.endsWith('_') &&
+          /^(?:\d[\d_]*|0x[\da-f][\da-f_]*|0o[0-7][0-7_]*|0b[01][01_]*)$/i.test(magnitude)
+            ? Number(magnitude.replaceAll('_', '')) * (idxStr.startsWith('-') ? -1 : 1)
+            : Number.NaN
+        if (!Number.isInteger(index) || index < 0 || index > 255 || !HEX_COLOR_RE.test(color)) {
           continue
         }
         const mapped = PALETTE_INDEX_MAP[index]
