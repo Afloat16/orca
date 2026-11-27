@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS files(
   -- current covers the recorded stat; due needs a whole read; failed did not commit.
   state TEXT NOT NULL DEFAULT 'current',
   fail_count INTEGER NOT NULL DEFAULT 0,
-  -- Retry held-out failures only after the source mtime changes.
+  -- Retry held-out failures after the source mtime or content dependencies change.
   failed_mtime_ms REAL,
   -- SHA-256 of bytes [0, byte_offset); lets a reread after restart append instead of replace.
   prefix_hash TEXT,
