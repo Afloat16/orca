@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "status": "ready_for_authorized_publication",
+  "pr": 50659,
+  "issue": 50656,
+  "action": "post_one_technical_followup_comment",
+  "url": "https://github.com/stablyai/orca/pull/50659",
+  "expectedState": "closed",
+  "expectedClosedPrHead": "a251960659b0ea7d08fc1bebc145e82d23680250",
+  "branch": "afloat16/orca50-20261127-hosted-review-qualified-base",
+  "expectedForkBranchHead": "7a64e57a8a085a4c5ce0afacce579472f034f819",
+  "ci": {
+    "status": "success",
+    "source": "7a64e57a8a085a4c5ce0afacce579472f034f819",
+    "base": "6e70d9f8c20b5e813ee2510ce3338c6bfcd12157",
+    "runId": 45981427909,
+    "jobId": 140446017872,
+    "url": "https://github.com/Afloat16/orca/actions/runs/45981427909/job/140446017872"
+  },
+  "commentBody": "I completed the follow-up to the display/target mismatch on the original branch, retaining the existing contribution and merging the tested upstream base. The PR remains closed; this update is for review of the concrete correction.\n\nSource: https://github.com/Afloat16/orca/commit/7a64e57a8a085a4c5ce0afacce579472f034f819\n\n[Exact 28-file comparison against the tested upstream base](https://github.com/Afloat16/orca/compare/6e70d9f8c20b5e813ee2510ce3338c6bfcd12157...7a64e57a8a085a4c5ce0afacce579472f034f819). The fork branch points to this correction; GitHub's closed PR record still shows the earlier head.\n\nThe form now retains the original Git ref, and known branch names from search are explicitly represented as `refs/heads/<name>`. Display, eligibility comparisons, main preflight and provider submission use the shared normalization rule without passing its branch-name output back through ref parsing. The same change covers Source Control, Checks, unattended Create PR, generated-field restoration and stack-parent discovery.\n\nFor the reported `refs/remotes/origin/origin/topic` case, the actual form displayed `origin/topic` on the original head but the Gitea creation payload contained `topic`. With this correction, the displayed value and payload both contain `origin/topic`. Explicit `refs/heads/origin/topic` and detailed-search selection behave the same. Ordinary `origin/main`, `refs/heads/main` and `refs/remotes/origin/main` controls still create against `main`. A missing literal branch is rejected even when its stripped sibling exists.\n\nGeneration also preserves the selected ref: real linked-worktree/local-bare-remote probes verify `origin/topic`, a literal `team/topic` alongside a configured `team` remote, and `refs/remotes/upstream/main` when its commit differs from `origin/main`. The registered repository root is passed separately from the linked worktree path, and the real IPC authorization checks are exercised.\n\nThe optional eligibility response `requestedBaseBranch` reports how the executing host interprets the requested base. Ordinary and stacked creation use the same captured host/selector for this proof and the write. When an older host cannot prove an ambiguous target, no create request is dispatched. Explicit generation that an older host could misinterpret is likewise refused; ordinary short-base creation and ordinary main generation retain the old protocol. This cannot recover identity already discarded by an old renderer or a legacy search response, so both ends need the update for full literal-prefix support.\n\nValidation: using the original PR's affected production files, 12 of 17 validation-only production scenarios fail. The behavioral correction at `651fbaf1` passes all 17 plus one committed branch-identity/parser invariant; both comparison paths exercise the current repo/worktree IPC authorization. The UI/IPC execution probes stay outside the commit, following AGENTS.md. The only subsequent change at `7a64e57a` localizes the two unresolved-owner error returns using an existing translation key; targeted localization coverage reproduces the original two failures and passes after the correction.\n\nCurrent follow-up candidate `7a64e57a8a085a4c5ce0afacce579472f034f819` passed the [complete required `pnpm check:changed` gate](https://github.com/Afloat16/orca/actions/runs/45981427909/job/140446017872) against tested upstream base `6e70d9f8c20b5e813ee2510ce3338c6bfcd12157`. The job verified the source and base commit IDs and confirmed that validation left tracked sources unchanged.\n\nThe visible base values were read from the actual BasePicker DOM and compared with the provider request bodies. I have not attached a desktop screenshot; these DOM/request traces are not a desktop capture.\n",
+  "doNotReopen": true,
+  "doNotCreateNewPR": true,
+  "newContributionCount": 0
+}
