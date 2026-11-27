@@ -65,10 +65,15 @@ export async function discoverOpenCodeSessions(args: {
   const legacyScopeFiles = withoutSqliteDuplicates(fileDiscovery.scopeFiles ?? [])
   const paths = [...new Set([...legacyFiles, ...legacyScopeFiles].map((file) => file.path))]
   const sidecars = new Map(
-    await mapWithConcurrency(paths, 4, async (path) => [
-      path,
-      await observeOpenCodeJsonSidecar(args.storageDir, path, args.issues, args.signal)
-    ] as const)
+    await mapWithConcurrency(
+      paths,
+      4,
+      async (path) =>
+        [
+          path,
+          await observeOpenCodeJsonSidecar(args.storageDir, path, args.issues, args.signal)
+        ] as const
+    )
   )
   const withSidecars = (files: readonly FileWithMtime[]): FileWithMtime[] =>
     files.map((file) => ({ ...file, sidecar: sidecars.get(file.path) ?? 'unknown' }))
