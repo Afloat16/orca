@@ -1,3 +1,4 @@
+import '../worker/session-search-worker.test-fixture'
 import { mkdir, rm, stat, utimes, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { afterEach, beforeEach, expect, it } from 'vitest'
