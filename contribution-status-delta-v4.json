@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 4,
+  "kind": "limited_incremental_status_and_feedback_audit",
+  "repository": "stablyai/orca",
+  "account": "Afloat16",
+  "readOnly": true,
+  "observation": {
+    "startedAt": "2026-11-27 11:12:14 UTC",
+    "completedAt": "2026-11-27 11:12:32 UTC",
+    "timezone": "UTC",
+    "nonAtomicSnapshot": true
+  },
+  "baseline": {
+    "path": "orca50/final-status-audit-v3.json",
+    "observation": {
+      "startedAt": "2026-11-27 10:57:05 UTC",
+      "completedAt": "2026-11-27 10:58:56 UTC",
+      "timezone": "UTC",
+      "nonAtomicSnapshot": true,
+      "main": "6152051574158e138c796212f8e00e081a49ab31"
+    },
+    "counts": {
+      "originalPRsCreated": 50,
+      "replacementPRsCreated": 1,
+      "totalAuthoredPRsCreated": 51,
+      "originalPRsOpen": 17,
+      "originalPRsClosedUnmerged": 33,
+      "originalPRsMerged": 0,
+      "replacementPRsOpen": 0,
+      "replacementPRsClosedUnmerged": 1,
+      "replacementPRsMerged": 0,
+      "allAuthoredPRsOpen": 17,
+      "allAuthoredPRsClosedUnmerged": 34,
+      "allAuthoredPRsMerged": 0,
+      "improvementsWithMaintainerContinuations": 32,
+      "maintainerContinuationPRs": 33,
+      "mergedContinuationPRs": 30,
+      "mergedIndependentImprovementsThroughContinuations": 30,
+      "totalMergedIndependentImprovements": 30,
+      "openCanonicalMaintainerContinuations": 2,
+      "openAlternateSameImprovementContinuations": 0,
+      "closedUnmergedAlternateSameImprovementContinuations": 1,
+      "rejectedWithoutContinuation": 1,
+      "closedOriginalAwaitingCompleteCorrection": 1,
+      "distinctCandidateImprovementsExcludingRetired": 50,
+      "verifiedMainCommitsWithAfloatCoauthor": 30,
+      "targetActual50MergedMet": false,
+      "targetAuthored50MergedMet": false
+    }
+  },
+  "scope": {
+    "authoredOpenAtV3": [
+      50512,
+      50520,
+      50594,
+      50668,
+      50607,
+      50507,
+      50543,
+      50560,
+      50562,
+      50532,
+      50688,
+      50536,
+      50686,
+      50539,
+      50581,
+      50637,
+      50639
+    ],
+    "canonicalOpenAtV3": [
+      50756,
+      50761
+    ],
+    "closedOriginalRework": [
+      50659
+    ],
+    "mergedSuccessorDiscussion": [
+      50781
+    ],
+    "totalFreshPRReads": 21,
+    "fullScopeReaudit": false,
+    "singlePass": true,
+    "excludedLegacyPRs": [
+      50572,
+      50497
+    ]
+  },
+  "freshPullRequests": [
+    {
+      "number": 50512,
+      "url": "https://github.com/stablyai/orca/pull/50512",
+      "title": "fix(google-calendar): resolve calendar names across all calendarList pages",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T09:16:48Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
+        "ref": "afloat16/orca50-20261127-calendar-list-pagination",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "89291b4bd108b077db41fc50d650e89414af95b1",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "a502749965b659a4c1ebedfe5b5980329bb7f4af",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50512"
+    },
+    {
+      "number": 50520,
+      "url": "https://github.com/stablyai/orca/pull/50520",
+      "title": "fix(google-docs): read open comments past the first page of Drive comments",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T09:15:04Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "f846856dd093f642a44c73766583cf2deaf484f5",
+        "ref": "afloat16/orca50-20261127-docs-comment-pagination",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "89291b4bd108b077db41fc50d650e89414af95b1",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "747dbb075ef74ec8d23c2aba5355cd0ceebd6c35",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50520"
+    },
+    {
+      "number": 50594,
+      "url": "https://github.com/stablyai/orca/pull/50594",
+      "title": "perf(google-drive): share concurrent reads of one file version",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:55:00Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+        "ref": "afloat16/orca50-20261127-drive-concurrent-read",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "19e47a17ae43e523712712a23add70b3dba2473b",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "f9c331fb6268376d8627d04a4b6bd999ecd0e0e6",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50594"
+    },
+    {
+      "number": 50668,
+      "url": "https://github.com/stablyai/orca/pull/50668",
+      "title": "fix(google-drive): prove folder name uniqueness before writes",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T08:41:14Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+        "ref": "afloat16/orca50-20261127-drive-folder-completeness",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "8e6a9c058b78bc721fe37dcd4c320ce18c287858",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "532a3096809e6d59e32d1d5c3d356c9fd0508271",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50668"
+    },
+    {
+      "number": 50607,
+      "url": "https://github.com/stablyai/orca/pull/50607",
+      "title": "fix(google): release rejected and missing response bodies",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:51:45Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "64e24ab5fe445acc312b3786a494315c89f279e1",
+        "ref": "afloat16/orca50-20261127-google-response-cleanup",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "cbc710a6364f15124cdb667663537adfb788f7f0",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "34361ae1d9902ae15f8f92ce89c478f1cdefa1d1",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50607"
+    },
+    {
+      "number": 50507,
+      "url": "https://github.com/stablyai/orca/pull/50507",
+      "title": "perf(google-sheets): index existing keys for batch upserts",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:00:28Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+        "ref": "afloat16/orca50-20261127-sheets-upsert-index",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "b6f9cb2e75954f3f4dcd8af0fa878f67f00ca528",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "b17457e77100d91f9e871cc30e0b80a67de74856",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50507"
+    },
+    {
+      "number": 50543,
+      "url": "https://github.com/stablyai/orca/pull/50543",
+      "title": "fix(ghostty): preserve literal hashes in imported config values",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:14:19Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+        "ref": "afloat16/orca50-20261127-ghostty-literal-hash",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "f7eb7becf29f261e28bbd8403b3e7ba385af90bb",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "02e67533fadc8902ae7d7cb4271af5e134b98612",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50543"
+    },
+    {
+      "number": 50560,
+      "url": "https://github.com/stablyai/orca/pull/50560",
+      "title": "fix(markdown): keep reference-looking inline code literal",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:22:10Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+        "ref": "afloat16/orca50-20261127-markdown-reference-code-spans",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "bf0997cfed9e0ac10e73ee98c5179c87d4329743",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "20d9d58ecb1295afd296fd6518f4f13f0f47d4b3",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50560"
+    },
+    {
+      "number": 50562,
+      "url": "https://github.com/stablyai/orca/pull/50562",
+      "title": "fix(notebook): remove text attachments when converting cells to code",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:21:32Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+        "ref": "afloat16/orca50-20261127-notebook-code-cell-attachments",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "e54fd942b0f306a695c895e7a5d751a7aff69737",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "f9c59f6186271384e0ce9d8a0f054b6a9e65db5f",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50562"
+    },
+    {
+      "number": 50532,
+      "url": "https://github.com/stablyai/orca/pull/50532",
+      "title": "fix(gitea): preserve incomplete branch lookup state",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:12:53Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+        "ref": "afloat16/orca50-20261127-gitea-incomplete-branch-scan",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "f7eb7becf29f261e28bbd8403b3e7ba385af90bb",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "bfa8a015f06e1133edf301b8af696ef2093f70f4",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50532"
+    },
+    {
+      "number": 50688,
+      "url": "https://github.com/stablyai/orca/pull/50688",
+      "title": "fix(gitlab): retain multiline review comment positions",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T08:50:49Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "3922a17a93aa048c1e08f257828527ce988594b6",
+        "ref": "afloat16/orca50-20261127-gitlab-discussion-ranges",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "12e9e05e457e3355c03667000ffac8c815c11a83",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "23cffa044bb8d1e3562fcf6ff23e9446ce4652b8",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50688"
+    },
+    {
+      "number": 50536,
+      "url": "https://github.com/stablyai/orca/pull/50536",
+      "title": "fix(gitlab): reject partial numeric pagination headers",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:12:10Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "7da79774a4ab2738f3e934c221059b203394e9ee",
+        "ref": "afloat16/orca50-20261127-gitlab-pagination-integer",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "f7eb7becf29f261e28bbd8403b3e7ba385af90bb",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "e49cb92e9493c39516f7a07def0f127ac5f0ab1b",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50536"
+    },
+    {
+      "number": 50686,
+      "url": "https://github.com/stablyai/orca/pull/50686",
+      "title": "fix(source-control): preserve branch case in review creation guards",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T08:53:14Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+        "ref": "afloat16/orca50-20261127-hosted-review-branch-case",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "1895daaac02da05183288f16a88ffbfa1a1e95fa",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "2333001b89078b331c928b5ddc5000907f3ca1d0",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50686"
+    },
+    {
+      "number": 50539,
+      "url": "https://github.com/stablyai/orca/pull/50539",
+      "title": "fix(linear): validate concrete workspace selectors after trimming",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T07:13:30Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+        "ref": "afloat16/orca50-20261127-linear-concrete-workspace",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "f7eb7becf29f261e28bbd8403b3e7ba385af90bb",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "460334be1e434000e74d48507a09e72164bf8163",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50539"
+    },
+    {
+      "number": 50581,
+      "url": "https://github.com/stablyai/orca/pull/50581",
+      "title": "fix(downloads): claim new save destinations without overwriting a concurrent file",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T08:58:23Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+        "ref": "afloat16/orca50-20261127-download-exclusive-claim",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "478e62ca32b721fb979f9b49d0521f8de27b839b",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "cd949b4b9f0445556a390ecb61a448707016fc8d",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50581"
+    },
+    {
+      "number": 50637,
+      "url": "https://github.com/stablyai/orca/pull/50637",
+      "title": "fix(plugins): release rejected catalog response bodies",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T08:09:46Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+        "ref": "afloat16/orca50-20261127-plugin-rejected-response-release",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "2bd1b46642f916e7edde226946eb7b42c3bd12d0",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "f04568df9f4f3da1e08573093133211807672778",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50637"
+    },
+    {
+      "number": 50639,
+      "url": "https://github.com/stablyai/orca/pull/50639",
+      "title": "fix(runtime): preserve the previous release when replacement publication fails",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T09:16:20Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "d4086e65cd501133998a54835ecb09cd517da302",
+        "ref": "afloat16/orca50-20261127-runtime-repair-rollback",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "2bd1b46642f916e7edde226946eb7b42c3bd12d0",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "fadf6fd2d5b78e01ead0f640881bb66c7483dd8d",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50639"
+    },
+    {
+      "number": 50756,
+      "url": "https://github.com/stablyai/orca/pull/50756",
+      "title": "fix(mcp): settle stdio sends via the write callback so they reject when the shared child exits",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T10:04:15Z",
+      "author": "nwparker",
+      "head": {
+        "sha": "cf687f2bf0da2e34890ee2eefd3bd80d7e1e0804",
+        "ref": "bugbash/pr-50628",
+        "repo": "stablyai/orca"
+      },
+      "base": {
+        "sha": "6e70d9f8c20b5e813ee2510ce3338c6bfcd12157",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "7060b8d9b267019ac3a9aaceec7d6f528b6a044a",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50756"
+    },
+    {
+      "number": 50761,
+      "url": "https://github.com/stablyai/orca/pull/50761",
+      "title": "fix(mcp): share one child across concurrent cold-start requests",
+      "state": "open",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": null,
+      "updatedAt": "2026-11-27T10:07:03Z",
+      "author": "nwparker",
+      "head": {
+        "sha": "e2b953e0766aa399daf4a0e4b9b2df8ac77e56c7",
+        "ref": "bugbash/pr-50635",
+        "repo": "stablyai/orca"
+      },
+      "base": {
+        "sha": "27a700fd8d659a298769e5453bb340d4debbf76a",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "f2eecf083021687ae6c5ef894b41ebf6353f34a5",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50761"
+    },
+    {
+      "number": 50659,
+      "url": "https://github.com/stablyai/orca/pull/50659",
+      "title": "fix(reviews): preserve qualified base branch names",
+      "state": "closed",
+      "merged": false,
+      "mergedAt": null,
+      "closedAt": "2026-11-27T09:20:54Z",
+      "updatedAt": "2026-11-27T10:29:54Z",
+      "author": "Afloat16",
+      "head": {
+        "sha": "a251960659b0ea7d08fc1bebc145e82d23680250",
+        "ref": "afloat16/orca50-20261127-hosted-review-qualified-base",
+        "repo": "Afloat16/orca"
+      },
+      "base": {
+        "sha": "fc43d6de0873bbf414347858bffa423ab9b506e1",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": null,
+      "apiMergeCommitSha": "1f06f2497d42c657daf61288bad10473fe4f4536",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50659"
+    },
+    {
+      "number": 50781,
+      "url": "https://github.com/stablyai/orca/pull/50781",
+      "title": "fix(ai-vault): read legacy OpenCode JSON message parts",
+      "state": "closed",
+      "merged": true,
+      "mergedAt": "2026-11-27T10:30:06Z",
+      "closedAt": "2026-11-27T10:30:06Z",
+      "updatedAt": "2026-11-27T10:57:39Z",
+      "author": "nwparker",
+      "head": {
+        "sha": "e3169d781e15bf9e41f03b3caf4fb113604e4279",
+        "ref": "bugbash/pr-50643",
+        "repo": "stablyai/orca"
+      },
+      "base": {
+        "sha": "ac427c1a84b836beca538064ed005ffc3ffa52d3",
+        "ref": "main",
+        "repo": "stablyai/orca"
+      },
+      "mergeCommit": "0cd7d530788fa347555810929f76340ecaa6bbab",
+      "apiMergeCommitSha": "0cd7d530788fa347555810929f76340ecaa6bbab",
+      "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50781"
+    }
+  ],
+  "delta": {
+    "stateTransitions": [],
+    "recordedHeadChanges": [],
+    "newlyClosedAuthoredPRs": [],
+    "newContinuationMappings": [],
+    "newlyActuallyMergedPRs": [],
+    "newActualMergeCommitCredit": [],
+    "authoredActualMergedIncrease": 0,
+    "independentContinuationMergedIncrease": 0
+  },
+  "counts": {
+    "observedAuthoredOpen": 17,
+    "observedCanonicalSuccessorsOpen": 2,
+    "observedClosedOriginalRework": 1,
+    "all51AuthoredPRsActualMergedFromV3PlusDelta": 0,
+    "independentContinuationMergedFromV3PlusDelta": 30,
+    "all51AuthoredPRsOpenFromV3PlusDelta": 17,
+    "all51AuthoredPRsClosedUnmergedFromV3PlusDelta": 34,
+    "source": "The 51/30 totals are carried from the complete v3 snapshot plus this explicitly limited zero-change delta; inactive closed PRs and other merged successors were not reread.",
+    "actual50MergedTargetMet": false
+  },
+  "feedback": {
+    "since": "2026-11-27T10:58:56Z",
+    "method": "Fresh PR state/head/updated_at for the 21 scoped PRs. None of the 17 authored open PRs, two canonical open successors, or #50659 advanced updated_at beyond v3, so unchanged histories were not fetched again. #50781 comments were explicitly read once.",
+    "newlyChangedPRDiscussionCandidates": [],
+    "commentsRead": [
+      50781
+    ],
+    "commentsReadCount": 4,
+    "commentsCreatedOrUpdatedAfterV3": [],
+    "newMaintainerSpecificRequests": [],
+    "newConcreteInlineFeedback": [],
+    "knownRootFollowupComment": {
+      "url": "https://github.com/stablyai/orca/pull/50781#issuecomment-7216513290",
+      "createdAt": "2026-11-27T10:57:39Z",
+      "updatedAt": "2026-11-27T10:57:39Z",
+      "bodyLength": 4645,
+      "note": "At this read the existing comment retained its 10:57:39 version. Root supplied that runtime was editing this same comment; this audit does not claim to have observed that pending update and did not poll again."
+    },
+    "carriedV3Feedback": {
+      "pr": 50781,
+      "url": "https://github.com/stablyai/orca/pull/50781#discussion_r4718252235",
+      "newInThisDelta": false,
+      "status": "Already assigned by root; task context reports the OpenCode follow-up candidate has passed the full gate. No new maintainer request observed in this delta."
+    }
+  },
+  "specialCases": {
+    "closedQualifiedBase": {
+      "pr": 50659,
+      "state": "closed",
+      "merged": false,
+      "apiHistoricalHead": "a251960659b0ea7d08fc1bebc145e82d23680250",
+      "lastKnownForkCandidateFromRoot": "7a64e57a8a085a4c5ce0afacce579472f034f819",
+      "forkCandidateFreshlyReadInThisDelta": false,
+      "technicalUpdate": "https://github.com/stablyai/orca/pull/50659#issuecomment-7215955003"
+    },
+    "openCodeMaintainedSuccessor": {
+      "pr": 50781,
+      "merged": true,
+      "mergedAt": "2026-11-27T10:30:06Z",
+      "mergeCommit": "0cd7d530788fa347555810929f76340ecaa6bbab",
+      "newMerge": false,
+      "credit": "Prior v3 actual merge-commit Afloat coauthor verification retained; identical merged flag, merged_at and merge_commit_sha freshly confirmed. No redundant commit fetch."
+    },
+    "duplicateMcpContinuation": {
+      "originalPr": 50628,
+      "canonicalSuccessorPr": 50756,
+      "alternateSuccessorPr": 50752,
+      "countAtMostOnce": true,
+      "canonicalCurrentlyOpen": true
+    }
+  },
+  "remoteWritesPerformed": false,
+  "rootLedgerModified": false,
+  "notesBranchModified": false,
+  "sourceModified": false,
+  "nextAction": "No further polling by this audit. Root may finalize its ledger using the limited delta and the in-progress existing-comment edit.",
+  "errors": []
+}
