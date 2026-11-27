@@ -20,11 +20,8 @@ jobs:
       matrix:
         include:
           - slug: opencode-json-message-parts
-            sha: e6fa4c61b8b59656d8f1e41b15192fa9b5f8f7c6
+            sha: 92ef85ee48deca222c15db71d6ace24c8848fab8
             base: 9890ea181c0f9ae59fb82da64c4a6fbc0504a817
-          - slug: gitlab-context-line-comments
-            sha: b561366bf77411f6e7056eb2cac9b2b3bf6082c0
-            base: 2194f552640e2afe07f9507f885251045c05c9e8
     steps:
       - uses: actions/checkout@v6
         with:
