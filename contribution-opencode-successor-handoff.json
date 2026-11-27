@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "preparedAt": "2026-11-27 10:38:22 UTC",
+  "status": "ready_for_authorized_publication",
+  "browserAuthorized": true,
+  "repository": "stablyai/orca",
+  "number": 50781,
+  "url": "https://github.com/stablyai/orca/pull/50781",
+  "action": "post_one_technical_handoff_comment",
+  "expectedState": "closed",
+  "expectedMerged": true,
+  "expectedHead": "e3169d781e15bf9e41f03b3caf4fb113604e4279",
+  "expectedUpdatedAt": "2026-11-27T10:30:13Z",
+  "observedMerge": {
+    "mergedAt": "2026-11-27T10:30:06Z",
+    "mergeCommit": "0cd7d530788fa347555810929f76340ecaa6bbab"
+  },
+  "originalPr": {
+    "number": 50643,
+    "state": "closed",
+    "merged": false,
+    "head": "51431a17d47ed1e590cb04fdd6109a4f5d9f39cc"
+  },
+  "newContributionCount": 0,
+  "sourceReviewOnly": false,
+  "exactSuccessorBehaviorTestsComplete": true,
+  "constraints": [
+    "Do not publish this skeleton.",
+    "Refresh successor state, head and comments before finalizing; do not overwrite or reopen the maintained PR.",
+    "Fill each exact-successor observation from root's actual run; do not infer runtime failure from missing source changes.",
+    "Preserve maintainer filename keys, tool normalization, bounded reads, inline selection and First Prompt changes.",
+    "Do not describe a record.id-versus-filename difference as a regression; it is the maintainer's deliberate storage-boundary design.",
+    "Do not post another copy of earlier original-PR freshness/I/O replies.",
+    "This is follow-up evidence for the same contribution, not a new improvement count."
+  ],
+  "requiredResolutions": [
+    "__E3169_FRESHNESS_OBSERVATION_AND_EVIDENCE__",
+    "__E3169_IO_RETRY_OBSERVATION_AND_EVIDENCE__",
+    "__E3169_EMISSION_ORDER_OBSERVATION_AND_EVIDENCE__",
+    "__E3169_EXACT_SOURCE_CI_URL_AND_RESULT__"
+  ],
+  "commentBody": "I reproduced three remaining original-review cases on the exact `e3169d7` source merged through this PR. The maintained bounded-listing and First Prompt control passes. These follow-ups belong to the same #50643 contribution. The maintained implementation should keep its message-filename part keys, shared tool-state normalization, bounded listing/first-prompt reads, inline-content precedence and legacy JSON First Prompt routing.\n\nThe remaining review changes on the original branch address three behaviors:\n\n1. **Separate-part freshness** ([original review](https://github.com/stablyai/orca/pull/50643#discussion_r4717073216)): [2c86f32e](https://github.com/Afloat16/orca/commit/2c86f32e2447a3cdcdb74917fcedbe30507bc0bc) and its [atomic migration follow-up](https://github.com/Afloat16/orca/commit/e6fa4c61b8b59656d8f1e41b15192fa9b5f8f7c6) track dependent message/part revisions across History, Search, persistent cache restarts and failed-version retries without changing the parent file's real stat or byte offsets. Exact-successor scenario: rewrite an assistant part at the same length while the parent session file is unchanged. **Observed:** after both persistent stores reopen, History still returns `draftquery` instead of `finalquery`, and Search returns 0 matches for the updated text. A later dependent revision also retains failCount 4 instead of receiving a fresh budget.\n\n2. **Retry after ordinary part I/O failures** ([original review](https://github.com/stablyai/orca/pull/50643#discussion_r4717575059)): [89f916f0](https://github.com/Afloat16/orca/commit/89f916f0c71f7a3a2d447ea666161f3afb07629d) separates failed reads from malformed JSON, and [92ef85ee](https://github.com/Afloat16/orca/commit/92ef85ee48deca222c15db71d6ace24c8848fab8) keeps dependency failures from committing a complete replacement or exhausting the unchanged-version Search retry budget. Successfully read malformed JSON remains skippable. Exact-successor scenario: three required-part read refusals, persistent-store restart, then recovery with unchanged part stats. **Observed:** after the injected filesystem read refusals are removed, History still returns no recovered prompt. After three further refusals and reopening both stores, Search still returns `[]` instead of `['ses_retry']`; the part size, mtime and ctime are unchanged. The malformed-JSON skip control remains part of this scenario.\n\n3. **Producer-order transcript emission** ([original review](https://github.com/stablyai/orca/pull/50643#discussion_r4717979274)): [51431a17](https://github.com/Afloat16/orca/commit/51431a17d47ed1e590cb04fdd6109a4f5d9f39cc) emits consecutive text/reasoning runs around tool blocks only for legacy fallback parts. Full first-user prompt/preview extraction and the default inline/other-agent mode remain unchanged. Exact-successor scenario: reasoning → tool call/result → final text. **Observed:** the maintained file-backed parser still combines the final answer with earlier reasoning before the tool call/result. The correction expected by the original review produces six ordered emitted records instead of the current five combined records.\n\nThe original-branch candidate `51431a17d47ed1e590cb04fdd6109a4f5d9f39cc` passed its [complete required gate](https://github.com/Afloat16/orca/actions/runs/45981427909/job/140446017344) against `9890ea181c0f9ae59fb82da64c4a6fbc0504a817`. That result validates the original-branch source, not the maintained successor.\n\n**Exact-source verification:** [regression reproduction job](https://github.com/Afloat16/orca/actions/runs/45983920462/job/140454544058) checks out `e3169d781e15bf9e41f03b3caf4fb113604e4279` and verifies that no production source is modified. It reproduces three assertion failures and passes the unchanged maintained control: 12 part-directory reads for the bounded listing and one for the legacy JSON First Prompt. The job succeeds because these expected outcomes were confirmed; the three production scenarios remain failures.\n\nThe order check uses this PR's own fixture with only its expected emission order corrected. The freshness and repeated-I/O checks reuse the original branch's real discovery, persistence and SQLite Search probes. The record-ID directory case is deliberately excluded because this implementation uses filename keys. Import, module and setup failures are rejected as invalid evidence.\n\nI am adapting the remaining corrections to current main while preserving this PR's filename-based storage boundary, shared tool-state normalization, bounded parsing and First Prompt routing. I will add the tested incremental candidate to this same comment.\n",
+  "proof": {
+    "source": "e3169d781e15bf9e41f03b3caf4fb113604e4279",
+    "runId": 45983920462,
+    "jobId": 140454544058,
+    "url": "https://github.com/Afloat16/orca/actions/runs/45983920462/job/140454544058",
+    "productionFilesModified": false,
+    "cases": [
+      {
+        "name": "reads the separately stored OpenCode message parts in their recorded order",
+        "status": "failed",
+        "failureMessages": [
+          "AssertionError: expected [ { role: 'user', …(1) }, …(4) ] to deeply equal [ { role: 'user', …(1) }, …(5) ]\n    at native\n    at /home/runner/work/orca/orca/src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts:87:64"
+        ]
+      },
+      {
+        "name": "reads only the newest preview parts when listing and the first prompt parts on demand",
+        "status": "passed",
+        "failureMessages": []
+      },
+      {
+        "name": "refreshes History and search when only legacy OpenCode part files change",
+        "status": "failed",
+        "failureMessages": [
+          "AssertionError: expected 'draftquery' to be 'finalquery' // Object.is equality\n    at /home/runner/work/orca/orca/src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts:110:8\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20",
+          "AssertionError: expected +0 to be 1 // Object.is equality\n    at /home/runner/work/orca/orca/src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts:112:40\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20",
+          "AssertionError: expected 4 to be 1 // Object.is equality\n    at /home/runner/work/orca/orca/src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts:121:46\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20",
+          "AssertionError: expected +0 to be 1 // Object.is equality\n    at /home/runner/work/orca/orca/src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts:123:44\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20"
+        ]
+      },
+      {
+        "name": "retries History and search after part I/O errors without a source-stat change",
+        "status": "failed",
+        "failureMessages": [
+          "AssertionError: expected undefined to be 'Recovered prompt' // Object.is equality\n    at /home/runner/work/orca/orca/src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts:109:63\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20",
+          "AssertionError: expected [] to deeply equal [ 'ses_retry' ]\n    at /home/runner/work/orca/orca/src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts:132:37\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20",
+          "AssertionError: expected undefined to be 'Recovered prompt' // Object.is equality\n    at /home/runner/work/orca/orca/src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts:135:72\n    at async file:///home/runner/work/orca/orca/node_modules/.pnpm/vitest@5.1.0_patch_hash=957d1d635d13350266bce54094e8197e86da1931a62d0caf7d5339c72040d9d_54fed08c4e112dffad1a7bbf5f70c028/node_modules/vitest/dist/chunks/run.CjdgFZiW.js:2801:20"
+        ]
+      }
+    ],
+    "marker": "2026-11-27T10:40:41.4203703Z EXPECTED BASELINE REGRESSIONS REPRODUCED: 3 assertion failures; 1 maintainer control passed; production sources unchanged."
+  },
+  "followupCandidate": "implementation_in_progress_not_yet_claimed"
+}
