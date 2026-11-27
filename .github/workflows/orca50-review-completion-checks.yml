@@ -19,12 +19,9 @@ jobs:
       max-parallel: 2
       matrix:
         include:
-          - slug: opencode-json-message-parts
-            sha: 51431a17d47ed1e590cb04fdd6109a4f5d9f39cc
-            base: 9890ea181c0f9ae59fb82da64c4a6fbc0504a817
-          - slug: hosted-review-qualified-base
-            sha: 7a64e57a8a085a4c5ce0afacce579472f034f819
-            base: 6e70d9f8c20b5e813ee2510ce3338c6bfcd12157
+          - slug: opencode-main-compatible-review-fixes
+            sha: d9a05c3882c493d04fbc521c6f4031b85f2babcb
+            base: 6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79
     steps:
       - uses: actions/checkout@v6
         with:
@@ -50,6 +47,77 @@ jobs:
         with:
           bun-version-file: config/.bun-version
           no-cache: true
+      - name: Reproduce the invisible-preview regression on exact parent sources
+        env:
+          CANDIDATE_SHA: ${{ matrix.sha }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import subprocess
+          
+          candidate = os.environ["CANDIDATE_SHA"]
+          baseline = "60b4bdf74f63d5931817182d42713b51c2458c96"
+          test_path = "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts"
+          test_name = "keeps earlier visible previews when newer part messages normalize to no preview"
+          report = Path(os.environ["RUNNER_TEMP"]) / "opencode-preview-baseline.json"
+          report.unlink(missing_ok=True)
+          def git(*args):
+              return subprocess.check_output(["git", *args], text=True).strip()
+          
+          assert git("rev-parse", "HEAD") == candidate
+          assert not git("diff", "--name-only")
+          fixture = subprocess.check_output(["git", "show", candidate + ":" + test_path])
+          subprocess.run(["git", "checkout", "--quiet", "--detach", baseline], check=True)
+          try:
+              assert git("rev-parse", "HEAD") == baseline
+              Path(test_path).write_bytes(fixture)
+              assert set(git("diff", "--name-only").splitlines()) == {test_path}
+              command = [
+                  "node", "config/scripts/test-runtime/execution-policy/run-vitest.mjs",
+                  "run", "--config", "config/vitest.config.ts", test_path,
+                  "--maxWorkers=1", "--testNamePattern=" + test_name,
+                  "--reporter=json", "--outputFile=" + str(report),
+              ]
+              completed = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, timeout=180)
+              print(completed.stdout[-16000:], flush=True)
+              assert report.is_file(), "Missing structured test report."
+              result = json.loads(report.read_text())
+              assert result.get("numRuntimeErrorTestSuites", 0) == 0, "Runtime errors are invalid evidence."
+              assert completed.returncode == 1, ("Expected a behavior assertion failure", completed.returncode)
+              assertions = [a for suite in result.get("testResults", [])
+                            for a in suite.get("assertionResults", [])]
+              selected = [a for a in assertions if a.get("title", a.get("fullName")) == test_name]
+              assert len(selected) == 1
+              actual = selected[0]
+              assert actual["status"] == "failed", actual
+              failures = actual.get("failureMessages", [])
+              assert failures and all("AssertionError" in failure for failure in failures), failures
+              assert not [a for a in assertions if a["status"] == "failed" and a is not actual]
+              assert set(git("diff", "--name-only").splitlines()) == {test_path}
+              assert not git("diff", "--cached", "--name-only")
+              assert git("rev-parse", "HEAD") == baseline
+              print(json.dumps({"source": baseline, "name": test_name,
+                                "status": actual["status"], "failureMessages": failures,
+                                "productionFilesModified": False}), flush=True)
+              print("EXPECTED PREVIEW REGRESSION REPRODUCED: one assertion failure on exact parent production sources.", flush=True)
+          finally:
+              subprocess.run(["git", "restore", "--worktree", "--", test_path], check=True)
+              subprocess.run(["git", "checkout", "--quiet", "--detach", candidate], check=True)
+              assert git("rev-parse", "HEAD") == candidate
+              assert not git("diff", "--name-only")
+              print("Restored exact candidate with tracked sources unchanged.", flush=True)
+          PY
+      - name: Verify all OpenCode review regressions and maintained controls
+        run: |
+          node config/scripts/test-runtime/execution-policy/run-vitest.mjs run --config config/vitest.config.ts \
+            src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts \
+            src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts \
+            src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts \
+            src/main/ai-vault/transcripts/session-transcript-message-content.test.ts \
+            --maxWorkers=2
       - name: Check the complete contribution
         run: timeout 900 pnpm check:changed --base=${{ matrix.base }} --maxWorkers=2
       - name: Confirm validation did not modify tracked sources
