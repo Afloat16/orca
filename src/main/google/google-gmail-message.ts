@@ -67,6 +67,16 @@ function decode(data: string | undefined): string {
 
 /** Keep mixed sections in order; prefer plain text within each alternative. */
 export function bodyText(part: Part | undefined): string {
+  let textByPart: Map<Part, string> | undefined
+  const textOf = (node: Part): string => {
+    let text = textByPart?.get(node)
+    if (text === undefined) {
+      const decoded = decode(node.body?.data)
+      text = node.mimeType === 'text/html' ? htmlToText(decoded) : decoded
+      textByPart?.set(node, text)
+    }
+    return text
+  }
   const select = (node: Part, relatedRoot = false): Part[] => {
     if (
       node.filename ||
@@ -123,15 +133,40 @@ export function bodyText(part: Part | undefined): string {
         []
       )
     }
-    return children.flat()
+    const leaves = children.flat()
+    if (
+      node.mimeType === 'multipart/mixed' &&
+      node.parts?.some((child) => child.mimeType === 'text/plain') &&
+      node.parts?.some((child) => child.mimeType === 'text/html')
+    ) {
+      // Some senders put equivalent plain/HTML siblings directly under mixed.
+      const siblings = new Set(node.parts)
+      textByPart ??= new Map()
+      const plainTexts = new Set(
+        leaves
+          .filter((leaf) => leaf.mimeType === 'text/plain' && siblings.has(leaf))
+          .map((leaf) => textOf(leaf).trim())
+      )
+      if (plainTexts.size > 0) {
+        let normalizedPlainTexts: Set<string> | undefined
+        return leaves.filter((leaf) => {
+          if (leaf.mimeType !== 'text/html' || !siblings.has(leaf)) {
+            return true
+          }
+          const text = textOf(leaf).trim()
+          if (plainTexts.has(text)) {
+            return false
+          }
+          normalizedPlainTexts ??= new Set(
+            [...plainTexts].map((plainText) => plainText.replace(/\s+/g, ' '))
+          )
+          return !normalizedPlainTexts.has(text.replace(/\s+/g, ' '))
+        })
+      }
+    }
+    return leaves
   }
-  return (part ? select(part) : [])
-    .map((node) => {
-      const text = decode(node.body?.data)
-      return node.mimeType === 'text/html' ? htmlToText(text) : text
-    })
-    .join('\n')
-    .trim()
+  return (part ? select(part) : []).map(textOf).join('\n').trim()
 }
 
 export function attachmentsOf(message: Message): GmailAttachment[] {

@@ -6,6 +6,19 @@ const textPart = (mimeType: string, text: string): Part => ({
   body: { data: Buffer.from(text).toString('base64url') }
 })
 
+it('keeps one plain representation of equivalent mixed siblings and separate HTML-only sections', () => {
+  expect(
+    bodyText({
+      mimeType: 'multipart/mixed',
+      parts: [
+        textPart('text/html', '<p>Status: ready</p><p>Items: 3 &amp; 4</p>'),
+        textPart('text/plain', 'Status: ready\r\nItems: 3 & 4'),
+        textPart('text/html', '<p>Additional details</p>')
+      ]
+    })
+  ).toBe('Status: ready\r\nItems: 3 & 4\nAdditional details')
+})
+
 it('keeps mixed body sections while selecting each nested alternative and excluding attachments', () => {
   const message: Part = {
     mimeType: 'multipart/mixed',
