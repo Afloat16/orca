@@ -1,0 +1,385 @@
+{
+  "repository": "Afloat16/orca",
+  "branch": "afloat16/orca50-20261127-opencode-main-compatibility",
+  "head": "981975040d7d71e231eb3c31965f9f0d5d9eb18f",
+  "tree": "6acff09853980e0486d6c6c4941ce446d085b42a",
+  "parents": [
+    "63c15540d7e901d66a87e4292cc9dbfe8f238217"
+  ],
+  "validationBase": "6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79",
+  "baseTree": "0bf9f2620e6af74959aa2531799e3b9e743a63db",
+  "url": "https://github.com/Afloat16/orca/commit/981975040d7d71e231eb3c31965f9f0d5d9eb18f",
+  "compareUrl": "https://github.com/Afloat16/orca/compare/6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79...981975040d7d71e231eb3c31965f9f0d5d9eb18f",
+  "originalPr": 50643,
+  "mergedContinuationPr": 50781,
+  "countsAsNewImprovement": false,
+  "newPrCreated": false,
+  "upstreamBranchModified": false,
+  "verification": {
+    "branchHeadExact": true,
+    "baseTreeExact": true,
+    "completeChangedFileSetExact": true,
+    "publishedBlobsExact": 28,
+    "commitsOverCurrentMain": 4,
+    "remoteChanges": {
+      "files": 28,
+      "additions": 741,
+      "deletions": 113
+    }
+  },
+  "beforeAfterFiles": [
+    {
+      "path": "src/main/ai-vault-search/indexing/session-search-index-consumer.ts",
+      "status": "modified",
+      "beforeSha256": "1800ffc910fcdb01f21454b6ebfce345ec5c395ed7b33ce628941f34bb42297f",
+      "sha256": "0b83471204288809902a09433b5c400e2730c90183e19ba2726e15eaf808d3d8",
+      "gitBlobSha": "a25393d88e213c9fcea32174525bc6ce6ce0c526",
+      "bytes": 7709,
+      "addedLines": 13,
+      "removedLines": 3
+    },
+    {
+      "path": "src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts",
+      "status": "added",
+      "beforeSha256": null,
+      "sha256": "fcfbce082720f94bc71cea58ef934fcbd226f58f409a9ff88dd70e97be452678",
+      "gitBlobSha": "2f483c08aab7b04f52e263e0d5d4e35d7d82ca32",
+      "bytes": 7418,
+      "addedLines": 192,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault-search/indexing/session-search-read-decision.ts",
+      "status": "modified",
+      "beforeSha256": "8ab104b9e8019c77a50cf50aed7ab82c5a1bb2d28b7b6e228d5330f896369eba",
+      "sha256": "4a4a78cab1516b324efad25aeb407f8c018e74e756e707810e4a37c84c719526",
+      "gitBlobSha": "3c3b9c2e83416456c30673ccbe77382b7d573c0d",
+      "bytes": 2647,
+      "addedLines": 7,
+      "removedLines": 5
+    },
+    {
+      "path": "src/main/ai-vault-search/storage/session-search-file-records.ts",
+      "status": "modified",
+      "beforeSha256": "cc532f5b2a8fa87a9f0834ec15a14190ec496b39f3af10cbf3c8e33f30937a3c",
+      "sha256": "76af2c71c5fd9d97da291d9b25998325026d02eeea1ee8d27ad6b2ddad2dc019",
+      "gitBlobSha": "68fed93dc0839dc27bb926696ed0cf91937227ce",
+      "bytes": 4577,
+      "addedLines": 6,
+      "removedLines": 4
+    },
+    {
+      "path": "src/main/ai-vault-search/storage/session-search-schema.ts",
+      "status": "modified",
+      "beforeSha256": "38b6ae59a42dca3060a3ab8bc345fa6d82959d78b870c37d195c6a6a8aaac6f8",
+      "sha256": "93789fc83005929da97ed3f03adcabd743ccbf7e6421d19bb0e14e0eea926f78",
+      "gitBlobSha": "626e2f577388c4bdadb41bcde8649c5554a10254",
+      "bytes": 6952,
+      "addedLines": 9,
+      "removedLines": 6
+    },
+    {
+      "path": "src/main/ai-vault-search/storage/session-search-store-types.ts",
+      "status": "modified",
+      "beforeSha256": "abbf9bc07b2fc9ecad3ea373691dad5d5a873073b1e7424ea5181b003bb12c85",
+      "sha256": "b849dc52f5ac43434e2d0e85f792e31ca7e3433a420a73977039950ae895ec4c",
+      "gitBlobSha": "1d24e7660d2e6a31939b637a6bbef2011769917f",
+      "bytes": 1422,
+      "addedLines": 2,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault-search/storage/session-search-store.ts",
+      "status": "modified",
+      "beforeSha256": "230854ea00cf181191e1b75e883f961689e7a3dd8309963e7a5b49708bc885d0",
+      "sha256": "4be529ffcc0c6ff4828bf66d9d58366279e9f8322261cf48779aa444d3c27819",
+      "gitBlobSha": "11eb8d4a62bf609bdcd9fcdcecd19808e28f1876",
+      "bytes": 10465,
+      "addedLines": 42,
+      "removedLines": 31
+    },
+    {
+      "path": "src/main/ai-vault-search/worker/session-search-cursor-snapshot.ts",
+      "status": "modified",
+      "beforeSha256": "800799b090099a525ecfeb54d242392a1c2bf65deee47ffac53eb5222a0b099f",
+      "sha256": "11eea00420ef76c6ca722d34241ffe93c90dea98a45cf13fa89aba1da01a09d5",
+      "gitBlobSha": "9c6aa92746682c5b8bf3fd61aa04472a2b801ea0",
+      "bytes": 2872,
+      "addedLines": 2,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault-search/worker/session-search-worker-entry.ts",
+      "status": "modified",
+      "beforeSha256": "5535311b55b17bd74687882106a06fe540e6550411bb977849b1af33478bb34c",
+      "sha256": "6c9906881dd5b1ef6ac3e2b743f9fa1c2ffec0b669d6079ec859a30c8c5f44b4",
+      "gitBlobSha": "e796d5e7da03ba65dd790ca2ee09136eae05cb2b",
+      "bytes": 9833,
+      "addedLines": 5,
+      "removedLines": 2
+    },
+    {
+      "path": "src/main/ai-vault-search/worker/session-search-worker-protocol.ts",
+      "status": "modified",
+      "beforeSha256": "e418408b27fd1fd9150f5a0cf98404928f87c4efa46116c00bf0937a0f47cff5",
+      "sha256": "32220f3327554d62f1179d6211a0dc8037fd1ca0b8218e1ff3e471f293d1ea8e",
+      "gitBlobSha": "32ea0a94238ff955d47c9e1b56106f43d084fb47",
+      "bytes": 2103,
+      "addedLines": 7,
+      "removedLines": 1
+    },
+    {
+      "path": "src/main/ai-vault-search/worker/session-search-worker-store-base.ts",
+      "status": "modified",
+      "beforeSha256": "6c65fe069895bdd8d4203cec0bb594d8140cf7dc84b35d16a3c9ebcd50af12bd",
+      "sha256": "5f6c7ae7ad920563df3c78fd2a1484b5c15dff1350d90cec2ea38d27e8c054a4",
+      "gitBlobSha": "d12998bd8fa3d56e6ed9cdc0eca753134d3af21d",
+      "bytes": 5347,
+      "addedLines": 7,
+      "removedLines": 2
+    },
+    {
+      "path": "src/main/ai-vault-search/worker/session-search-worker-store.ts",
+      "status": "modified",
+      "beforeSha256": "62525fa9e0cb79c11dcc5b1326e8da633de704b385eeb60aaf6b64ab5898500c",
+      "sha256": "87d248e366235d52aa819831eac1a8630d711d3727683d3c4ce68fe320433a15",
+      "gitBlobSha": "96a1cb8a05f44c75230120b9514fddfb890882bd",
+      "bytes": 7027,
+      "addedLines": 9,
+      "removedLines": 1
+    },
+    {
+      "path": "src/main/ai-vault/parse-cache/session-parse-cache-database.ts",
+      "status": "modified",
+      "beforeSha256": "56c37fd1a0fcaf35bd06f5a24db58741fb64cddc049a62aacbef0c8e9058df29",
+      "sha256": "937e4bfcd7497848466e1c2fda3b2ba03db5dfef4fc8cbccc26679edd77e5458",
+      "gitBlobSha": "dd2e76cc30bc9ec624c51b60a5807ec1432e6e2f",
+      "bytes": 11648,
+      "addedLines": 11,
+      "removedLines": 23
+    },
+    {
+      "path": "src/main/ai-vault/parse-cache/session-parse-cache-schema.ts",
+      "status": "added",
+      "beforeSha256": null,
+      "sha256": "546fb20a10baa89aa2d84cb1e1f80f014ac8536ba6e9487770a0feed7faa0925",
+      "gitBlobSha": "0a64d29412e7f0924439fe564a35779d0ad60906",
+      "bytes": 701,
+      "addedLines": 19,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/parse-cache/session-parse-cache-store.ts",
+      "status": "modified",
+      "beforeSha256": "61c09f2a3fa0b15ea0d4b550a2dbb7554d08b73a55e11cb7e7d5d6aac995a1ae",
+      "sha256": "8eadc595d0a450bcf5abea4c42672cd59d0dd9055afd4da7e95f0132804aa96f",
+      "gitBlobSha": "b2be9806b38592f656e034e19519a333d70b5f4a",
+      "bytes": 11488,
+      "addedLines": 5,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/parse-cache/session-scanner-parse-cache.ts",
+      "status": "modified",
+      "beforeSha256": "a324ed5f6fd48eb10a68113582dfce1327df184e8056a4e15e023d76fe7a4ed5",
+      "sha256": "b935a9133cae3c28025b45d894ae781e934d8b2eedd8093395ba05413ed8fef9",
+      "gitBlobSha": "15d2ce58dbd424502ebfbc4958c30036b55724ae",
+      "bytes": 10816,
+      "addedLines": 3,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/parse-cache/session-scope-cwds-table.ts",
+      "status": "modified",
+      "beforeSha256": "315467cb4ecef5621fe5fe2c6c5d10bdd6763ff56641c51afb3b4b2a6419eba2",
+      "sha256": "3836654503a5937e36b75ec5257ebe782a7a32fda67d499e4fe60d4513573452",
+      "gitBlobSha": "7398917dd14231c0846bd7d1bea700735ccbe652",
+      "bytes": 4574,
+      "addedLines": 22,
+      "removedLines": 8
+    },
+    {
+      "path": "src/main/ai-vault/parsing/session-scanner-messages.ts",
+      "status": "modified",
+      "beforeSha256": "5523c12815b47e8e3418e90bdf1ac3e2adedbbe9f983317d92f397e6658a8cde",
+      "sha256": "efc5e2a9d9af1cf7a0220b9a1590da80f3b928d8905831b4751b1468674dd799",
+      "gitBlobSha": "de33e6bafadc924729de0ccb178bd73c2503699a",
+      "bytes": 3561,
+      "addedLines": 6,
+      "removedLines": 2
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-dependencies.ts",
+      "status": "added",
+      "beforeSha256": null,
+      "sha256": "6e60968c78826aaac01a8c23bfd7db59c03ddd5f71e8c27ede8f689d84b9796a",
+      "gitBlobSha": "14269f5ec37244173f379025665a7c90ebfc98fb",
+      "bytes": 2697,
+      "addedLines": 72,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts",
+      "status": "added",
+      "beforeSha256": null,
+      "sha256": "8f33bf9b20bb3b5ec300e1a8295a7e6576703ec979623b44572a3453dc011076",
+      "gitBlobSha": "c40e6e3eeab1ab8306c3c2cb51d1dee5ee6962fe",
+      "bytes": 5603,
+      "addedLines": 131,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts",
+      "status": "modified",
+      "beforeSha256": "862a294120639216e2def3010c1f077b65543c352217361ea547ed15a17b3fcf",
+      "sha256": "786ed27a9c0fc8913543cbaf38f51ad612430773ae07561a2ae965fc970bf6e0",
+      "gitBlobSha": "6e346492d20209eab82db3957e13dfdd61ee4eba",
+      "bytes": 8221,
+      "addedLines": 37,
+      "removedLines": 1
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-parser.ts",
+      "status": "modified",
+      "beforeSha256": "bab98816c61311633369d2a6920897ab409785e8dc8e782e530c19666cdaf33d",
+      "sha256": "66c29b6fb198ae465202a4eb6bef957f010bb8f202be962836f1b6473bbdc99e",
+      "gitBlobSha": "d89533ced374f52d65a0599bd62bdad1431f5ea8",
+      "bytes": 9477,
+      "addedLines": 39,
+      "removedLines": 23
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/sqlite/session-scanner-opencode-sqlite-discovery.ts",
+      "status": "modified",
+      "beforeSha256": "57722dbe0de54e67f25712e44992b634ae22f5a7fee08c8fb058fdbe6541d637",
+      "sha256": "fab19f5b0ef6531b62f3ddcd7db5c37386f64967db72cae4be1eafa5194be9b7",
+      "gitBlobSha": "52edab013e4f84f277045346f8c8931d201e06cb",
+      "bytes": 4351,
+      "addedLines": 39,
+      "removedLines": 2
+    },
+    {
+      "path": "src/main/ai-vault/session-scanner-types.ts",
+      "status": "modified",
+      "beforeSha256": "d95e5c9cdbb69cf7dea1f8137c6d654e4418d8987f4fd3669beef8ff5e7f3b7e",
+      "sha256": "dd12a879bbb24cd9648ab65181651a26ee504868eb397d8c0877f11a713f304a",
+      "gitBlobSha": "4ef484721fab8dd1a22a9d5366a3020ff8834c48",
+      "bytes": 7411,
+      "addedLines": 2,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/transcripts/session-transcript-consumers.ts",
+      "status": "modified",
+      "beforeSha256": "2cafd058e90342c9721c266dc4d2e9e73b07ec3ed258624bbea9d4ab549a9dbb",
+      "sha256": "d3e36ca7f395293b183ca370ccfeef8810df7feb4923beeaf522005492662224",
+      "gitBlobSha": "b355f8d289b4fc4aa89fd618f2a705b64fb4bcf9",
+      "bytes": 4114,
+      "addedLines": 2,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/transcripts/session-transcript-message-content.test.ts",
+      "status": "added",
+      "beforeSha256": null,
+      "sha256": "a54baaa9f950750ba1c5df9425b61ced4501b66b0941de9c7ca8bba190ad7c96",
+      "gitBlobSha": "be8b21148ce62e442c76ffcd2297c2e0573609ba",
+      "bytes": 1522,
+      "addedLines": 34,
+      "removedLines": 0
+    },
+    {
+      "path": "src/main/ai-vault/transcripts/session-transcript-message-content.ts",
+      "status": "modified",
+      "beforeSha256": "1fd91138028ba51754835ccd89666193e5dd5d8eaab5876e2febc293d13820ce",
+      "sha256": "f46c3a01481d29daf1a7ee61ce4484fdd6e7ca8c894ea18895067dfbaed32596",
+      "gitBlobSha": "75f07383c077bf52b0ada1a76c23bee8868c01f6",
+      "bytes": 5481,
+      "addedLines": 18,
+      "removedLines": 1
+    },
+    {
+      "path": "src/main/ai-vault/transcripts/session-transcript-reader.ts",
+      "status": "modified",
+      "beforeSha256": "4f6b23d526a02ef1af1b259068edeb04c0b54c244a279f07eab8c7881c85807f",
+      "sha256": "724279ba8649de99e0b0260bddfabcf345fc660ae3582c2b7b85d1e99686510f",
+      "gitBlobSha": "7fd35af965e154a7fb76e33b7de848c361f98f9b",
+      "bytes": 9215,
+      "addedLines": 2,
+      "removedLines": 0
+    }
+  ],
+  "ci": {
+    "status": "success",
+    "targetedFiles": [
+      "src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts",
+      "src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts",
+      "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts",
+      "src/main/ai-vault/transcripts/session-transcript-message-content.test.ts"
+    ],
+    "targetedExpectedTests": 7,
+    "expectedRedBaseline": "d9a05c3882c493d04fbc521c6f4031b85f2babcb",
+    "expectedRedOnlyTestName": "keeps earlier visible previews when newer part messages normalize to no preview",
+    "earlierBaseline": {
+      "head": "e3169d781e15bf9e41f03b3caf4fb113604e4279",
+      "url": "https://github.com/Afloat16/orca/actions/runs/45983920462/job/140454544058",
+      "behaviorFailures": 3,
+      "maintainerControlPasses": 1
+    },
+    "CI9": "https://github.com/Afloat16/orca/actions/runs/45987068553/job/140465301061",
+    "source": "981975040d7d71e231eb3c31965f9f0d5d9eb18f",
+    "base": "6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79",
+    "runId": 45987772336,
+    "jobId": 140467658038,
+    "url": "https://github.com/Afloat16/orca/actions/runs/45987772336/job/140467658038",
+    "workflowCommit": "5dec4f1156c58d3c76e64c4be3b7e88fbb8505f1",
+    "baseline": {
+      "source": "d9a05c3882c493d04fbc521c6f4031b85f2babcb",
+      "testName": "keeps earlier visible previews when newer part messages normalize to no preview",
+      "expectedAssertionFailures": 1,
+      "observedAssertionFailures": 1,
+      "productionFilesModified": false,
+      "expectedVsObserved": "expected ['Earlier useful preview.']; received []"
+    },
+    "targeted": {
+      "files": 4,
+      "passed": 7,
+      "failed": 0
+    },
+    "requiredGate": {
+      "command": "pnpm check:changed --base=6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79 --maxWorkers=2",
+      "changedFiles": 28,
+      "passedChecks": 28,
+      "seconds": 118.6
+    },
+    "trackedSourcesUnchanged": true,
+    "validationPlatform": "GitHub Actions Ubuntu 24.04, Node 24.22.3, repository-supported Bun 1.4.4 test runner",
+    "checkedAt": "2026-11-27T11:10:25Z"
+  },
+  "localValidation": {
+    "format": "PASS: all28 artifact files initially and later3 changed files separately, repository config, existing installed oxfmt",
+    "oxlint": "PASS: all28 artifact files initially and later3 changed files separately with repository config",
+    "behavior": "Not run locally because workspace is a mixed 9890 integration, not exact current main. Root will run exact-source fork CI.",
+    "fullGate": "Exact-source fork CI passed all 28 selected required checks; no local mixed-checkout success claimed."
+  },
+  "performance": "For retained, SQLite-deduplicated legacy candidates, observe up to four sessions concurrently. Each pass enumerates message JSON files and filename-keyed part directories and stats retained children; it does not read message or part bodies on the normal path. Only a part-directory/file metadata failure reads the corresponding message to decide whether that dependency is unused (inline content, other role, malformed message). Metadata work is proportional to retained dependency count; listing is not constant total I/O. The maintainer parser continues its bounded preview/full-first-prompt content reads. No synthetic parent mtime, size or byte offset.",
+  "previewReview": {
+    "url": "https://github.com/stablyai/orca/pull/50781#discussion_r4718252235",
+    "previousCandidate": "60b4bdf74f63d5931817182d42713b51c2458c96",
+    "candidate": "981975040d7d71e231eb3c31965f9f0d5d9eb18f",
+    "uniqueCase": "keeps earlier visible previews when newer part messages normalize to no preview",
+    "baselineStatus": "CI9 reproduced initial60b4 failure; CI10 will test the stronger second-stage boundary on exactd9a.",
+    "change": "Count only text accepted by both extractPreviewContentText and normalizePreviewText, exactly as the forward consumer; retain 100-message window and preview count limit.",
+    "secondStageBaseline": "d9a05c3882c493d04fbc521c6f4031b85f2babcb"
+  },
+  "listingTestCompatibility": {
+    "ci9": "https://github.com/Afloat16/orca/actions/runs/45987068553/job/140465301061",
+    "cause": "The imported second I/O test requested full-first-prompt capture, which deliberately omits assistant preview parts under the maintainer reader policy.",
+    "fix": "Normal listing for Initial/Updated+Inline preview expectations; actual First Prompt reader for Inline prompt; all content expectations retained and first I/O retry test body unchanged.",
+    "productionPolicyChanged": false
+  },
+  "independentReview": {
+    "root": "Read all28 paths and accepted production design, final two-stage predicate, and listing/First Prompt test-entry correction.",
+    "runtime": "Read observer/parser I/O/migration design. Reported final-normalization boundary, incorporated in63c and latestfixture. No remaining concrete blocker reported."
+  }
+}

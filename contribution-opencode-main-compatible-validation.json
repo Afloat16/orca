@@ -1,0 +1,31 @@
+{
+  "status": "success",
+  "source": "981975040d7d71e231eb3c31965f9f0d5d9eb18f",
+  "base": "6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79",
+  "runId": 45987772336,
+  "jobId": 140467658038,
+  "url": "https://github.com/Afloat16/orca/actions/runs/45987772336/job/140467658038",
+  "workflowCommit": "5dec4f1156c58d3c76e64c4be3b7e88fbb8505f1",
+  "baseline": {
+    "source": "d9a05c3882c493d04fbc521c6f4031b85f2babcb",
+    "testName": "keeps earlier visible previews when newer part messages normalize to no preview",
+    "expectedAssertionFailures": 1,
+    "observedAssertionFailures": 1,
+    "productionFilesModified": false,
+    "expectedVsObserved": "expected ['Earlier useful preview.']; received []"
+  },
+  "targeted": {
+    "files": 4,
+    "passed": 7,
+    "failed": 0
+  },
+  "requiredGate": {
+    "command": "pnpm check:changed --base=6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79 --maxWorkers=2",
+    "changedFiles": 28,
+    "passedChecks": 28,
+    "seconds": 118.6
+  },
+  "trackedSourcesUnchanged": true,
+  "validationPlatform": "GitHub Actions Ubuntu 24.04, Node 24.22.3, repository-supported Bun 1.4.4 test runner",
+  "checkedAt": "2026-11-27T11:10:25Z"
+}
