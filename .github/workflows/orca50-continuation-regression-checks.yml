@@ -1,0 +1,60 @@
+name: Orca continuation regression proof
+on:
+  push:
+    branches: [validation/orca50-opencode-continuation-20261127]
+permissions:
+  contents: read
+concurrency:
+  group: orca50-opencode-continuation-20261127
+  cancel-in-progress: false
+env:
+  ORCA_BACKGROUND_LAUNCH: '1'
+jobs:
+  changed-checks:
+    name: ${{ matrix.slug }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - slug: expected-legacy-json-regressions
+            sha: e3169d781e15bf9e41f03b3caf4fb113604e4279
+            base: 2e4587f137b1812965278bb31f99792d3c0284b0
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: stablyai/orca
+          ref: ${{ matrix.sha }}
+          filter: blob:none
+          fetch-depth: 50
+          persist-credentials: false
+      - name: Verify exact candidate and base
+        env:
+          CANDIDATE_SHA: ${{ matrix.sha }}
+          CANDIDATE_BASE: ${{ matrix.base }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+          git cat-file -e "$CANDIDATE_BASE^{commit}"
+          git diff --exit-code
+      - uses: ./.github/actions/install-node-dependencies
+        with:
+          native-runtime: node
+          node-version: '24'
+          cache-pnpm-store: 'false'
+          persist-native-cache: 'false'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version-file: config/.bun-version
+          no-cache: true
+      - name: Read validation-only probes
+        uses: actions/checkout@v6
+        with:
+          repository: Afloat16/orca
+          ref: ${{ github.sha }}
+          path: .orca-regression-payload
+          sparse-checkout: validation/opencode-continuation-e3169
+          persist-credentials: false
+      - name: Reproduce three reviewed failures and retain the maintainer control
+        run: python .orca-regression-payload/validation/opencode-continuation-e3169/run-probes.py

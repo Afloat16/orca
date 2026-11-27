@@ -1,0 +1,94 @@
+{
+  "kind": "validation-only",
+  "checkout": {
+    "repository": "stablyai/orca",
+    "head": "e3169d781e15bf9e41f03b3caf4fb113604e4279"
+  },
+  "reference": {
+    "repository": "Afloat16/orca",
+    "head": "51431a17d47ed1e590cb04fdd6109a4f5d9f39cc"
+  },
+  "continuationPr": 50781,
+  "originalPr": 50643,
+  "productionModifications": [],
+  "helperFilesRequired": [],
+  "artifactFiles": [
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts",
+      "sourceHead": "e3169d781e15bf9e41f03b3caf4fb113604e4279",
+      "change": "Only change the expected emitted sequence: keep reasoning before the tool call/result and final text after them. The remainder of the maintainer's exact test file, including tool normalization, listing bound, and First Prompt routing control, is unchanged.",
+      "localPath": "files/src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts",
+      "sha256": "4e790acd4ecd631a1d2103640a5bbd2c02ecfb5d6e6bacb8110ee0b62201bcb9",
+      "bytes": 6720
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts",
+      "sourceHead": "51431a17d47ed1e590cb04fdd6109a4f5d9f39cc",
+      "change": "Exact test copied from the original PR head; production discovery -> History persistent parse cache -> SQLite search; same-length part text update with unchanged session stat.",
+      "localPath": "files/src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts",
+      "sha256": "8f33bf9b20bb3b5ec300e1a8295a7e6576703ec979623b44572a3453dc011076",
+      "bytes": 5603
+    },
+    {
+      "path": "src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts",
+      "sourceHead": "51431a17d47ed1e590cb04fdd6109a4f5d9f39cc",
+      "change": "Exact test copied from the original PR head. Select only the repeated-I/O recovery case; exclude the second case whose record.id part-directory convention deliberately differs from the maintainer's filename-keyed implementation.",
+      "localPath": "files/src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts",
+      "sha256": "400714382d8b73dea37fbfe91dd5a90d0cbbe930de99af994338959de431c5e5",
+      "bytes": 7071
+    }
+  ],
+  "sourceVerification": {
+    "maintainerTest": "Exact immutable e3169 source; only two expectation edits (one replacement and one insertion).",
+    "fixtures": "The main test now uses e3169's own file, so no session-parse-cache-previous-row.test-fixture.ts is needed. The borrowed I/O test's session-search-indexer-test-fixture.ts and persistence/reset APIs were read and verified present at e3169."
+  },
+  "command": "ORCA_BACKGROUND_LAUNCH=1 node config/scripts/test-runtime/execution-policy/run-vitest.mjs run --config config/vitest.config.ts src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts --maxWorkers=1 --testNamePattern='reads the separately|reads only the newest|refreshes History|retries History'",
+  "testNamePattern": "reads the separately|reads only the newest|refreshes History|retries History",
+  "expectedCases": [
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts",
+      "name": "reads the separately stored OpenCode message parts in their recorded order",
+      "expected": "fail on emitted order assertion",
+      "desiredOrder": [
+        "user combined prompt",
+        "assistant reasoning",
+        "tool normalized read call",
+        "tool result",
+        "assistant final text",
+        "older inline assistant"
+      ],
+      "controlAssertionsBeforeFailure": [
+        "whole first-user prompt combines both user parts",
+        "previewMessages retain expected whole-message summaries"
+      ]
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts",
+      "name": "reads only the newest preview parts when listing and the first prompt parts on demand",
+      "expected": "pass",
+      "control": "Maintainer's exact positive control: 40 source messages; 12 part-directory reads for bounded listing; 1 part-directory read for First Prompt with legacy JSON sessionId."
+    },
+    {
+      "path": "src/main/ai-vault/scanners/opencode/session-scanner-opencode-freshness.test.ts",
+      "name": "refreshes History and search when only legacy OpenCode part files change",
+      "expected": "fail with stale History preview and missing updated search hit after persistent reopen",
+      "control": "Initial parse/index and persisted coverage must succeed; parent session mtime and size stay unchanged. The trailing retry-budget assertions are original validation code and also observe the absent dependency revision."
+    },
+    {
+      "path": "src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts",
+      "name": "retries History and search after part I/O errors without a source-stat change",
+      "expected": "fail recovery assertions",
+      "control": "Actual read refusals are EIO followed by three EACCES attempts, then close/reopen and Search recovery before History. Stat size/mtime/ctime stay fixed; malformed JSON part remains a skip control."
+    }
+  ],
+  "excludedCases": [
+    {
+      "path": "src/main/ai-vault-search/indexing/session-search-opencode-json-read-errors.test.ts",
+      "name": "keeps inline sessions visible and tracks fallback parts by the safe message id",
+      "reason": "The maintainer intentionally uses message filenames, rather than record.id, to locate part directories. This is not a regression claim."
+    }
+  ],
+  "runInterpretation": "Run only these four cases. A nonzero exit is expected for the three behavioral regressions; the unchanged maintainer bounded/FirstPrompt control should pass. Import/module/transform/setup errors are invalid evidence. Do not run contribution typecheck with borrowed newer test-only API fields as a baseline gate; this packet is solely for the Vitest behavior probe.",
+  "worktreeGuard": "After overlay, git diff/name checks must show only these three .test.ts paths, including new untracked test paths. No production files, branch, or PR is modified by this packet.",
+  "maintainerTestBeforeSha256": "862a294120639216e2def3010c1f077b65543c352217361ea547ed15a17b3fcf"
+}
