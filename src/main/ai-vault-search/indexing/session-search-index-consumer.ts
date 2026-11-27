@@ -160,8 +160,13 @@ class SessionSearchReadConsumer implements TranscriptReadConsumer {
   }
 
   finish(outcome: TranscriptReadOutcome): void {
-    if (outcome.cancelled || this.write.cancelled?.() || this.write.failed?.()) {
-      // Cancellation must not count toward the failure limit for a healthy file.
+    if (
+      outcome.cancelled ||
+      outcome.sourceUnavailable ||
+      this.write.cancelled?.() ||
+      this.write.failed?.()
+    ) {
+      // Cancellation and dependency I/O refusals must not permanently hold out a source revision.
       this.write.discard()
       return
     }
@@ -191,7 +196,12 @@ class SessionSearchReadConsumer implements TranscriptReadConsumer {
       return
     }
     // Stamp and count repeated read failures so unchanged unreadable files can be held out.
-    this.store.setFileState(candidate.file.path, 'failed', candidate.file.mtimeMs)
+    this.store.setFileState(
+      candidate.file.path,
+      'failed',
+      candidate.file.mtimeMs,
+      candidate.file.dependencySignature
+    )
   }
 }
 

@@ -86,9 +86,10 @@ it('reads the separately stored OpenCode message parts in their recorded order',
     ])
     expect(messages.map(({ role, text }) => ({ role, text }))).toEqual([
       { role: 'user', text: 'Inspect the build failure.\nKeep the command output.' },
-      { role: 'assistant', text: 'Checking the compiler.\nThe dependency is missing.' },
+      { role: 'assistant', text: 'Checking the compiler.' },
       { role: 'tool', text: 'read: build.log' },
       { role: 'tool', text: 'Missing package' },
+      { role: 'assistant', text: 'The dependency is missing.' },
       { role: 'assistant', text: 'An older inline message.' }
     ])
   } finally {

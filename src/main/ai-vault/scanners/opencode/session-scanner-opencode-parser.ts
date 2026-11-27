@@ -6,7 +6,8 @@ import {
   wslGatedReaddir,
   wslGatedReadFile
 } from '../../../native-chat/transcript-filesystem/wsl-transcript-fs-access'
-import { WslTranscriptFsError } from '../../../native-chat/transcript-filesystem/wsl-transcript-fs-error'
+import { isMissingTranscriptPathError } from '../../discovery/session-path-absence'
+import { noteTranscriptSourceFailure } from '../../parsing/session-scanner-jsonl-reader'
 import { basename, dirname, join } from 'node:path'
 import type { AiVaultSession } from '../../../../shared/ai-vault/contracts/ai-vault-types'
 import type { FileWithMtime, SessionAccumulator } from '../../session-scanner-types'
@@ -72,8 +73,8 @@ async function readOpenCodeJsonDirectory(
     entries = await waitForAiVaultScan(wslGatedReaddir(directory, 'scan', signal), signal)
   } catch (error) {
     throwIfAiVaultScanCancelled(signal)
-    // Propagate WSL refusal so an unreachable directory is not cached as an empty transcript.
-    if (error instanceof WslTranscriptFsError) {
+    if (!isMissingTranscriptPathError(error)) {
+      noteTranscriptSourceFailure(error)
       throw error
     }
     return []
@@ -83,28 +84,36 @@ async function readOpenCodeJsonDirectory(
     if (!entry.isFile() || !entry.name.endsWith('.json')) {
       continue
     }
-    let record: Record<string, unknown> | null = null
-    try {
-      const parsed: unknown = JSON.parse(
-        await waitForAiVaultScan(
-          wslGatedReadFile(join(directory, entry.name), 'utf-8', 'scan', signal),
-          signal
-        )
-      )
-      record = asRecord(parsed)
-    } catch (error) {
-      throwIfAiVaultScanCancelled(signal)
-      // Skip malformed live writes, but propagate WSL refusal so incomplete transcripts remain retryable.
-      if (error instanceof WslTranscriptFsError) {
-        throw error
-      }
-      continue
-    }
+    const record = await readOpenCodeJsonRecord(join(directory, entry.name), signal)
     if (record) {
       records.push({ name: entry.name, record })
     }
   }
   return records
+}
+
+/** Malformed JSON stays skippable; an I/O refusal must not become a complete cached transcript. */
+export async function readOpenCodeJsonRecord(
+  path: string,
+  signal?: AbortSignal
+): Promise<Record<string, unknown> | null> {
+  let content: string
+  try {
+    content = await waitForAiVaultScan(wslGatedReadFile(path, 'utf-8', 'scan', signal), signal)
+  } catch (error) {
+    throwIfAiVaultScanCancelled(signal)
+    noteTranscriptSourceFailure(error)
+    throw error
+  }
+  try {
+    const parsed: unknown = JSON.parse(content)
+    return asRecord(parsed)
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      return null
+    }
+    throw error
+  }
 }
 
 // Rebuild arbitrary directory order by creation time; undated files sort last so they cannot displace the first prompt.
@@ -213,7 +222,9 @@ export async function consumeOpenCodeMessages(
         message.content ??
         previewTail?.get(index) ??
         (readsParts ? await readOpenCodeMessageParts(storageRoot, name, signal) : undefined)
-      const hasPreview = addSessionContent(accumulator, role, content, timestamp)
+      const hasPreview = addSessionContent(accumulator, role, content, timestamp, {
+        preserveBlockOrder: message.content == null
+      })
       if (!hasPreview) {
         addPreviewMessage(accumulator, {
           role,
