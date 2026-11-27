@@ -8,6 +8,7 @@ import {
   resetSessionParseCachePersistenceForTests
 } from '../../ai-vault/parse-cache/session-parse-cache-persistence'
 import { withFullFirstUserPromptCapture } from '../../ai-vault/prompts/session-scanner-first-user-prompt-capture'
+import { readAiVaultFirstUserPrompt } from '../../ai-vault/prompts/session-first-user-prompt-read'
 import { scanAiVaultSessions } from '../../ai-vault/session-scanner'
 import { resetTranscriptConsumersForTests } from '../../ai-vault/transcripts/session-transcript-consumers'
 import * as transcriptFs from '../../native-chat/transcript-filesystem/wsl-transcript-fs-access'
@@ -165,9 +166,16 @@ it('keeps inline sessions visible and tracks fallback parts by their message fil
     return readdir(...args)
   })
 
-  const first = await history()
+  const listing = () => scanAiVaultSessions({ ...harness.roots, unlimited: true })
+  const first = await listing()
   expect(first.sessions.map((session) => session.sessionId)).toEqual(['ses_retry'])
-  expect(first.sessions[0]?.firstUserPrompt).toBe('Inline prompt')
+  expect(
+    await readAiVaultFirstUserPrompt({
+      agent: 'opencode',
+      filePath: join(storage, 'session', 'project', 'ses_retry.json'),
+      sessionId: 'ses_retry'
+    })
+  ).toEqual({ prompt: 'Inline prompt' })
   expect(first.sessions[0]?.previewMessages.map(({ text }) => text).sort()).toEqual([
     'Initial reply',
     'Inline prompt'
@@ -177,7 +185,7 @@ it('keeps inline sessions visible and tracks fallback parts by their message fil
   await put(reply, { id: 'prt_01', type: 'text', text: 'Updated reply' })
   const later = new Date(before.mtimeMs + 4_000)
   await utimes(reply, later, later)
-  expect((await history()).sessions[0]?.previewMessages.map(({ text }) => text).sort()).toEqual([
+  expect((await listing()).sessions[0]?.previewMessages.map(({ text }) => text).sort()).toEqual([
     'Inline prompt',
     'Updated reply'
   ])
