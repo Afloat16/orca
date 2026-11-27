@@ -63,24 +63,24 @@ export function transcriptMessagesFromDecodedMessage(
   const messages: TranscriptMessage[] = []
   const textRole = transcriptMessageRole(decoded.role)
   const textParts: string[] = []
+  const flushText = (): void => {
+    if (textRole && textParts.length > 0) {
+      pushMessage(messages, textRole, boundedJoinedText(textParts), decoded.timestamp)
+    }
+    textParts.length = 0
+  }
   for (const block of decoded.blocks) {
     if (block.kind === 'tool_call') {
+      flushText()
       pushMessage(messages, 'tool', toolCallTextFromDecoded(block), decoded.timestamp)
     } else if (block.kind === 'tool_result') {
+      flushText()
       pushMessage(messages, 'tool', toolResultText(block.textParts), decoded.timestamp)
     } else {
       textParts.push(block.text)
     }
   }
-  if (textRole && textParts.length > 0) {
-    const content = boundedJoinedText(textParts)
-    const message = content.text
-      ? transcriptMessageFromText(textRole, content.text, decoded.timestamp, content.textTruncated)
-      : null
-    if (message) {
-      messages.unshift(message)
-    }
-  }
+  flushText()
   return messages
 }
 
