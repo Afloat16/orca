@@ -20,27 +20,27 @@
     "originalPRsCreated": 50,
     "replacementPRsCreated": 1,
     "totalAuthoredPRsCreated": 51,
-    "originalPRsOpen": 17,
+    "originalPRsOpen": 15,
     "originalPRsClosedUnmerged": 33,
-    "originalPRsMerged": 0,
+    "originalPRsMerged": 2,
     "replacementPRsOpen": 0,
     "replacementPRsClosedUnmerged": 1,
     "replacementPRsMerged": 0,
-    "allAuthoredPRsOpen": 17,
+    "allAuthoredPRsOpen": 15,
     "allAuthoredPRsClosedUnmerged": 34,
-    "allAuthoredPRsMerged": 0,
+    "allAuthoredPRsMerged": 2,
     "improvementsWithMaintainerContinuations": 32,
     "maintainerContinuationPRs": 33,
-    "mergedContinuationPRs": 30,
-    "mergedIndependentImprovementsThroughContinuations": 30,
-    "totalMergedIndependentImprovements": 30,
-    "openCanonicalMaintainerContinuations": 2,
+    "mergedContinuationPRs": 32,
+    "mergedIndependentImprovementsThroughContinuations": 32,
+    "totalMergedIndependentImprovements": 34,
+    "openCanonicalMaintainerContinuations": 0,
     "openAlternateSameImprovementContinuations": 0,
     "closedUnmergedAlternateSameImprovementContinuations": 1,
     "rejectedWithoutContinuation": 1,
     "closedOriginalAwaitingCompleteCorrection": 0,
     "distinctCandidateImprovementsExcludingRetired": 50,
-    "verifiedMainCommitsWithAfloatCoauthor": 30,
+    "verifiedMainCommitsWithAfloatCoauthor": 32,
     "targetActual50MergedMet": false,
     "targetAuthored50MergedMet": false,
     "closedOriginalWithTestedCorrectionAwaitingMaintainer": 1,
@@ -115,12 +115,12 @@
       "pr": 50512,
       "prUrl": "https://github.com/stablyai/orca/pull/50512",
       "implementationHead": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
-      "head": "0f61ee8d821ed7060e2d6eb1dd9f8b6f2e3ba491",
-      "state": "open",
-      "merged": false,
-      "mergedAt": null,
+      "head": "acf32a1d1cd6790263719e3d9482a2d104e3799d",
+      "state": "closed",
+      "merged": true,
+      "mergedAt": "2026-11-27T11:51:07Z",
       "author": "Afloat16",
-      "maintainerCanModify": true,
+      "maintainerCanModify": false,
       "change": "Follow calendarList continuation tokens before listing calendars or resolving a name. Keep direct ID/primary lookups and the existing ambiguity refusal.",
       "problem": "Calendars after the first250 entries cannot be selected by name. A duplicate name on a later page is also missed, so an update may select the first calendar instead of reporting ambiguity.",
       "effectZh": "按名称解析 Google Calendar 时继续读取后续页；达到分页上限仍不完整时明确报错，避免漏掉同名日历后误选。",
@@ -130,7 +130,7 @@
         "runId": 45965251200,
         "jobId": 140392273709,
         "url": "https://github.com/Afloat16/orca/actions/runs/45965251200/job/140392273709",
-        "matchesObservedHead": true
+        "matchesObservedHead": false
       },
       "dedupe": {
         "queries": [
@@ -139,11 +139,47 @@
         ]
       },
       "continuationPr": null,
-      "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "mergeable": null,
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
-      "closedAt": null,
-      "prUpdatedAt": "2026-11-27T09:16:48Z"
+      "closedAt": "2026-11-27T11:51:07Z",
+      "prUpdatedAt": "2026-11-27T11:51:07Z",
+      "mergeCommit": "d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+      "landedCommitCredit": {
+        "originalPr": 50512,
+        "successorPr": null,
+        "commit": "d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+        "url": "https://github.com/stablyai/orca/commit/d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+        "mergedAt": "2026-11-27T11:51:07Z",
+        "author": "Afloat16",
+        "gitAuthor": {
+          "name": "Afloat",
+          "email": "ShuffleMonkey@163.com",
+          "date": "2026-11-27T11:51:06Z"
+        },
+        "committer": "web-flow",
+        "gitCommitter": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "date": "2026-11-27T11:51:06Z"
+        },
+        "parentCount": 1,
+        "parents": [
+          "bc0ec379626bc614db43c3bd74eaf043170a3f00"
+        ],
+        "subject": "fix(google-calendar): resolve calendar names across all calendarList pages (#50512)",
+        "coauthors": [],
+        "hasAfloatCoauthor": false,
+        "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+        "ancestry": {
+          "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+          "status": "ahead",
+          "aheadBy": 77,
+          "behindBy": 0,
+          "mergeBase": "d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+          "verifiedOnMain": true
+        }
+      }
     },
     {
       "package": "data/docs-comment-pagination/manifest.json",
@@ -154,12 +190,12 @@
       "pr": 50520,
       "prUrl": "https://github.com/stablyai/orca/pull/50520",
       "implementationHead": "f846856dd093f642a44c73766583cf2deaf484f5",
-      "head": "f846856dd093f642a44c73766583cf2deaf484f5",
-      "state": "open",
-      "merged": false,
-      "mergedAt": null,
+      "head": "ec53a95247b41e63bff39e8725e2913e5cf6af85",
+      "state": "closed",
+      "merged": true,
+      "mergedAt": "2026-11-27T11:44:59Z",
       "author": "Afloat16",
-      "maintainerCanModify": true,
+      "maintainerCanModify": false,
       "change": "Request nextPageToken in Drive's field mask and follow every comment page, including empty intermediate pages. Keep filtering, clipping, reply limits and the output budget.",
       "problem": "A document read stops after the first100 comments, so unresolved feedback after a resolved first page disappears and openComments reports an incorrect total.",
       "effectZh": "继续读取 Google Docs 评论后续页，保留未解决意见；分页上限、重复 token 或后页失败时显示真实的部分数量。",
@@ -169,7 +205,7 @@
         "jobId": 140397206642,
         "runId": 45966770120,
         "url": "https://github.com/Afloat16/orca/actions/runs/45966770120/job/140397206642",
-        "matchesObservedHead": true
+        "matchesObservedHead": false
       },
       "dedupe": {
         "queries": [
@@ -178,11 +214,53 @@
         ]
       },
       "continuationPr": null,
-      "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "mergeable": null,
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
-      "closedAt": null,
-      "prUpdatedAt": "2026-11-27T09:15:04Z"
+      "closedAt": "2026-11-27T11:44:59Z",
+      "prUpdatedAt": "2026-11-27T11:44:59Z",
+      "mergeCommit": "3d9a0c521053d40136779697cfaa7d10860f2c52",
+      "landedCommitCredit": {
+        "originalPr": 50520,
+        "successorPr": null,
+        "commit": "3d9a0c521053d40136779697cfaa7d10860f2c52",
+        "url": "https://github.com/stablyai/orca/commit/3d9a0c521053d40136779697cfaa7d10860f2c52",
+        "mergedAt": "2026-11-27T11:44:59Z",
+        "author": "Afloat16",
+        "gitAuthor": {
+          "name": "Afloat",
+          "email": "ShuffleMonkey@163.com",
+          "date": "2026-11-27T11:44:58Z"
+        },
+        "committer": "web-flow",
+        "gitCommitter": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "date": "2026-11-27T11:44:58Z"
+        },
+        "parentCount": 1,
+        "parents": [
+          "f83b8ea82a836e524577d763835b11d5d9cc26fb"
+        ],
+        "subject": "fix(google-docs): read unresolved comments across every page (#50520)",
+        "coauthors": [
+          "Co-authored-by: Neil <neil@stably.ai>"
+        ],
+        "hasAfloatCoauthor": false,
+        "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+        "ancestry": {
+          "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+          "status": "ahead",
+          "aheadBy": 81,
+          "behindBy": 0,
+          "mergeBase": "3d9a0c521053d40136779697cfaa7d10860f2c52",
+          "verifiedOnMain": true
+        }
+      },
+      "maintainerReviewOutcome": {
+        "url": "https://github.com/stablyai/orca/pull/50520#issuecomment-7217203855",
+        "note": "Maintainer reset to reviewed squash ec53a95; later seen-token commit 19a4df7 was excluded. Existing 20-page cap retained; do not restore removed commit."
+      }
     },
     {
       "package": "data/drive-concurrent-read/manifest.json",
@@ -219,10 +297,23 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:55:00Z"
+      "prUpdatedAt": "2026-11-27T07:55:00Z",
+      "upstreamWorkflowObservation": {
+        "source": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+        "conclusion": "action_required",
+        "runIds": [
+          45961506288,
+          45961506347,
+          45961506307,
+          45961506290,
+          45961506283
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "data/drive-folder-completeness/manifest.json",
@@ -263,10 +354,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T08:41:14Z"
+      "prUpdatedAt": "2026-11-27T08:41:14Z",
+      "upstreamWorkflowObservation": {
+        "source": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+        "conclusion": "action_required",
+        "runIds": [
+          45967011233,
+          45967011208,
+          45967011094,
+          45967011083
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "data/gmail-forward-concurrency/manifest.json",
@@ -303,7 +406,7 @@
       },
       "continuationPr": 50671,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -396,7 +499,7 @@
       },
       "continuationPr": 50765,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -492,7 +595,7 @@
       },
       "continuationPr": 50675,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -580,10 +683,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:51:45Z"
+      "prUpdatedAt": "2026-11-27T07:51:45Z",
+      "upstreamWorkflowObservation": {
+        "source": "64e24ab5fe445acc312b3786a494315c89f279e1",
+        "conclusion": "action_required",
+        "runIds": [
+          45960983133,
+          45960983042,
+          45960983041,
+          45960983578
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "data/sheets-upsert-index/manifest.json",
@@ -624,10 +739,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:00:28Z"
+      "prUpdatedAt": "2026-11-27T07:00:28Z",
+      "upstreamWorkflowObservation": {
+        "source": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+        "conclusion": "action_required",
+        "runIds": [
+          45955207767,
+          45955207644,
+          45955207594,
+          45955207607
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "parser/advertised-ipv6-origins/manifest.json",
@@ -661,7 +788,7 @@
       },
       "continuationPr": 50611,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -753,7 +880,7 @@
       },
       "continuationPr": 50766,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -852,7 +979,7 @@
       },
       "continuationPr": 50764,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -954,10 +1081,21 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:14:19Z"
+      "prUpdatedAt": "2026-11-27T07:14:19Z",
+      "upstreamWorkflowObservation": {
+        "source": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+        "conclusion": "action_required",
+        "runIds": [
+          45956679497,
+          45956679375,
+          45956679425
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "parser/ghostty-palette-indexes/manifest.json",
@@ -992,7 +1130,7 @@
       },
       "continuationPr": 50608,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -1087,7 +1225,7 @@
       },
       "continuationPr": 50767,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -1188,7 +1326,7 @@
       },
       "continuationPr": 50673,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -1284,7 +1422,7 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "rework": {
         "status": "complete_behavioral_correction_published_localization_followup_in_progress",
@@ -1357,7 +1495,7 @@
       },
       "continuationPr": 50663,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -1450,7 +1588,7 @@
       },
       "continuationPr": 50664,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -1543,10 +1681,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:22:10Z"
+      "prUpdatedAt": "2026-11-27T07:22:10Z",
+      "upstreamWorkflowObservation": {
+        "source": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+        "conclusion": "action_required",
+        "runIds": [
+          45957407238,
+          45957407222,
+          45957407273,
+          45957407280
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "parser/notebook-code-cell-attachments/manifest.json",
@@ -1587,10 +1737,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:21:32Z"
+      "prUpdatedAt": "2026-11-27T07:21:32Z",
+      "upstreamWorkflowObservation": {
+        "source": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+        "conclusion": "action_required",
+        "runIds": [
+          45957484434,
+          45957484376,
+          45957484458,
+          45957484338
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "parser/opencode-json-message-parts/manifest.json",
@@ -1635,7 +1797,7 @@
       },
       "continuationPr": 50781,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "latestCheck": {
         "status": "success",
@@ -1862,7 +2024,7 @@
       },
       "continuationPr": 50670,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -1947,7 +2109,7 @@
       },
       "continuationPr": 50595,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2033,7 +2195,7 @@
       },
       "continuationPr": 50604,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2119,7 +2281,7 @@
       },
       "continuationPr": 50597,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2215,10 +2377,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:12:53Z"
+      "prUpdatedAt": "2026-11-27T07:12:53Z",
+      "upstreamWorkflowObservation": {
+        "source": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+        "conclusion": "action_required",
+        "runIds": [
+          45956446155,
+          45956446139,
+          45956446108,
+          45956446132
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "providers/gitlab-bridge-name-isolation/manifest.json",
@@ -2262,7 +2436,7 @@
       },
       "continuationPr": 50745,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2358,7 +2532,7 @@
       },
       "continuationPr": 50770,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2462,10 +2636,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T08:50:49Z"
+      "prUpdatedAt": "2026-11-27T08:50:49Z",
+      "upstreamWorkflowObservation": {
+        "source": "3922a17a93aa048c1e08f257828527ce988594b6",
+        "conclusion": "action_required",
+        "runIds": [
+          45968367001,
+          45968366845,
+          45968366784,
+          45968366937
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "providers/gitlab-pagination-integer/manifest.json",
@@ -2507,10 +2693,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:12:10Z"
+      "prUpdatedAt": "2026-11-27T07:12:10Z",
+      "upstreamWorkflowObservation": {
+        "source": "7da79774a4ab2738f3e934c221059b203394e9ee",
+        "conclusion": "action_required",
+        "runIds": [
+          45956532868,
+          45956532703,
+          45956532690,
+          45956532568
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "providers/hosted-review-branch-case/manifest.json",
@@ -2555,10 +2753,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T08:53:14Z"
+      "prUpdatedAt": "2026-11-27T08:53:14Z",
+      "upstreamWorkflowObservation": {
+        "source": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+        "conclusion": "action_required",
+        "runIds": [
+          45968234109,
+          45968234150,
+          45968234134,
+          45968234105
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "providers/hosted-review-response-confirmation/manifest.json",
@@ -2603,7 +2813,7 @@
       },
       "continuationPr": 50708,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2695,7 +2905,7 @@
       },
       "continuationPr": 50706,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2790,7 +3000,7 @@
       },
       "continuationPr": 50710,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -2883,10 +3093,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T07:13:30Z"
+      "prUpdatedAt": "2026-11-27T07:13:30Z",
+      "upstreamWorkflowObservation": {
+        "source": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+        "conclusion": "action_required",
+        "runIds": [
+          45956604560,
+          45956604538,
+          45956604632,
+          45956604650
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "providers/linear-workspace-read-coalescing/manifest.json",
@@ -2921,7 +3143,7 @@
       },
       "continuationPr": 50603,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -3017,7 +3239,7 @@
       },
       "continuationPr": 50762,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -3110,7 +3332,7 @@
       },
       "continuationPr": 50653,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -3205,7 +3427,7 @@
       "continuationPr": null,
       "externallyUpdated": true,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "ciFollowups": {
         "pr": 50581,
@@ -3237,7 +3459,20 @@
         "noCurrentCompletePrAgainstMainClaim": true
       },
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T08:58:23Z"
+      "prUpdatedAt": "2026-11-27T08:58:23Z",
+      "upstreamWorkflowObservation": {
+        "source": "c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+        "conclusion": "action_required",
+        "runIds": [
+          45969788865,
+          45969049266,
+          45969049476,
+          45969049217,
+          45969049194
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "runtime/download-fetch-causes/manifest.json",
@@ -3281,7 +3516,7 @@
       },
       "continuationPr": 50676,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -3375,7 +3610,7 @@
       },
       "continuationPr": 50779,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": "2026-11-27T10:18:59Z",
       "prUpdatedAt": "2026-11-27T10:18:59Z",
@@ -3494,7 +3729,7 @@
       },
       "continuationPr": 50714,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -3590,18 +3825,18 @@
       },
       "continuationPr": 50761,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
           "number": 50761,
           "url": "https://github.com/stablyai/orca/pull/50761",
           "title": "fix(mcp): share one child across concurrent cold-start requests",
-          "state": "open",
-          "merged": false,
-          "mergedAt": null,
-          "closedAt": null,
-          "updatedAt": "2026-11-27T10:07:03Z",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T11:33:05Z",
+          "closedAt": "2026-11-27T11:33:05Z",
+          "updatedAt": "2026-11-27T11:33:10Z",
           "author": "nwparker",
           "head": {
             "sha": "e2b953e0766aa399daf4a0e4b9b2df8ac77e56c7",
@@ -3609,14 +3844,14 @@
             "repo": "stablyai/orca"
           },
           "base": {
-            "sha": "27a700fd8d659a298769e5453bb340d4debbf76a",
+            "sha": "c9235c403954529d1119e0942fde4c4cde5d855a",
             "ref": "main",
             "repo": "stablyai/orca"
           },
-          "mergeCommit": null,
-          "apiMergeCommitSha": "f2eecf083021687ae6c5ef894b41ebf6353f34a5",
+          "mergeCommit": "13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+          "apiMergeCommitSha": "13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
           "maintainerCanModify": false,
-          "mergedBy": null,
+          "mergedBy": "nwparker",
           "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50761"
         },
         "closure": {
@@ -3626,7 +3861,43 @@
           "body": "Thanks @Afloat16 for finding and fixing this race. We've carried your fix forward in #50761, rebased onto current main so it can merge. Your commit authorship is kept. Closing this one in favor of that PR."
         },
         "countsAsSeparateImprovement": false,
-        "landedCommitCredit": null
+        "landedCommitCredit": {
+          "originalPr": 50635,
+          "successorPr": 50761,
+          "commit": "13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+          "url": "https://github.com/stablyai/orca/commit/13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+          "mergedAt": "2026-11-27T11:33:05Z",
+          "author": "nwparker",
+          "gitAuthor": {
+            "name": "Neil",
+            "email": "4138956+nwparker@users.noreply.github.com",
+            "date": "2026-11-27T11:33:03Z"
+          },
+          "committer": "web-flow",
+          "gitCommitter": {
+            "name": "GitHub",
+            "email": "noreply@github.com",
+            "date": "2026-11-27T11:33:03Z"
+          },
+          "parentCount": 1,
+          "parents": [
+            "c8af5f892eaaa3a36a0912bcfed30014b6153432"
+          ],
+          "subject": "fix(mcp): share one child across concurrent cold-start requests (#50761)",
+          "coauthors": [
+            "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+          ],
+          "hasAfloatCoauthor": true,
+          "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+          "ancestry": {
+            "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+            "status": "ahead",
+            "aheadBy": 85,
+            "behindBy": 0,
+            "mergeBase": "13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+            "verifiedOnMain": true
+          }
+        }
       },
       "closedAt": "2026-11-27T09:48:48Z",
       "prUpdatedAt": "2026-11-27T09:48:48Z"
@@ -3673,18 +3944,18 @@
       },
       "continuationPr": 50756,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
           "number": 50756,
           "url": "https://github.com/stablyai/orca/pull/50756",
           "title": "fix(mcp): settle stdio sends via the write callback so they reject when the shared child exits",
-          "state": "open",
-          "merged": false,
-          "mergedAt": null,
-          "closedAt": null,
-          "updatedAt": "2026-11-27T10:04:15Z",
+          "state": "closed",
+          "merged": true,
+          "mergedAt": "2026-11-27T11:32:42Z",
+          "closedAt": "2026-11-27T11:32:42Z",
+          "updatedAt": "2026-11-27T11:32:48Z",
           "author": "nwparker",
           "head": {
             "sha": "cf687f2bf0da2e34890ee2eefd3bd80d7e1e0804",
@@ -3692,14 +3963,14 @@
             "repo": "stablyai/orca"
           },
           "base": {
-            "sha": "6e70d9f8c20b5e813ee2510ce3338c6bfcd12157",
+            "sha": "c9235c403954529d1119e0942fde4c4cde5d855a",
             "ref": "main",
             "repo": "stablyai/orca"
           },
-          "mergeCommit": null,
-          "apiMergeCommitSha": "7060b8d9b267019ac3a9aaceec7d6f528b6a044a",
+          "mergeCommit": "c8af5f892eaaa3a36a0912bcfed30014b6153432",
+          "apiMergeCommitSha": "c8af5f892eaaa3a36a0912bcfed30014b6153432",
           "maintainerCanModify": false,
-          "mergedBy": null,
+          "mergedBy": "nwparker",
           "apiSource": "https://api.github.com/repos/stablyai/orca/pulls/50756"
         },
         "closure": {
@@ -3709,7 +3980,43 @@
           "body": "Thanks @Afloat16 for finding this and for the fix. We've carried it forward in #50756 with a small test hardening, rebased onto current main. Your authorship is preserved on the commit. Closing this one in favor of that PR."
         },
         "countsAsSeparateImprovement": false,
-        "landedCommitCredit": null
+        "landedCommitCredit": {
+          "originalPr": 50628,
+          "successorPr": 50756,
+          "commit": "c8af5f892eaaa3a36a0912bcfed30014b6153432",
+          "url": "https://github.com/stablyai/orca/commit/c8af5f892eaaa3a36a0912bcfed30014b6153432",
+          "mergedAt": "2026-11-27T11:32:42Z",
+          "author": "nwparker",
+          "gitAuthor": {
+            "name": "Neil",
+            "email": "4138956+nwparker@users.noreply.github.com",
+            "date": "2026-11-27T11:32:41Z"
+          },
+          "committer": "web-flow",
+          "gitCommitter": {
+            "name": "GitHub",
+            "email": "noreply@github.com",
+            "date": "2026-11-27T11:32:41Z"
+          },
+          "parentCount": 1,
+          "parents": [
+            "d5539413e58a6535a1a7c69904d6ff3adb9ecb6b"
+          ],
+          "subject": "fix(mcp): settle stdio sends via the write callback so they reject when the shared child exits (#50756)",
+          "coauthors": [
+            "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+          ],
+          "hasAfloatCoauthor": true,
+          "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+          "ancestry": {
+            "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+            "status": "ahead",
+            "aheadBy": 86,
+            "behindBy": 0,
+            "mergeBase": "c8af5f892eaaa3a36a0912bcfed30014b6153432",
+            "verifiedOnMain": true
+          }
+        }
       },
       "alternateContinuations": [
         {
@@ -3788,7 +4095,7 @@
       },
       "continuationPr": 50751,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -3891,10 +4198,22 @@
       },
       "continuationPr": null,
       "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T08:09:46Z"
+      "prUpdatedAt": "2026-11-27T08:09:46Z",
+      "upstreamWorkflowObservation": {
+        "source": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+        "conclusion": "action_required",
+        "runIds": [
+          45963120199,
+          45963120106,
+          45963120122,
+          45963120165
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      }
     },
     {
       "package": "runtime/runtime-repair-rollback/manifest.json",
@@ -3941,11 +4260,32 @@
         ]
       },
       "continuationPr": null,
-      "mergeable": true,
-      "snapshotAt": "2026-11-27 11:12:32 UTC",
+      "mergeable": false,
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "closedAt": null,
-      "prUpdatedAt": "2026-11-27T09:16:20Z"
+      "prUpdatedAt": "2026-11-27T09:16:20Z",
+      "upstreamWorkflowObservation": {
+        "source": "d4086e65cd501133998a54835ecb09cd517da302",
+        "conclusion": "action_required",
+        "runIds": [
+          45972054189,
+          45968024359,
+          45968024370,
+          45968024471,
+          45968024468
+        ],
+        "observedAt": "2026-11-27T16:16:09Z",
+        "description": "Upstream pull_request workflows require action/approval; not an executed test failure or pass."
+      },
+      "mergeableState": "dirty",
+      "currentConflict": {
+        "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+        "head": "d4086e65cd501133998a54835ecb09cd517da302",
+        "path": "src/main/node-runtime/managed-runtime-release-install.ts",
+        "description": "Main added publishRename using renameFileWithWindowsRetryAsync (25 attempts, AbortSignal) to displacement and final publication. Original PR replaces the same publication block with rollback helper; preserve main retry semantics while restoring displaced data even after cancellation. Other four PR file paths unchanged on current main relative to merge base (two added files still absent). No code pushed: exact repo gate unavailable here (Node 22, pnpm unavailable, GitHub DNS inaccessible in execution container).",
+        "checkedAt": "2026-11-27T16:16:09Z"
+      }
     },
     {
       "package": "runtime/sftp-fifo-source/manifest.json",
@@ -3991,7 +4331,7 @@
       },
       "continuationPr": null,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "retiredWithoutMerge": {
         "reason": "Maintainer found no current user-facing production path for the proposed FIFO handling.",
@@ -4043,7 +4383,7 @@
       },
       "continuationPr": 50672,
       "mergeable": null,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "issueClosingReferenceVerified": true,
       "continuation": {
         "successor": {
@@ -4134,7 +4474,7 @@
         ]
       },
       "visualProofComplete": false,
-      "snapshotAt": "2026-11-27 10:58:56 UTC",
+      "snapshotAt": "2026-11-27T16:16:09Z",
       "closedAt": "2026-11-27T10:27:06Z",
       "prUpdatedAt": "2026-11-27T10:27:06Z",
       "continuationPr": 50785,
@@ -4343,8 +4683,6 @@
     {
       "kind": "existing-authored-pull-requests",
       "pullRequests": [
-        50512,
-        50520,
         50594,
         50668,
         50607,
@@ -4362,20 +4700,6 @@
         50639
       ],
       "description": "Watch current review/CI/merge decisions; apply concrete justified review corrections to current heads using nonforce leases."
-    },
-    {
-      "kind": "open-canonical-maintainer-continuations",
-      "pullRequests": [
-        {
-          "originalPr": 50635,
-          "successorPr": 50761
-        },
-        {
-          "originalPr": 50628,
-          "successorPr": 50756
-        }
-      ],
-      "description": "Track actual merged_at and actual main credit; never count alternate continuation #50752 separately."
     },
     {
       "kind": "closed-original-complete-correction",
@@ -4433,6 +4757,13 @@
         "checkedAt": "2026-11-27T11:10:25Z"
       },
       "description": "Same existing contribution. Core initial scope is merged; the four later review cases are corrected in the fork and are not yet claimed as upstream merged."
+    },
+    {
+      "kind": "existing-conflict",
+      "originalPr": 50639,
+      "head": "d4086e65cd501133998a54835ecb09cd517da302",
+      "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+      "description": "Main added publishRename using renameFileWithWindowsRetryAsync (25 attempts, AbortSignal) to displacement and final publication. Original PR replaces the same publication block with rollback helper; preserve main retry semantics while restoring displaced data even after cancellation. Other four PR file paths unchanged on current main relative to merge base (two added files still absent). No code pushed: exact repo gate unavailable here (Node 22, pnpm unavailable, GitHub DNS inaccessible in execution container)."
     }
   ],
   "sourceChecks": [
@@ -4955,7 +5286,7 @@
       }
     }
   },
-  "updatedAt": "2026-11-27T11:17:14Z",
+  "updatedAt": "2026-11-27T16:16:09Z",
   "verifiedMainCommitCredit": [
     {
       "originalPr": 50524,
@@ -5466,6 +5797,80 @@
         "mergeBase": "f895469a52fa5988435791ecb81404deb4148899",
         "verifiedOnMain": true
       }
+    },
+    {
+      "originalPr": 50635,
+      "successorPr": 50761,
+      "commit": "13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+      "url": "https://github.com/stablyai/orca/commit/13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+      "mergedAt": "2026-11-27T11:33:05Z",
+      "author": "nwparker",
+      "gitAuthor": {
+        "name": "Neil",
+        "email": "4138956+nwparker@users.noreply.github.com",
+        "date": "2026-11-27T11:33:03Z"
+      },
+      "committer": "web-flow",
+      "gitCommitter": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-11-27T11:33:03Z"
+      },
+      "parentCount": 1,
+      "parents": [
+        "c8af5f892eaaa3a36a0912bcfed30014b6153432"
+      ],
+      "subject": "fix(mcp): share one child across concurrent cold-start requests (#50761)",
+      "coauthors": [
+        "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+      ],
+      "hasAfloatCoauthor": true,
+      "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+      "ancestry": {
+        "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+        "status": "ahead",
+        "aheadBy": 85,
+        "behindBy": 0,
+        "mergeBase": "13bfe8e7ba7bae177eda5ed300f2bc192aa07066",
+        "verifiedOnMain": true
+      }
+    },
+    {
+      "originalPr": 50628,
+      "successorPr": 50756,
+      "commit": "c8af5f892eaaa3a36a0912bcfed30014b6153432",
+      "url": "https://github.com/stablyai/orca/commit/c8af5f892eaaa3a36a0912bcfed30014b6153432",
+      "mergedAt": "2026-11-27T11:32:42Z",
+      "author": "nwparker",
+      "gitAuthor": {
+        "name": "Neil",
+        "email": "4138956+nwparker@users.noreply.github.com",
+        "date": "2026-11-27T11:32:41Z"
+      },
+      "committer": "web-flow",
+      "gitCommitter": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-11-27T11:32:41Z"
+      },
+      "parentCount": 1,
+      "parents": [
+        "d5539413e58a6535a1a7c69904d6ff3adb9ecb6b"
+      ],
+      "subject": "fix(mcp): settle stdio sends via the write callback so they reject when the shared child exits (#50756)",
+      "coauthors": [
+        "Co-authored-by: Afloat <ShuffleMonkey@163.com>"
+      ],
+      "hasAfloatCoauthor": true,
+      "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+      "ancestry": {
+        "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+        "status": "ahead",
+        "aheadBy": 86,
+        "behindBy": 0,
+        "mergeBase": "c8af5f892eaaa3a36a0912bcfed30014b6153432",
+        "verifiedOnMain": true
+      }
     }
   ],
   "replacementPublication": {
@@ -5638,7 +6043,47 @@
     },
     "nonAtomicSnapshot": true,
     "publicFollowupUpdatedAt": "2026-11-27T11:13:27Z",
-    "finalizedAt": "2026-11-27T11:17:14Z"
+    "finalizedAt": "2026-11-27T11:17:14Z",
+    "latestScheduledAudit": {
+      "observedAt": "2026-11-27T16:16:09Z",
+      "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+      "nonAtomicSnapshot": true,
+      "allAuthoredPRsRead": 51,
+      "allContinuationPRsRead": 33,
+      "previousVerifiedMain": "6152051574158e138c796212f8e00e081a49ab31",
+      "previousVerifiedMainAncestry": {
+        "status": "ahead",
+        "aheadBy": 99,
+        "behindBy": 0
+      },
+      "newAuthoredMerges": [
+        50512,
+        50520
+      ],
+      "newMaintainerMerges": [
+        50761,
+        50756
+      ],
+      "accountOpenPRSearchResults": 49,
+      "upstreamActionRequiredPRs": [
+        50594,
+        50668,
+        50607,
+        50507,
+        50543,
+        50560,
+        50562,
+        50532,
+        50688,
+        50536,
+        50686,
+        50539,
+        50581,
+        50637,
+        50639
+      ],
+      "newSubmission": false
+    }
   },
   "effectiveContributionPRs": [
     50512,
@@ -5705,6 +6150,80 @@
       "description": "Completed literal Git-ref identity across UI, generated fields, host preflight and create paths; localized owner errors; exact-source required gate passed and concrete correction posted on original closed topic.",
       "source": "7a64e57a8a085a4c5ce0afacce579472f034f819",
       "url": "https://github.com/stablyai/orca/pull/50659#issuecomment-7215955003"
+    }
+  ],
+  "verifiedAuthoredMainCommitCredit": [
+    {
+      "originalPr": 50512,
+      "successorPr": null,
+      "commit": "d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+      "url": "https://github.com/stablyai/orca/commit/d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+      "mergedAt": "2026-11-27T11:51:07Z",
+      "author": "Afloat16",
+      "gitAuthor": {
+        "name": "Afloat",
+        "email": "ShuffleMonkey@163.com",
+        "date": "2026-11-27T11:51:06Z"
+      },
+      "committer": "web-flow",
+      "gitCommitter": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-11-27T11:51:06Z"
+      },
+      "parentCount": 1,
+      "parents": [
+        "bc0ec379626bc614db43c3bd74eaf043170a3f00"
+      ],
+      "subject": "fix(google-calendar): resolve calendar names across all calendarList pages (#50512)",
+      "coauthors": [],
+      "hasAfloatCoauthor": false,
+      "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+      "ancestry": {
+        "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+        "status": "ahead",
+        "aheadBy": 77,
+        "behindBy": 0,
+        "mergeBase": "d019a5d70597fb919fd85a2b93ee6b4f1f243122",
+        "verifiedOnMain": true
+      }
+    },
+    {
+      "originalPr": 50520,
+      "successorPr": null,
+      "commit": "3d9a0c521053d40136779697cfaa7d10860f2c52",
+      "url": "https://github.com/stablyai/orca/commit/3d9a0c521053d40136779697cfaa7d10860f2c52",
+      "mergedAt": "2026-11-27T11:44:59Z",
+      "author": "Afloat16",
+      "gitAuthor": {
+        "name": "Afloat",
+        "email": "ShuffleMonkey@163.com",
+        "date": "2026-11-27T11:44:58Z"
+      },
+      "committer": "web-flow",
+      "gitCommitter": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-11-27T11:44:58Z"
+      },
+      "parentCount": 1,
+      "parents": [
+        "f83b8ea82a836e524577d763835b11d5d9cc26fb"
+      ],
+      "subject": "fix(google-docs): read unresolved comments across every page (#50520)",
+      "coauthors": [
+        "Co-authored-by: Neil <neil@stably.ai>"
+      ],
+      "hasAfloatCoauthor": false,
+      "source": "Actual merged PR merge_commit_sha and upstream commit, verified ancestry on main.",
+      "ancestry": {
+        "main": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+        "status": "ahead",
+        "aheadBy": 81,
+        "behindBy": 0,
+        "mergeBase": "3d9a0c521053d40136779697cfaa7d10860f2c52",
+        "verifiedOnMain": true
+      }
     }
   ]
 }
