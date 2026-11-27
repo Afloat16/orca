@@ -77,7 +77,7 @@ async function replacePrompt(text: string): Promise<void> {
   expect((await stat(userPart)).size).toBe(before.size)
 }
 
-async function listedPrompt(): Promise<string | undefined> {
+async function listedPrompt(): Promise<string | null | undefined> {
   const result = await withFullFirstUserPromptCapture(() =>
     scanAiVaultSessions({ ...harness.roots, unlimited: true })
   )
