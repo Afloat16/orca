@@ -50,6 +50,7 @@ function rows(path?: string): SessionSearchSnapshotRow[] {
   return store.connection
     .prepare(`SELECT f.path, CAST(f.dev AS REAL) AS dev, CAST(f.ino AS REAL) AS ino,
     f.mtime_ms, f.size_bytes, f.state, f.fail_count, f.failed_mtime_ms, f.byte_offset, f.prefix_hash,
+    f.content_signature,
     s.agent, s.content_hash, s.content_hash_count FROM files f LEFT JOIN sessions s ON s.id=f.session_row_id
     ${path === undefined ? '' : 'WHERE f.path = ?'}`)
     .all(...(path === undefined ? [] : [path]))
@@ -64,6 +65,7 @@ function rows(path?: string): SessionSearchSnapshotRow[] {
       state: row.state === 'due' ? 'due' : row.state === 'failed' ? 'failed' : 'current',
       failCount: Number(row.fail_count),
       failedMtimeMs: row.failed_mtime_ms === null ? null : Number(row.failed_mtime_ms),
+      contentSignature: typeof row.content_signature === 'string' ? row.content_signature : null,
       byteOffset: row.byte_offset === PARTIAL_FILE_CURSOR ? null : Number(row.byte_offset),
       prefixHash: typeof row.prefix_hash === 'string' ? row.prefix_hash : null,
       agent: typeof row.agent === 'string' ? row.agent : null,
@@ -231,7 +233,7 @@ async function execute({ id, command: c }: SearchWorkerRequest): Promise<SearchW
       writes.delete(c.handle)
       break
     case 'state':
-      store.setFileState(c.path, c.state, c.mtime)
+      store.setFileState(c.path, c.state, c.mtime, c.contentSignature)
       path = c.path
       break
     case 'remove':

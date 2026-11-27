@@ -1,3 +1,4 @@
+import { sidecarContentSignature } from '../../ai-vault/parse-cache/session-sidecar-stat'
 import type { SessionFileCandidate } from '../../ai-vault/session-scanner-types'
 import type { SessionParseReadRequirement } from '../../ai-vault/parse-cache/session-scanner-parse-cache'
 import {
@@ -29,7 +30,7 @@ export function sessionSearchReadDecision(args: {
   if (!row) {
     return 'any'
   }
-  if (heldOut(row, file.mtimeMs)) {
+  if (heldOut(row, file)) {
     return 'skip'
   }
   if (row.state === 'due') {
@@ -50,18 +51,21 @@ export function sessionSearchReadDecision(args: {
   return statMatches(row, file) ? 'skip' : 'any'
 }
 
-/** A held-out file is retried only when its mtime changes. */
-function heldOut(row: SessionSearchFileRow, mtimeMs: number): boolean {
+/** A changed transcript or content dependency permits another read after repeated failures. */
+function heldOut(row: SessionSearchFileRow, file: SessionFileCandidate['file']): boolean {
   return (
     row.state === 'failed' &&
     row.failCount >= SESSION_SEARCH_FAILURES_BEFORE_HELD_OUT &&
-    row.failedMtimeMs === mtimeMs
+    row.failedMtimeMs === file.mtimeMs &&
+    (row.contentSignature ?? null) === sidecarContentSignature(file.sidecar)
   )
 }
 
 function statMatches(row: SessionSearchFileRow, file: SessionFileCandidate['file']): boolean {
   return (
     row.mtimeMs === file.mtimeMs &&
+    sidecarContentSignature(file.sidecar) !== 'unknown' &&
+    (row.contentSignature ?? null) === sidecarContentSignature(file.sidecar) &&
     (row.sizeBytes === null || file.sizeBytes === undefined || row.sizeBytes === file.sizeBytes)
   )
 }

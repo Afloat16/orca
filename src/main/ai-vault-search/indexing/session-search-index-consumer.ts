@@ -1,3 +1,4 @@
+import { sidecarContentSignature } from '../../ai-vault/parse-cache/session-sidecar-stat'
 import { isCursorAcpSessionRow } from '../../../shared/ai-vault/session-display/cursor-acp-session-path'
 import { inSessionParseFileLane } from '../../ai-vault/parse-cache/session-parse-file-lane'
 import { requestWholeTranscriptRead } from '../../ai-vault/transcripts/session-transcript-reader'
@@ -191,7 +192,12 @@ class SessionSearchReadConsumer implements TranscriptReadConsumer {
       return
     }
     // Stamp and count repeated read failures so unchanged unreadable files can be held out.
-    this.store.setFileState(candidate.file.path, 'failed', candidate.file.mtimeMs)
+    this.store.setFileState(
+      candidate.file.path,
+      'failed',
+      candidate.file.mtimeMs,
+      sidecarContentSignature(candidate.file.sidecar)
+    )
   }
 }
 

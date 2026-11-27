@@ -4,6 +4,8 @@ export type SessionSidecarStat = {
   path: string
   mtimeMs: number
   sizeBytes: number
+  // Composite content dependencies need every name/stat, not just their newest mtime.
+  contentSignature?: string
 }
 
 export type SessionSidecarObservation =
@@ -29,7 +31,8 @@ export function sidecarUnchanged(
     typeof entry === 'object' &&
     entry.path === observed.path &&
     entry.mtimeMs === observed.mtimeMs &&
-    entry.sizeBytes === observed.sizeBytes
+    entry.sizeBytes === observed.sizeBytes &&
+    entry.contentSignature === observed.contentSignature
   )
 }
 
@@ -41,10 +44,26 @@ export function parsePersistedSidecar(value: unknown): SessionSidecarObservation
   if (!isRecord(value)) {
     return undefined
   }
-  const { path, mtimeMs, sizeBytes } = value
+  const { path, mtimeMs, sizeBytes, contentSignature } = value
   return typeof path === 'string' && typeof mtimeMs === 'number' && typeof sizeBytes === 'number'
-    ? { path, mtimeMs, sizeBytes }
+    ? {
+        path,
+        mtimeMs,
+        sizeBytes,
+        ...(typeof contentSignature === 'string' ? { contentSignature } : {})
+      }
     : undefined
+}
+
+/** Unreadable dependencies must not prove that a previously indexed conversation is current. */
+export function sidecarContentSignature(
+  sidecar: SessionSidecarObservation | undefined
+): string | null {
+  return sidecar === 'unknown'
+    ? 'unknown'
+    : typeof sidecar === 'object'
+      ? (sidecar.contentSignature ?? null)
+      : null
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

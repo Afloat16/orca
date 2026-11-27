@@ -184,7 +184,8 @@ export class SessionSearchStore {
           // Numeric stat IDs may exceed SQLite's safe INTEGER-to-number read range.
           `SELECT path, CAST(dev AS REAL) AS dev, CAST(ino AS REAL) AS ino,
                   mtime_ms AS mtimeMs, size_bytes AS sizeBytes,
-                  state, fail_count AS failCount, failed_mtime_ms AS failedMtimeMs
+                  state, fail_count AS failCount, failed_mtime_ms AS failedMtimeMs,
+                  content_signature AS contentSignature
            FROM files`
         )
         .all() as (Omit<SessionSearchFileRow, 'identity'> & {
@@ -201,24 +202,32 @@ export class SessionSearchStore {
       sizeBytes: row.sizeBytes,
       state: row.state,
       failCount: row.failCount,
-      failedMtimeMs: row.failedMtimeMs
+      failedMtimeMs: row.failedMtimeMs,
+      contentSignature: row.contentSignature ?? null
     }))
   }
 
-  setFileState(path: string, state: SessionSearchFileState, atMtimeMs?: number): void {
+  setFileState(
+    path: string,
+    state: SessionSearchFileState,
+    atMtimeMs?: number,
+    contentSignature?: string | null
+  ): void {
     try {
       if (state === 'failed') {
         // Persist initial failures too, or unreadable new files retry forever.
         this.db
           .prepare(
-            `INSERT INTO files(path, byte_offset, mtime_ms, state, fail_count, failed_mtime_ms)
-             VALUES (?, 0, ?, 'failed', 1, ?)
+            `INSERT INTO files(path, byte_offset, mtime_ms, state, fail_count, failed_mtime_ms,
+                               content_signature)
+             VALUES (?, 0, ?, 'failed', 1, ?, ?)
              ON CONFLICT(path) DO UPDATE SET
                state = 'failed',
                fail_count = files.fail_count + 1,
-               failed_mtime_ms = excluded.failed_mtime_ms`
+               failed_mtime_ms = excluded.failed_mtime_ms,
+               content_signature = excluded.content_signature`
           )
-          .run(path, atMtimeMs ?? 0, atMtimeMs ?? null)
+          .run(path, atMtimeMs ?? 0, atMtimeMs ?? null, contentSignature ?? null)
         return
       }
       this.db

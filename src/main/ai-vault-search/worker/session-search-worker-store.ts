@@ -1,3 +1,4 @@
+import { sidecarContentSignature } from '../../ai-vault/parse-cache/session-sidecar-stat'
 import { ownRetainedString } from '../../../shared/text/own-retained-string'
 import type { SessionFileCandidate } from '../../ai-vault/session-scanner-types'
 import type {
@@ -67,7 +68,12 @@ export class SessionSearchWorkerStore extends SessionSearchWorkerStoreBase {
         .then((response) => {
           if (response.failure === 'write' && !failed) {
             failed = true
-            this.setFileState(candidate.file.path, 'failed', candidate.file.mtimeMs)
+            this.setFileState(
+              candidate.file.path,
+              'failed',
+              candidate.file.mtimeMs,
+              sidecarContentSignature(candidate.file.sidecar)
+            )
             for (const [dependent, path] of this.invalidations) {
               if (dependent !== owner && path === candidate.file.path) {
                 dependent.abort()
@@ -180,6 +186,7 @@ export class SessionSearchWorkerStore extends SessionSearchWorkerStoreBase {
           state: 'current',
           failCount: 0,
           failedMtimeMs: null,
+          contentSignature: sidecarContentSignature(candidate.file.sidecar),
           byteOffset: outcome.byteOffset,
           prefixHash: outcome.prefixHash ?? null,
           agent: old?.agent ?? candidate.agent,

@@ -312,6 +312,7 @@ function sameSidecar(
       typeof right === 'object' &&
       left.path === right.path &&
       left.mtimeMs === right.mtimeMs &&
-      left.sizeBytes === right.sizeBytes)
+      left.sizeBytes === right.sizeBytes &&
+      left.contentSignature === right.contentSignature)
   )
 }

@@ -1,4 +1,6 @@
 import { basename, extname, join } from 'node:path'
+import { mapWithConcurrency } from '../../../../../shared/concurrency/map-with-concurrency'
+import { observeOpenCodeJsonSidecar } from '../session-scanner-opencode-json-sidecar'
 import type { AiVaultScanIssue } from '../../../../../shared/ai-vault/contracts/ai-vault-types'
 import { discoverFiles } from '../../../discovery/session-scanner-discovery'
 import { splitOpenCodeSqliteCandidate } from '../../../../../shared/agent-session/lifecycle/provider-handles/opencode-sqlite-session-path'
@@ -59,14 +61,25 @@ export async function discoverOpenCodeSessions(args: {
   }
   const withoutSqliteDuplicates = (files: readonly FileWithMtime[]): FileWithMtime[] =>
     files.filter((file) => !sqliteSessionIds.has(sessionIdFromLegacyFilePath(file.path)))
+  const legacyFiles = withoutSqliteDuplicates(fileDiscovery.files)
+  const legacyScopeFiles = withoutSqliteDuplicates(fileDiscovery.scopeFiles ?? [])
+  const paths = [...new Set([...legacyFiles, ...legacyScopeFiles].map((file) => file.path))]
+  const sidecars = new Map(
+    await mapWithConcurrency(paths, 4, async (path) => [
+      path,
+      await observeOpenCodeJsonSidecar(args.storageDir, path, args.issues, args.signal)
+    ] as const)
+  )
+  const withSidecars = (files: readonly FileWithMtime[]): FileWithMtime[] =>
+    files.map((file) => ({ ...file, sidecar: sidecars.get(file.path) ?? 'unknown' }))
   const scopeFiles = walksScope
-    ? [...withoutSqliteDuplicates(fileDiscovery.scopeFiles ?? []), ...(sqliteScopeFiles ?? [])]
+    ? [...withSidecars(legacyScopeFiles), ...(sqliteScopeFiles ?? [])]
     : undefined
 
   return {
     agent: 'opencode' as const,
     rootDir: fileDiscovery.rootDir,
-    files: [...withoutSqliteDuplicates(fileDiscovery.files), ...sqliteFiles],
+    files: [...withSidecars(legacyFiles), ...sqliteFiles],
     ...(scopeFiles ? { scopeFiles } : {})
   }
 }

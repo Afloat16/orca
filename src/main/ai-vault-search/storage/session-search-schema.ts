@@ -53,7 +53,9 @@ CREATE TABLE IF NOT EXISTS files(
   -- Retry held-out failures only after the source mtime changes.
   failed_mtime_ms REAL,
   -- SHA-256 of bytes [0, byte_offset); lets a reread after restart append instead of replace.
-  prefix_hash TEXT
+  prefix_hash TEXT,
+  -- Composite message/part dependencies can change without touching the transcript stat.
+  content_signature TEXT
 );
 CREATE INDEX IF NOT EXISTS files_mtime ON files(mtime_ms);
 CREATE INDEX IF NOT EXISTS files_session_mtime ON files(session_row_id, mtime_ms);
@@ -130,13 +132,15 @@ export function openSessionSearchDatabase(path: string): SyncDatabase {
   })
 }
 
-/** Version 8 indexes predate the column; check under the write lock so concurrent openers add it once. */
+/** Version 8 indexes predate these columns; concurrent openers must add each only once. */
 export function addSessionSearchPrefixHashColumn(db: SyncDatabase): void {
   db.exec('BEGIN IMMEDIATE')
   try {
     const columns = db.prepare('PRAGMA table_info(files)').all()
-    if (!columns.some((column) => asRecord(column)?.name === 'prefix_hash')) {
-      db.exec('ALTER TABLE files ADD COLUMN prefix_hash TEXT')
+    for (const name of ['prefix_hash', 'content_signature']) {
+      if (!columns.some((column) => asRecord(column)?.name === name)) {
+        db.exec(`ALTER TABLE files ADD COLUMN ${name} TEXT`)
+      }
     }
     db.exec('COMMIT')
   } catch (error) {

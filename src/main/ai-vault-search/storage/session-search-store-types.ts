@@ -12,6 +12,7 @@ export type SessionSearchFileRow = {
   state: SessionSearchFileState
   failCount: number
   failedMtimeMs: number | null
+  contentSignature?: string | null
 }
 
 export type SessionSearchResumableCursor = { byteOffset: number; prefixHash: string }
