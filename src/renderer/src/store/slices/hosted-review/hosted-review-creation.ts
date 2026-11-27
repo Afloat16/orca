@@ -5,6 +5,7 @@ import type {
   CreateStackedHostedReviewResult
 } from '../../../../../shared/source-control/hosted-review/hosted-review-contracts'
 import { callRuntimeRpc } from '@/runtime/rpc/calls/runtime-rpc-call'
+import { translate } from '@/i18n/i18n'
 import { requireHostedReviewBaseIdentity } from '@/runtime/source-control/reviews/runtime-hosted-review-base-identity'
 import { normalizeHostedReviewBaseRef } from '../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import {
@@ -27,7 +28,10 @@ export function createHostedReviewCreation(
         return {
           ok: false,
           code: 'validation',
-          error: 'The workspace host is unresolved. Refresh the workspace and retry.'
+          error: translate(
+            'auto.store.slices.editor.gitOperationTarget.unresolvedHost',
+            'The workspace host is unresolved. Refresh the workspace and retry.'
+          )
         }
       }
       const target = hostedReviewRepoOwnerTarget(repo)
@@ -80,7 +84,10 @@ export function createHostedReviewCreation(
         return {
           ok: false,
           code: 'validation',
-          error: 'The workspace host is unresolved. Refresh the workspace and retry.'
+          error: translate(
+            'auto.store.slices.editor.gitOperationTarget.unresolvedHost',
+            'The workspace host is unresolved. Refresh the workspace and retry.'
+          )
         }
       }
       const target = hostedReviewRepoOwnerTarget(repo)
