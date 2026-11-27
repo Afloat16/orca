@@ -19,9 +19,9 @@ jobs:
       max-parallel: 2
       matrix:
         include:
-          - slug: opencode-json-message-parts
-            sha: 92ef85ee48deca222c15db71d6ace24c8848fab8
-            base: 9890ea181c0f9ae59fb82da64c4a6fbc0504a817
+          - slug: hosted-review-qualified-base
+            sha: 651fbaf1a7ad428279f4624d4fcff222c5096034
+            base: 6e70d9f8c20b5e813ee2510ce3338c6bfcd12157
     steps:
       - uses: actions/checkout@v6
         with:
