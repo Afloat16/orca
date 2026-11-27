@@ -60,7 +60,12 @@ function* iterateGitOutputLines(output: string): Generator<string> {
   }
 }
 
-function parseSuffixRemoteRefs(output: string, base: string, remotes: readonly string[]): string[] {
+function parseSuffixRemoteRefs(
+  output: string,
+  base: string,
+  remotes: readonly string[],
+  allowQualifiedBase: boolean
+): string[] {
   const refs = new Set<string>()
   for (const line of iterateGitOutputLines(output)) {
     const separator = line.indexOf(' ')
@@ -82,7 +87,7 @@ function parseSuffixRemoteRefs(output: string, base: string, remotes: readonly s
       isRemoteHeadRef(shortRef, remotes) ||
       // Bare HEAD names the remote symbolic slot, never feature/HEAD.
       (base === 'HEAD' && shortRef.endsWith('/HEAD')) ||
-      (shortRef !== base && !isSingleRemoteSegmentMatch)
+      (!(allowQualifiedBase && shortRef === base) && !isSingleRemoteSegmentMatch)
     ) {
       continue
     }
@@ -98,13 +103,17 @@ function parseSuffixRemoteRefs(output: string, base: string, remotes: readonly s
 async function listSuffixRemoteBaseRefs(
   run: HostedReviewGitRun,
   base: string,
-  remotes: readonly string[]
+  remotes: readonly string[],
+  allowQualifiedBase: boolean
 ): Promise<{ refs: string[]; unknown: boolean }> {
   try {
     const { stdout } = await run(['show-ref', '--', base], {
       maxBuffer: MAX_REMOTE_REF_OUTPUT_BYTES
     })
-    return { refs: parseSuffixRemoteRefs(stdout, base, remotes), unknown: false }
+    return {
+      refs: parseSuffixRemoteRefs(stdout, base, remotes, allowQualifiedBase),
+      unknown: false
+    }
   } catch (error) {
     // Pattern queries exit 1 on no match; overflow/repository/transport failures remain inconclusive and preserve the candidate.
     return isShowRefNoMatchError(error) ? { refs: [], unknown: false } : { refs: [], unknown: true }
@@ -146,6 +155,7 @@ export async function baseRefExistsOnRemote(
   options: HostedReviewExecutionOptions = {}
 ): Promise<boolean> {
   const base = normalizeHostedReviewBaseRef(candidate).trim()
+  const allowQualifiedBase = !candidate.trim().startsWith('refs/')
   if (!base) {
     return false
   }
@@ -170,7 +180,7 @@ export async function baseRefExistsOnRemote(
     // Probe conventional names too for stale origin/upstream refs after remote removal.
     const remoteNames = new Set(['origin', 'upstream', ...configuredRemotes])
     const candidateRefs = new Set<string>()
-    if (base.includes('/')) {
+    if (allowQualifiedBase && base.includes('/')) {
       // Qualified refs remain discoverable even after their remote was unconfigured.
       candidateRefs.add(`refs/remotes/${base}`)
     }
@@ -187,7 +197,12 @@ export async function baseRefExistsOnRemote(
       return true
     }
     // Preserve stale-remote suffix matching with a 10MiB bound after cheap exact probes.
-    const suffixResult = await listSuffixRemoteBaseRefs(run, base, configuredRemotes)
+    const suffixResult = await listSuffixRemoteBaseRefs(
+      run,
+      base,
+      configuredRemotes,
+      allowQualifiedBase
+    )
     return suffixResult.refs.length > 0 || suffixResult.unknown
   } catch {
     return true

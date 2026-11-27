@@ -120,7 +120,7 @@ export function useChecksPanelCreateReview(model: ChecksPanelCreateReviewInput) 
         return
       }
       const fields = generated ?? { base: prBase, title: prTitle, body: prBody, draft: prDraft }
-      const base = stripBaseRef(fields.base).trim()
+      const base = fields.base.trim()
       const title = fields.title.trim()
       const worktreePath = activeWorktreePath ?? repo.path
       const invalidFieldsError = !title
@@ -131,7 +131,8 @@ export function useChecksPanelCreateReview(model: ChecksPanelCreateReviewInput) 
               value0: hostedReviewCreateCopy.reviewLabel
             }
           )
-        : !base || stripBaseRef(base).toLowerCase() === stripBaseRef(branch).toLowerCase()
+        : !base ||
+            stripBaseRef(base).toLowerCase() === normalizeHostedReviewHeadRef(branch).toLowerCase()
           ? translate(
               'auto.components.right.sidebar.SourceControl.ae743199cd',
               'Choose a different base branch before creating a {{value0}}.',

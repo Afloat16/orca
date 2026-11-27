@@ -1,4 +1,6 @@
 import { getRepoIdFromWorktreeId } from '../../../../../shared/worktree/id'
+import { requireHostedReviewBaseIdentity } from '../reviews/runtime-hosted-review-base-identity'
+import { normalizeHostedReviewBaseRef } from '../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import { TEXT_GENERATION_CLIENT_TIMEOUT_MS } from '../../../../../shared/text-generation/text-generation-client-timeout'
 import { localizeTextGenerationResult } from '@/lib/text-generation/text-generation-error-copy'
 import {
@@ -103,6 +105,28 @@ export async function generateRuntimePullRequestFields(
   overrides?: RuntimeGeneratePullRequestFieldsOverrides
 ): Promise<RuntimeGeneratePullRequestFieldsResult> {
   const target = context.target
+  const baseBranch = normalizeHostedReviewBaseRef(input.base)
+  // A slash may be a configured remote on an older host, even when it is not origin/upstream.
+  const preserveBaseRef =
+    input.base.trim().startsWith('refs/remotes/') ||
+    (input.base.trim().startsWith('refs/') && baseBranch.includes('/'))
+  if (preserveBaseRef) {
+    if (
+      (target.kind === 'environment' && !context.worktreeId) ||
+      (target.kind === 'local' && !context.repoPath)
+    ) {
+      throw new Error('The workspace host is unresolved. Refresh the workspace and retry.')
+    }
+    await requireHostedReviewBaseIdentity(target, {
+      repoPath: context.repoPath ?? '',
+      repoId: context.worktreeId ? getRepoIdFromWorktreeId(context.worktreeId) : undefined,
+      worktreePath: context.worktreePath ?? undefined,
+      worktreeId: context.worktreeId,
+      connectionId: context.connectionId,
+      base: input.base
+    })
+  }
+  const generationInput = { ...input, base: preserveBaseRef ? input.base.trim() : baseBranch }
   if (target.kind === 'local' || !context.worktreeId) {
     const result = await window.api.git.generatePullRequestFields({
       worktreePath: resolveLocalWorktreePath(context),
@@ -110,7 +134,7 @@ export async function generateRuntimePullRequestFields(
       ...(context.worktreeId ? { worktreeId: context.worktreeId } : {}),
       repoId: context.worktreeId ? getRepoIdFromWorktreeId(context.worktreeId) : undefined,
       connectionId: context.connectionId,
-      ...input,
+      ...generationInput,
       ...(overrides?.sourceControlAiResolvedParams
         ? { sourceControlAiResolvedParams: overrides.sourceControlAiResolvedParams }
         : {}),
@@ -124,7 +148,7 @@ export async function generateRuntimePullRequestFields(
     'git.generatePullRequestFields',
     {
       worktree: toRuntimeWorktreeSelector(context.worktreeId),
-      ...input,
+      ...generationInput,
       ...getRuntimeCommitMessageSettings(context.target, context.prefs, context.connectionId),
       ...(overrides?.sourceControlAiResolvedParams
         ? { sourceControlAiResolvedParams: overrides.sourceControlAiResolvedParams }

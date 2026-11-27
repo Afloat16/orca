@@ -15,7 +15,7 @@ import type { ResolveSourceControlAiResult } from '../../../../../../shared/sour
 import type { SourceControlAiPrCreationDefaults } from '../../../../../../shared/source-control/ai/settings/source-control-ai-settings-types'
 import type { PullRequestFieldRevisions } from '@/store/slices/hosted-review/generation/pull-request-generation-state'
 import type { PullRequestGenerationOptions } from '@/store/slices/hosted-review/generation/pull-request-generation-auto-submit'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import { resolveGeneratedHostedReviewBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import type {
   GenerationSeed,
   PullRequestGenerationOutcome,
@@ -25,6 +25,7 @@ import type {
 
 type CreatePullRequestFieldGenerationOptions = {
   open: boolean
+  repoPath?: string
   submitting: boolean
   resolvedPullRequestAi: ResolveSourceControlAiResult | null
   base: string
@@ -68,6 +69,7 @@ type CreatePullRequestFieldGenerationResult = {
 
 export function useCreatePullRequestFieldGeneration({
   open,
+  repoPath,
   submitting,
   resolvedPullRequestAi,
   base,
@@ -149,6 +151,7 @@ export function useCreatePullRequestFieldGeneration({
       const requestContext = {
         // Pin generation to the worktree owner so focused-host navigation cannot retarget it.
         target,
+        repoPath,
         prefs: useAppStore.getState().settings,
         worktreeId,
         worktreePath,
@@ -167,7 +170,7 @@ export function useCreatePullRequestFieldGeneration({
         const result = await generateRuntimePullRequestFields(
           requestContext,
           {
-            base: stripBaseRef(base.trim()),
+            base: base.trim(),
             title,
             body,
             draft,
@@ -196,7 +199,10 @@ export function useCreatePullRequestFieldGeneration({
         if (!currentSeed || currentSeed.requestId !== requestId) {
           return { result: null }
         }
-        const shownFields = applyGeneratedFields(result.fields, currentSeed.fieldRevisions)
+        const shownFields = applyGeneratedFields(
+          { ...result.fields, base: resolveGeneratedHostedReviewBaseRef(result.fields.base, base) },
+          currentSeed.fieldRevisions
+        )
         useAppStore.getState().recordFeatureInteraction('ai-pr-generation')
         setGenerateError(null)
         return { result: shownFields }
@@ -231,6 +237,7 @@ export function useCreatePullRequestFieldGeneration({
       generationSeedRef,
       onBranchChangedByGeneration,
       resolvedPrDefaults.useTemplate,
+      repoPath,
       setGenerateError,
       setGenerating,
       target,

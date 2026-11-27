@@ -1,5 +1,3 @@
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
-
 export function resolveCreateReviewDefaultBaseRef({
   currentBaseRef,
   eligibilityDefaultBaseRef
@@ -8,5 +6,5 @@ export function resolveCreateReviewDefaultBaseRef({
   eligibilityDefaultBaseRef?: string | null
 }): string {
   // Prefer remote-validated defaults over local-only stack parents; manual base edits still win through resync suppression.
-  return stripBaseRef(eligibilityDefaultBaseRef?.trim() || currentBaseRef?.trim() || '')
+  return eligibilityDefaultBaseRef?.trim() || currentBaseRef?.trim() || ''
 }

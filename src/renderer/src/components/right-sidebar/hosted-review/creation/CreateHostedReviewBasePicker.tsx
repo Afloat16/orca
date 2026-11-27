@@ -7,7 +7,10 @@ import { useTranslate } from '@/i18n/use-translate'
 import type { LocalizedHostedReviewCopy } from '@/i18n/hosted-review-localized-copy'
 import { COMPOSER_FIELD_CLASS } from './create-hosted-review-composer-field-class'
 import { CreateHostedReviewComposerMessage } from './CreateHostedReviewComposerMessage'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import {
+  normalizeHostedReviewBaseRef as stripBaseRef,
+  hostedReviewBaseRefForBranch
+} from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 
 type CreateHostedReviewBasePickerProps = {
   copy: LocalizedHostedReviewCopy
@@ -54,8 +57,10 @@ export function CreateHostedReviewBasePicker({
   const fieldId = useId()
   const resultsId = useId()
 
+  const normalizedBase = stripBaseRef(base)
   const trimmedQuery = baseQuery.trim()
   const trimmedRepoDefault = repoDefaultBase?.trim() ?? ''
+  const displayedRepoDefault = stripBaseRef(trimmedRepoDefault)
   const showResults = editing && baseResults.length > 0
   // Name the default an emptied field will choose so resetting cannot be invisible.
   const showRepoDefaultHint = editing && trimmedQuery.length === 0 && trimmedRepoDefault.length > 0
@@ -74,9 +79,16 @@ export function CreateHostedReviewBasePicker({
     setActiveResult(-1)
   }
 
-  const commitSearch = (value: string): void => {
+  const commitSearch = (value: string, branchResult = false): void => {
     // Empty commits choose the repo default; before it resolves, preserve the committed base instead of guessing.
-    const nextBase = value.trim() || trimmedRepoDefault
+    const query = value.trim()
+    const nextBase = !query
+      ? trimmedRepoDefault
+      : branchResult
+        ? hostedReviewBaseRefForBranch(query)
+        : query === normalizedBase
+          ? base
+          : query
     if (nextBase) {
       setBase(nextBase)
     }
@@ -126,7 +138,8 @@ export function CreateHostedReviewBasePicker({
     }
     if (event.key === 'Enter') {
       event.preventDefault()
-      commitSearch(baseResults[activeResult] ?? baseQuery)
+      const result = baseResults[activeResult]
+      commitSearch(result ?? baseQuery, result !== undefined)
       return
     }
     if (event.key === 'Escape') {
@@ -175,8 +188,8 @@ export function CreateHostedReviewBasePicker({
             showResults && activeResult >= 0 ? `${resultsId}-${activeResult}` : undefined
           }
           aria-invalid={baseSameAsBranch || undefined}
-          title={editing ? undefined : base}
-          value={editing ? baseQuery : base}
+          title={editing ? undefined : normalizedBase}
+          value={editing ? baseQuery : normalizedBase}
           disabled={fieldsLocked}
           onFocus={(event) => {
             // Clear a stale programmatic-blur latch before the next real focus/blur cycle.
@@ -192,7 +205,7 @@ export function CreateHostedReviewBasePicker({
           onKeyDown={handleKeyDown}
           // Name the actual default, which may be trunk rather than main.
           placeholder={
-            trimmedRepoDefault ||
+            displayedRepoDefault ||
             t('auto.components.right.sidebar.SourceControl.e64a632456', 'main')
           }
           className={cn(COMPOSER_FIELD_CLASS, 'pl-2 pr-7')}
@@ -210,7 +223,7 @@ export function CreateHostedReviewBasePicker({
           className="max-h-40 overflow-auto rounded-md border border-input bg-popover p-1 shadow-xs scrollbar-sleek"
         >
           {baseResults.map((ref, index) => {
-            const selected = stripBaseRef(base) === ref
+            const selected = normalizedBase === ref
             return (
               <button
                 key={ref}
@@ -226,7 +239,7 @@ export function CreateHostedReviewBasePicker({
                 )}
                 onMouseDown={(event) => {
                   event.preventDefault()
-                  commitSearch(ref)
+                  commitSearch(ref, true)
                 }}
               >
                 <span className="truncate">{ref}</span>
@@ -242,7 +255,7 @@ export function CreateHostedReviewBasePicker({
           {t(
             'auto.components.right.sidebar.CreateHostedReviewBasePicker.da4d57c9c2',
             'Leave empty to use {{value0}}.',
-            { value0: trimmedRepoDefault }
+            { value0: displayedRepoDefault }
           )}
         </p>
       ) : null}

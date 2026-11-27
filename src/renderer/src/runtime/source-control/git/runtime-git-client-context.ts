@@ -60,6 +60,8 @@ export type RuntimeDiscoverCommitMessageModelsResult =
 export type RuntimeGitContext = {
   /** Transport to the worktree's owner. */
   target: RuntimeClientTarget
+  /** Registered repo root, distinct from a linked worktree path. */
+  repoPath?: string
   prefs?: RuntimeGitPrefs | null
   worktreeId: string | null | undefined
   worktreePath: string

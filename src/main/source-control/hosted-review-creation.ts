@@ -173,6 +173,8 @@ export async function getHostedReviewCreationEligibility(
     review: review ? { number: review.number, url: review.url } : null,
     reviewLookupOutcome,
     defaultBaseRef,
+    requestedBaseBranch:
+      normalizeHostedReviewBaseRef(candidateBase ?? defaultBaseRef ?? '') || null,
     head: branch || null,
     ...(githubRepository && isDefaultGitHubHost(githubRepository.host)
       ? { stackedCreationSupported: true }

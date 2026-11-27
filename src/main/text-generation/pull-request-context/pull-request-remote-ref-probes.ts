@@ -77,14 +77,15 @@ async function listExactRemoteBaseRefs(
   execGit: PullRequestGitExec,
   base: string,
   remotes: readonly string[],
-  options: ExactRefProbeExecOptions
+  options: ExactRefProbeExecOptions,
+  branchOnly: boolean
 ): Promise<{ refs: string[]; probeUnknown: boolean }> {
   // Only configured remote prefixes qualify a base; slash-containing branch names still need remote candidate probes.
   const isConfiguredQualifiedBase =
-    base.includes('/') && remotes.some((remote) => base.startsWith(`${remote}/`))
+    !branchOnly && base.includes('/') && remotes.some((remote) => base.startsWith(`${remote}/`))
   // Bare names are suffixes, not complete remote-tracking refs; probe exact spelling only for qualified candidates.
   const exactRefNames = new Set<string>([
-    ...(base.includes('/') ? [base] : []),
+    ...(!branchOnly && base.includes('/') ? [base] : []),
     ...(isConfiguredQualifiedBase
       ? []
       : [`origin/${base}`, `upstream/${base}`, ...remotes.map((remote) => `${remote}/${base}`)])
@@ -99,8 +100,14 @@ async function listExactRemoteBaseRefs(
   }
 }
 
-function parseSuffixRemoteRefs(output: string, base: string, remotes: readonly string[]): string[] {
+function parseSuffixRemoteRefs(
+  output: string,
+  base: string,
+  remotes: readonly string[],
+  branchOnly: boolean
+): string[] {
   const refs = new Set<string>()
+  const remoteNames = [...remotes].sort((left, right) => right.length - left.length)
   for (const line of iterateGitOutputLines(output)) {
     const separator = line.indexOf(' ')
     if (separator === -1) {
@@ -114,12 +121,16 @@ function parseSuffixRemoteRefs(output: string, base: string, remotes: readonly s
       continue
     }
     const shortRef = fullRef.slice('refs/remotes/'.length)
+    const remote =
+      remoteNames.find((name) => shortRef.startsWith(`${name}/`)) ?? shortRef.split('/')[0]
     if (
       !shortRef.includes('/') ||
       isRemoteHeadRef(shortRef, remotes) ||
       // Bare HEAD denotes the remote symbolic slot, not feature/HEAD.
       (base === 'HEAD' && shortRef.endsWith('/HEAD')) ||
-      (shortRef !== base && !shortRef.endsWith(`/${base}`))
+      (branchOnly
+        ? shortRef.slice(remote.length + 1) !== base
+        : shortRef !== base && !shortRef.endsWith(`/${base}`))
     ) {
       continue
     }
@@ -136,11 +147,12 @@ async function listSuffixRemoteBaseRefs(
   execGit: PullRequestGitExec,
   base: string,
   remotes: readonly string[],
-  options: ExactRefProbeExecOptions
+  options: ExactRefProbeExecOptions,
+  branchOnly: boolean
 ): Promise<string[]> {
   try {
     const { stdout } = await execGit(['show-ref', '--', base], options)
-    return parseSuffixRemoteRefs(stdout, base, remotes)
+    return parseSuffixRemoteRefs(stdout, base, remotes, branchOnly)
   } catch {
     // Overflow/transport failure is inconclusive; preserve the bare candidate rather than block generation.
     return []
@@ -151,13 +163,14 @@ function shouldSearchSuffixRemoteRefs(
   base: string,
   remotes: readonly string[],
   refs: readonly string[],
-  probeUnknown: boolean
+  probeUnknown: boolean,
+  branchOnly: boolean
 ): boolean {
   if (
     probeUnknown ||
     refs.length >= 2 ||
-    refs.includes(base) ||
-    remotes.some((remote) => base.startsWith(`${remote}/`))
+    (!branchOnly &&
+      (refs.includes(base) || remotes.some((remote) => base.startsWith(`${remote}/`))))
   ) {
     return false
   }
@@ -171,16 +184,29 @@ export async function getPullRequestRemoteRefState(
   base: string,
   maxBuffer: number
 ): Promise<PullRequestRemoteRefState> {
+  const branchOnly = base.startsWith('refs/heads/')
+  const reference = base
+  base = branchOnly
+    ? reference.slice('refs/heads/'.length)
+    : reference.startsWith('refs/remotes/')
+      ? reference.slice('refs/remotes/'.length)
+      : reference
   const probeOptions: ExactRefProbeExecOptions = { maxBuffer }
   const queryable = canQueryRemoteBaseRefs(base)
   const remotes = splitGitLines(await safeExec(execGit, ['remote'], probeOptions))
   const exactResult = queryable
-    ? await listExactRemoteBaseRefs(execGit, base, remotes, probeOptions)
+    ? await listExactRemoteBaseRefs(execGit, base, remotes, probeOptions, branchOnly)
     : { refs: [], probeUnknown: false }
   const suffixRefs =
     queryable &&
-    shouldSearchSuffixRemoteRefs(base, remotes, exactResult.refs, exactResult.probeUnknown)
-      ? await listSuffixRemoteBaseRefs(execGit, base, remotes, probeOptions)
+    shouldSearchSuffixRemoteRefs(
+      base,
+      remotes,
+      exactResult.refs,
+      exactResult.probeUnknown,
+      branchOnly
+    )
+      ? await listSuffixRemoteBaseRefs(execGit, base, remotes, probeOptions, branchOnly)
       : []
   return {
     remotes,

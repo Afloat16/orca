@@ -79,7 +79,7 @@ export function buildLocalBlockerHostedReviewCreationEligibility(
     provider,
     review: null,
     canCreate: false as const,
-    defaultBaseRef: normalizeHostedReviewBaseRef(status.baseRef ?? '').trim(),
+    defaultBaseRef: status.baseRef?.trim() ?? '',
     head: branch,
     // Local Git blockers cannot establish whether a hosted review exists.
     reviewLookupOutcome: 'unavailable' as const
@@ -113,7 +113,7 @@ export function buildCreatePrIntentUnavailableEligibility(
     provider,
     review: null,
     canCreate: false as const,
-    defaultBaseRef: normalizeHostedReviewBaseRef(status.baseRef ?? '').trim(),
+    defaultBaseRef: status.baseRef?.trim() ?? '',
     head: branch,
     reviewLookupOutcome: 'unavailable' as const
   }

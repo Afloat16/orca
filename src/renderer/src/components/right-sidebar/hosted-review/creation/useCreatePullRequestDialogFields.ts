@@ -11,7 +11,6 @@ import type {
   PullRequestFieldRevisions
 } from '@/store/slices/hosted-review/generation/pull-request-generation-state'
 import { resolveCreateReviewDefaultBaseRef } from './create-pull-request-base-ref-normalization'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import { resolveCreateReviewSeedText } from '../../../../../../shared/source-control/hosted-review/hosted-review-create-seed'
 import {
   createInitialPullRequestFieldRevisions,
@@ -143,7 +142,7 @@ export function useCreatePullRequestDialogFields({
       const nextFields = { base, title, body, draft }
       // Replace only fields unchanged since generation began.
       if (currentRevisions.base === seedRevisions.base) {
-        nextFields.base = stripBaseRef(fields.base)
+        nextFields.base = fields.base.trim()
         setBase(nextFields.base)
         setBaseQuery('')
         setBaseResults([])
@@ -224,6 +223,7 @@ export function useCreatePullRequestDialogFields({
     handleCancelGenerate
   } = useCreatePullRequestFieldGeneration({
     open,
+    repoPath: repo?.path,
     submitting,
     resolvedPullRequestAi,
     base,

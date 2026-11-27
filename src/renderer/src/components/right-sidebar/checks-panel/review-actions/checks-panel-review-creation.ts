@@ -3,7 +3,6 @@ import type {
   HostedReviewLookupOutcome
 } from '../../../../../../shared/source-control/hosted-review/hosted-review-contracts'
 import type { PRRefreshErrorType } from '../../../../../../shared/github/pull-requests/refresh/pull-request-refresh-types'
-import { normalizeHostedReviewBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import { isHostedReviewCreateEligibilityConfirmable } from '../../../../../../shared/source-control/hosted-review/hosted-review-create-confirmation'
 import type { HostedReviewLookupAuthority as ChecksPanelReviewLookup } from '../../../../../../shared/source-control/hosted-review/hosted-review-create-confirmation'
 // Share hard-error definitions so composer gating and empty-state copy cannot drift.
@@ -18,7 +17,7 @@ export function resolveChecksPanelHostedReviewBaseRef(input: {
 }
 
 function normalizeChecksPanelHostedReviewBaseRef(ref: string | null | undefined): string | null {
-  const normalizedRef = ref ? normalizeHostedReviewBaseRef(ref) : ''
+  const normalizedRef = ref?.trim() ?? ''
   return normalizedRef || null
 }
 

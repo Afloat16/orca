@@ -115,6 +115,7 @@ export type HostedReviewSummary = {
 
 export type CreateHostedReviewInput = {
   provider: HostedReviewProvider
+  /** Git base ref; explicit namespaces preserve literal branch prefixes. */
   base: string
   head?: string
   title: string
@@ -233,6 +234,8 @@ export type HostedReviewCreationEligibility = {
   nextAction: HostedReviewCreationNextAction
   reviewLookupOutcome: HostedReviewLookupOutcome
   defaultBaseRef?: string | null
+  /** Provider branch for the requested base, before a preview may fall back; absent on older hosts. */
+  requestedBaseBranch?: string | null
   head?: string | null
   title?: string | null
   body?: string | null

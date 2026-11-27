@@ -32,7 +32,7 @@ import type {
 } from '@/store/slices/hosted-review/generation/pull-request-generation-state'
 import type { PullRequestGenerationOptions } from '@/store/slices/hosted-review/generation/pull-request-generation-auto-submit'
 import type { HostedReviewProvider } from '../../../../../../shared/source-control/hosted-review/hosted-review-contracts'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import { resolveGeneratedHostedReviewBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import type { SourceControlStoreActions } from '../listing/use-store-actions'
 import type { SourceControlWorktreeContext } from '../listing/use-worktree-context'
 import type { SourceControlStatusRefresh } from '../sync/use-status-refresh'
@@ -147,13 +147,14 @@ export function useSourceControlPullRequestGeneration({
             {
               // Route generation to the repo owner, which may differ from the focused host.
               target: context.runtimeTarget,
+              repoPath: activeRepo.path,
               prefs: useAppStore.getState().settings,
               worktreeId: context.worktreeId,
               worktreePath: context.worktreePath,
               connectionId: context.connectionId
             },
             {
-              base: stripBaseRef(seed.base.trim()),
+              base: seed.base.trim(),
               title: seed.title,
               body: seed.body,
               draft: seed.draft,
@@ -184,7 +185,7 @@ export function useSourceControlPullRequestGeneration({
               record,
               requestId,
               result: {
-                base: stripBaseRef(result.fields.base),
+                base: resolveGeneratedHostedReviewBaseRef(result.fields.base, seed.base),
                 title: result.fields.title,
                 body: result.fields.body,
                 draft: result.fields.draft

@@ -8,10 +8,7 @@ import {
   getRuntimeRepoBaseRefDefault,
   searchRuntimeRepoBaseRefDetails
 } from '@/runtime/source-control/references/runtime-repo-client'
-import {
-  normalizeHostedReviewBaseRef as stripBaseRef,
-  normalizeCreateReviewBaseSearchResults
-} from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import { normalizeCreateReviewBaseSearchResults } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 
 type CreatePullRequestBaseRefDiscoveryOptions = {
   open: boolean
@@ -58,7 +55,7 @@ export function useCreatePullRequestBaseRefDiscovery({
     void getRuntimeRepoBaseRefDefault(repoHostId, repoId)
       .then((result) => {
         if (!stale && result.defaultBaseRef) {
-          setRepoDefault({ repoId, baseRef: stripBaseRef(result.defaultBaseRef) })
+          setRepoDefault({ repoId, baseRef: result.defaultBaseRef.trim() })
         }
       })
       .catch(() => undefined)

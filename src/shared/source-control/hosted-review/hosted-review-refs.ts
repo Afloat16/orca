@@ -12,6 +12,21 @@ export function normalizeHostedReviewBaseRef(ref: string): string {
     : normalized.replace(/^(origin|upstream)\//, '')
 }
 
+/** Branch names from search/provider results must not be reinterpreted as remote shorthand. */
+export function hostedReviewBaseRefForBranch(branch: string): string {
+  const name = branch.trim()
+  return name ? `refs/heads/${name}` : ''
+}
+
+export function resolveGeneratedHostedReviewBaseRef(generated: string, requested: string): string {
+  const base = generated.trim()
+  const original = requested.trim()
+  if (!base || base === original || base === normalizeHostedReviewBaseRef(original)) {
+    return original
+  }
+  return base.startsWith('refs/') ? base : hostedReviewBaseRefForBranch(base)
+}
+
 /** Exclude only a remote's direct symbolic HEAD, preserving branches like feature/HEAD. */
 export function isRemoteHeadRef(ref: string, remotes: readonly string[] = []): boolean {
   // Every true result ends in `/HEAD`, so ordinary refs can skip the remote copy+sort.
@@ -36,10 +51,9 @@ export function normalizeCreateReviewBaseSearchResults(
   const branches: string[] = []
   for (const result of results) {
     // APIs need branch names; detailed search resolves remote-qualified refs, including slash-containing remote names.
-    const branch =
-      result.refName.startsWith('refs/') && result.localBranchName
-        ? result.localBranchName.trim()
-        : normalizeHostedReviewBaseRef((result.localBranchName || result.refName).trim())
+    const branch = result.localBranchName
+      ? result.localBranchName.trim()
+      : normalizeHostedReviewBaseRef(result.refName)
     if (!branch || seen.has(branch)) {
       continue
     }

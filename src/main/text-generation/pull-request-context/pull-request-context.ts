@@ -117,28 +117,44 @@ function resolveComparisonBase(
   comparisonBase: string
   fetchTarget: RemoteBranch | null
 } {
-  const qualifiedBase = parseRemoteBranch(base, state.remotes)
+  const explicitLocal = base.startsWith('refs/heads/')
+  const explicitRemote = base.startsWith('refs/remotes/')
+  const branch = explicitLocal ? base.slice('refs/heads/'.length) : base
+  if (explicitRemote) {
+    return {
+      comparisonBase: base,
+      fetchTarget: parseRemoteBranch(base.slice('refs/remotes/'.length), state.remotes)
+    }
+  }
+  const qualifiedBase = explicitLocal ? null : parseRemoteBranch(base, state.remotes)
   if (qualifiedBase) {
     return { comparisonBase: qualifiedBase.ref, fetchTarget: qualifiedBase }
   }
-  if (state.refs.includes(base)) {
+  if (!explicitLocal && state.refs.includes(base)) {
     return { comparisonBase: base, fetchTarget: parseRemoteRef(base, state.remotes) }
   }
 
-  const preferredRemoteRefs = [`origin/${base}`, `upstream/${base}`]
+  const preferredRemoteRefs = [`origin/${branch}`, `upstream/${branch}`]
   for (const ref of preferredRemoteRefs) {
-    const parsed = parseRemoteRef(ref, state.remotes)
+    const parsed = explicitLocal
+      ? { remote: ref.slice(0, -(branch.length + 1)), branch, ref }
+      : parseRemoteRef(ref, state.remotes)
     if (parsed && (state.refs.includes(ref) || state.remotes.includes(parsed.remote))) {
-      return { comparisonBase: ref, fetchTarget: parsed }
+      return { comparisonBase: explicitLocal ? `refs/remotes/${ref}` : ref, fetchTarget: parsed }
     }
   }
 
   const matchingRefs = state.probeUnknown
     ? []
-    : state.refs.filter((ref) => ref.endsWith(`/${base}`))
+    : state.refs.filter((ref) => ref.endsWith(`/${branch}`))
   if (matchingRefs.length === 1) {
     const ref = matchingRefs[0]
-    return { comparisonBase: ref, fetchTarget: parseRemoteRef(ref, state.remotes) }
+    return {
+      comparisonBase: explicitLocal ? `refs/remotes/${ref}` : ref,
+      fetchTarget: explicitLocal
+        ? { remote: ref.slice(0, -(branch.length + 1)), branch, ref }
+        : parseRemoteRef(ref, state.remotes)
+    }
   }
 
   return { comparisonBase: base, fetchTarget: null }

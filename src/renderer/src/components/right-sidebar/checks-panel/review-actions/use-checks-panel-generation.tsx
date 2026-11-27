@@ -13,7 +13,7 @@ import {
 import type { RuntimeGeneratePullRequestFieldsOverrides } from '@/runtime/source-control/git/runtime-git-client-context'
 import type { ChecksPanelReviewState } from '../review-state/use-checks-panel-review-state'
 import type { ChecksPanelControllerState } from '../panel/use-checks-panel-controller-state'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import { resolveGeneratedHostedReviewBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import {
   createRunningPullRequestGenerationRecord,
   markPullRequestGenerationTerminalSeedRestored,
@@ -134,13 +134,14 @@ export function useChecksPanelGeneration(model: ChecksPanelGenerationInput) {
             {
               // Route by the workspace owner captured at click time.
               target: context.runtimeTarget,
+              repoPath: repo.path,
               prefs: useAppStore.getState().settings,
               worktreeId: context.worktreeId,
               worktreePath: context.worktreePath,
               connectionId: context.connectionId
             },
             {
-              base: stripBaseRef(seed.base.trim()),
+              base: seed.base.trim(),
               title: seed.title,
               body: seed.body,
               draft: seed.draft,
@@ -168,7 +169,7 @@ export function useChecksPanelGeneration(model: ChecksPanelGenerationInput) {
               record,
               requestId,
               result: {
-                base: stripBaseRef(result.fields.base),
+                base: resolveGeneratedHostedReviewBaseRef(result.fields.base, seed.base),
                 title: result.fields.title,
                 body: result.fields.body,
                 draft: result.fields.draft

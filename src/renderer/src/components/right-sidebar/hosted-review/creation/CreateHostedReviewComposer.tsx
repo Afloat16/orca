@@ -27,7 +27,10 @@ import {
   hostedReviewProviderSupportsDraft,
   type HostedReviewProvider
 } from '../../../../../../shared/source-control/hosted-review/hosted-review-contracts'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import {
+  normalizeHostedReviewBaseRef as stripBaseRef,
+  normalizeHostedReviewHeadRef
+} from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import type { HostedReviewStackParent } from '../provider-actions/useHostedReviewStackParent'
 import type {
   DropdownActionKind,
@@ -145,7 +148,7 @@ export function CreateHostedReviewComposer({
   const setStacked = (enabled: boolean): void => {
     setStackSelection({ key: stackSelectionKey ?? '', enabled })
   }
-  const strippedBranch = stripBaseRef(branch)
+  const strippedBranch = normalizeHostedReviewHeadRef(branch)
   const baseSameAsBranch = normalizedBase.toLowerCase() === strippedBranch.toLowerCase()
   const createDisabled =
     imageUploadPending ||

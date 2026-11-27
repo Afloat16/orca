@@ -10,10 +10,7 @@ import type {
   HostedReviewCreationEligibility,
   HostedReviewProvider
 } from '../../../../../../shared/source-control/hosted-review/hosted-review-contracts'
-import {
-  normalizeHostedReviewBaseRef,
-  normalizeHostedReviewHeadRef
-} from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import { normalizeHostedReviewHeadRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import type { GitStatusEntry } from '../../../../../../shared/git/status/git-status-types'
 import { summarizeCommitFailure } from '../../../../../../shared/source-control/recovery/source-control-commit-failure'
 import { getStageAllPaths } from '../../../../../../shared/source-control/listing/source-control-discard-all-sequence'
@@ -131,7 +128,7 @@ export function resolveCreatePrIntentReviewBase({
   composerBaseRef?: string | null
 }): string {
   // Match the composer's remote-validated eligibility base, correcting local-only stack parents; fall back only when no default exists.
-  return normalizeHostedReviewBaseRef(
+  return (
     eligibilityDefaultBaseRef?.trim() || currentBaseRef?.trim() || composerBaseRef?.trim() || ''
   )
 }

@@ -32,7 +32,7 @@ export type UseCreatePullRequestDialogFieldsOptions = {
   workspace?: WorkspaceAttachmentMetadata | null
   eligibility: HostedReviewCreationEligibility | null
   currentBaseRef?: string | null
-  repo?: Pick<Repo, 'sourceControlAi'> | null
+  repo?: Pick<Repo, 'sourceControlAi' | 'path'> | null
   /** Generation preferences; routing comes from `target`. */
   settings: SourceControlAiSettingsInput | null
   /** The worktree owner's transport. */

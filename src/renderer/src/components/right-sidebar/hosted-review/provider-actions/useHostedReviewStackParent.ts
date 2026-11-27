@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import type { HostedReviewInfo } from '../../../../../../shared/source-control/hosted-review/hosted-review-contracts'
-import { normalizeHostedReviewBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
+import {
+  normalizeHostedReviewBaseRef,
+  normalizeHostedReviewHeadRef
+} from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 
 export type HostedReviewStackParent = Pick<HostedReviewInfo, 'number' | 'url'>
 
@@ -39,7 +42,7 @@ export function useHostedReviewStackParent({
 }: UseHostedReviewStackParentOptions): HostedReviewStackParent | null {
   const normalizedBase = normalizeHostedReviewBaseRef(base).trim()
   const normalizedDefault = normalizeHostedReviewBaseRef(repoDefaultBase ?? '').trim()
-  const normalizedHead = normalizeHostedReviewBaseRef(head).trim()
+  const normalizedHead = normalizeHostedReviewHeadRef(head).trim()
   const canLookup =
     enabled &&
     repoPath.length > 0 &&

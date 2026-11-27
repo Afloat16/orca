@@ -1,15 +1,32 @@
 import { expect, it } from 'vitest'
-import { normalizeHostedReviewBaseRef } from './hosted-review-refs'
+import {
+  hostedReviewBaseRefForBranch,
+  normalizeHostedReviewBaseRef,
+  normalizeCreateReviewBaseSearchResults,
+  resolveGeneratedHostedReviewBaseRef
+} from './hosted-review-refs'
 
-it('preserves branch prefixes after removing one explicit ref namespace', () => {
-  expect(normalizeHostedReviewBaseRef('refs/heads/origin/topic')).toBe('origin/topic')
+it('keeps a literal branch identity through explicit refs, search and generated fields', () => {
+  const names = [
+    'origin/topic',
+    'upstream/topic',
+    'refs/remotes/origin/topic',
+    'team/topic',
+    'main'
+  ]
+  for (const branch of names) {
+    const ref = hostedReviewBaseRefForBranch(branch)
+    expect(normalizeHostedReviewBaseRef(ref)).toBe(branch)
+    expect(resolveGeneratedHostedReviewBaseRef(branch, ref)).toBe(ref)
+  }
   expect(normalizeHostedReviewBaseRef('refs/remotes/origin/origin/topic')).toBe('origin/topic')
-  expect(normalizeHostedReviewBaseRef('refs/heads/upstream/topic')).toBe('upstream/topic')
-  expect(normalizeHostedReviewBaseRef('refs/heads/refs/remotes/origin/topic')).toBe(
-    'refs/remotes/origin/topic'
-  )
   expect(normalizeHostedReviewBaseRef('origin/main')).toBe('main')
-  expect(normalizeHostedReviewBaseRef('upstream/main')).toBe('main')
   expect(normalizeHostedReviewBaseRef('refs/remotes/origin/main')).toBe('main')
-  expect(normalizeHostedReviewBaseRef(' refs/heads/feature/topic ')).toBe('feature/topic')
+  expect(
+    normalizeCreateReviewBaseSearchResults([
+      { refName: 'origin/origin/topic', localBranchName: 'origin/topic' },
+      { refName: 'refs/heads/origin/topic', localBranchName: 'origin/topic' },
+      { refName: 'upstream/main', localBranchName: 'main' }
+    ])
+  ).toEqual(['origin/topic', 'main'])
 })

@@ -7,7 +7,6 @@ import type {
   PullRequestFieldRevisions
 } from '@/store/slices/hosted-review/generation/pull-request-generation-state'
 import { resolveCreateReviewSeedText } from '../../../../../../shared/source-control/hosted-review/hosted-review-create-seed'
-import { normalizeHostedReviewBaseRef as stripBaseRef } from '../../../../../../shared/source-control/hosted-review/hosted-review-refs'
 import {
   createInitialPullRequestFieldRevisions,
   type GenerationSeed,
@@ -205,7 +204,7 @@ export function useCreatePullRequestFieldSeeding({
     restoredExternalGenerationSeedRef.current = externalGenerationSeedRestoreKey
     fieldRevisionsRef.current = { ...externalGenerationSeedFieldRevisions }
     baseEditedByUserRef.current = true
-    setBase(stripBaseRef(externalGenerationSeed.base))
+    setBase(externalGenerationSeed.base.trim())
     setTitle(externalGenerationSeed.title)
     setBody(externalGenerationSeed.body)
     setDraft(externalGenerationSeed.draft)
