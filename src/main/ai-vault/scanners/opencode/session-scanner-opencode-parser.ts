@@ -28,7 +28,10 @@ import { shouldCaptureFullFirstUserPrompt } from '../../prompts/session-scanner-
 import { asRecord } from '../../parsing/session-record-fields'
 import { extractString } from '../../../../shared/text/trimmed-string'
 import { timeObjectValue, timestampMs } from '../../parsing/session-record-time'
-import { normalizeTitleText } from '../../parsing/session-scanner-text-normalization'
+import {
+  extractPreviewContentText,
+  normalizeTitleText
+} from '../../parsing/session-scanner-text-normalization'
 import { tokenTotal } from '../../parsing/session-scanner-token-values'
 import { openCodeToolInput, openCodeToolOutcome } from './session-scanner-opencode-tool-state'
 
@@ -178,7 +181,8 @@ async function readOpenCodePreviewTail(
     const content = record.content ?? (await readOpenCodeMessageParts(storageRoot, name, signal))
     tail.set(index, content)
     const { blocks } = decodeSessionMessage(role, content, null, { includeTools: false })
-    if (blocks.some((block) => block.kind === 'text')) {
+    const textParts = blocks.flatMap((block) => (block.kind === 'text' ? [block.text] : []))
+    if (extractPreviewContentText(textParts, role) !== null) {
       previews++
     }
   }

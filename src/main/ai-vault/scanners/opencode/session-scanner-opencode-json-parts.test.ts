@@ -154,3 +154,38 @@ it('reads only the newest preview parts when listing and the first prompt parts 
     await rm(root, { recursive: true, force: true })
   }
 })
+
+it('keeps earlier visible previews when newer part messages normalize to no preview', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'orca-opencode-json-visible-preview-'))
+  const time = 1784109600000
+  try {
+    const path = join(root, 'session', 'project', 'ses_visible.json')
+    await put(path, { id: 'ses_visible', directory: root, time: { created: time } })
+    const texts = [
+      'Earlier useful preview.',
+      ' \t\n',
+      '<system-reminder>Context only.</system-reminder>',
+      ' \t\n',
+      '<goal_context>Context only.</goal_context>',
+      ' \t\n',
+      '<current_datetime>2026-07-15</current_datetime>'
+    ]
+    for (const [index, text] of texts.entries()) {
+      const id = `msg_${index}`
+      await put(join(root, 'message', 'ses_visible', `${id}.json`), {
+        id,
+        role: index === 0 ? 'user' : 'assistant',
+        time: { created: time + index }
+      })
+      await put(join(root, 'part', id, 'prt_01.json'), { type: 'text', text })
+    }
+    const file = { path, mtimeMs: time, modifiedAt: '2026-07-15T10:00:00.000Z' }
+    const full = await parseOpenCodeSessionFile(file, 'linux', { active: true, push: () => {} })
+    expect(full?.previewMessages.map(({ text }) => text)).toEqual(['Earlier useful preview.'])
+
+    const listing = await parseOpenCodeSessionFile(file, 'linux')
+    expect(listing?.previewMessages.map(({ text }) => text)).toEqual(['Earlier useful preview.'])
+  } finally {
+    await rm(root, { recursive: true, force: true })
+  }
+})
