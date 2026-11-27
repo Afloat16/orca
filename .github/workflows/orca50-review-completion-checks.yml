@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - slug: opencode-main-compatible-review-fixes
-            sha: d9a05c3882c493d04fbc521c6f4031b85f2babcb
+            sha: 981975040d7d71e231eb3c31965f9f0d5d9eb18f
             base: 6a8e7f533cf9f6e40afbc090ac35f42efb2e9b79
     steps:
       - uses: actions/checkout@v6
@@ -58,7 +58,7 @@ jobs:
           import subprocess
           
           candidate = os.environ["CANDIDATE_SHA"]
-          baseline = "60b4bdf74f63d5931817182d42713b51c2458c96"
+          baseline = "d9a05c3882c493d04fbc521c6f4031b85f2babcb"
           test_path = "src/main/ai-vault/scanners/opencode/session-scanner-opencode-json-parts.test.ts"
           test_name = "keeps earlier visible previews when newer part messages normalize to no preview"
           report = Path(os.environ["RUNNER_TEMP"]) / "opencode-preview-baseline.json"
