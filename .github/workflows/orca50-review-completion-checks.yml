@@ -19,11 +19,8 @@ jobs:
       max-parallel: 2
       matrix:
         include:
-          - slug: git-history-worktree-path-framing
-            sha: ba2efdf6b77bb26e38e62eaac1b1d6c0a1c04924
-            base: 9890ea181c0f9ae59fb82da64c4a6fbc0504a817
-          - slug: runtime-repair-rollback
-            sha: d4086e65cd501133998a54835ecb09cd517da302
+          - slug: opencode-json-message-parts
+            sha: 2c86f32e2447a3cdcdb74917fcedbe30507bc0bc
             base: 9890ea181c0f9ae59fb82da64c4a6fbc0504a817
     steps:
       - uses: actions/checkout@v6
