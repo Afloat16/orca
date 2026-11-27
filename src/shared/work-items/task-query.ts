@@ -286,9 +286,9 @@ export function stripRepoQualifiers(rawQuery: string): string {
   const kept: string[] = []
   for (const { value: token, raw } of tokenizeSearchQueryWithRaw(rawQuery.trim())) {
     // Why: parseTaskQuery reads quoted tokens as free text, so "is:closed" and "repo:x/y" must stay quoted.
-    // Double quotes because GitHub search ignores single-quoted phrases.
+    // Double quotes suit GitHub search, but retain mixed quoting that this tokenizer cannot escape.
     if (raw.startsWith('"') || raw.startsWith("'")) {
-      kept.push(`"${token}"`)
+      kept.push(token.includes('"') ? raw : `"${token}"`)
       continue
     }
     if (/^repo:[^\s]+$/i.test(token)) {

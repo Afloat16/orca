@@ -17,4 +17,8 @@ it('removes repo filters without turning quoted search text into filters', () =>
   expect(stripRepoQualifiers("'tab bar' -label:'needs triage' repo:a/b")).toBe(
     '"tab bar" -label:"needs triage"'
   )
+  const mixedQuotes = `'a" is:closed "b'`
+  const mixedQuery = stripRepoQualifiers(`repo:o/p ${mixedQuotes}`)
+  expect(mixedQuery).toBe(mixedQuotes)
+  expect(parseTaskQuery(mixedQuery).state).toBeNull()
 })
