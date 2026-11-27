@@ -165,10 +165,10 @@ it('keeps earlier visible previews when newer part messages normalize to no prev
       'Earlier useful preview.',
       ' \t\n',
       '<system-reminder>Context only.</system-reminder>',
-      ' \t\n',
-      '<goal_context>Context only.</goal_context>',
-      ' \t\n',
-      '<current_datetime>2026-07-15</current_datetime>'
+      ...Array.from(
+        { length: 6 },
+        () => '<goal_context>x</goal_context>::orca-visual{file="chart.html"}'
+      )
     ]
     for (const [index, text] of texts.entries()) {
       const id = `msg_${index}`

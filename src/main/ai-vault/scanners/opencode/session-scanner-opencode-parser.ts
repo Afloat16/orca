@@ -30,6 +30,7 @@ import { extractString } from '../../../../shared/text/trimmed-string'
 import { timeObjectValue, timestampMs } from '../../parsing/session-record-time'
 import {
   extractPreviewContentText,
+  normalizePreviewText,
   normalizeTitleText
 } from '../../parsing/session-scanner-text-normalization'
 import { tokenTotal } from '../../parsing/session-scanner-token-values'
@@ -182,7 +183,7 @@ async function readOpenCodePreviewTail(
     tail.set(index, content)
     const { blocks } = decodeSessionMessage(role, content, null, { includeTools: false })
     const textParts = blocks.flatMap((block) => (block.kind === 'text' ? [block.text] : []))
-    if (extractPreviewContentText(textParts, role) !== null) {
+    if (normalizePreviewText(extractPreviewContentText(textParts, role) ?? '', role) !== null) {
       previews++
     }
   }
