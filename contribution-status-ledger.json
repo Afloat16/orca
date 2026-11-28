@@ -5289,7 +5289,7 @@
       }
     }
   },
-  "updatedAt": "2026-11-27T22:15:50Z",
+  "updatedAt": "2026-11-28T03:48:35Z",
   "verifiedMainCommitCredit": [
     {
       "originalPr": 50524,
@@ -6048,16 +6048,16 @@
     "publicFollowupUpdatedAt": "2026-11-27T11:13:27Z",
     "finalizedAt": "2026-11-27T11:17:14Z",
     "latestScheduledAudit": {
-      "observedAt": "2026-11-27T22:15:50Z",
+      "observedAt": "2026-11-28T03:48:35Z",
       "observationTimeMeaning": "Start of non-atomic audit",
-      "main": "5f27429c3c61ac74efa0fc7304229a6c247d29c1",
+      "main": "1c5ace9afb04edb74fff663286df2217655e1ebb",
       "nonAtomicSnapshot": true,
       "allAuthoredPRsRead": 51,
       "allContinuationPRsRead": 33,
-      "previousVerifiedMain": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+      "previousVerifiedMain": "5f27429c3c61ac74efa0fc7304229a6c247d29c1",
       "previousVerifiedMainAncestry": {
         "status": "ahead",
-        "aheadBy": 91,
+        "aheadBy": 144,
         "behindBy": 0
       },
       "newAuthoredMerges": [],
@@ -6211,10 +6211,10 @@
       },
       "newSubmission": false,
       "newTechnicalReviewCorrections": false,
-      "reviewObservation": "Re-read all 15 open PR discussions and the closed #50659 and merged #50781 follow-up discussions. No new actionable technical review or executed CI failure; old #50581 and #50639 review findings have published responses and verified historical fixes.",
-      "conflictObservation": "Raw pull API confirms #50639 dirty, other 14 unstable but mergeable. Current main managed-runtime-release-install.ts blob 0ea25dd06a6cf82f0cd72f3d04ef2364059b9136 is unchanged from previous verified main. Exact repository validation remains unavailable in execution environment (Node 22.16.0, no pnpm or Bun, GitHub DNS failure). No unvalidated source was pushed.",
-      "scopeSearch": "Author search from replacement publication time returned only known #50754. #50656 remains open. Searches for #50656, #50659, #50781 and #50638 returned only known PRs.",
-      "creditObservation": "All 32 canonical maintainer successor merged_at and merge commit SHAs re-read, unchanged; previous verified main is ancestor of current main, so recorded final commit authorship remains applicable."
+      "reviewObservation": "Re-read all 15 open PR discussions and review threads, plus #50659 and #50781 discussions. No new comments since the prior audit, no unresolved inline review threads, no new executed CI failures. #50581 remains at c02eb904; its prior review threads remain resolved.",
+      "conflictObservation": "Repeated PR reads confirm #50639 is not mergeable and the other 14 are mergeable. Current main managed-runtime-release-install.ts blob 0ea25dd06a6cf82f0cd72f3d04ef2364059b9136 is unchanged; the existing Windows retry/cancellation publication conflict remains. Fresh execution-environment check: Node v22.16.0; no pnpm or Bun; git ls-remote failed because github.com could not be resolved. No unvalidated code pushed.",
+      "scopeSearch": "Afloat16 author search since #50754 creation returned only that known PR; open PR search returned 49 results. Recent successor searches for Afloat/Afloat16 and #50656/#50659/#50639/#50781 did not identify a new continuation. No new submissions.",
+      "creditObservation": "All 51 original/replacement PRs and all 33 known continuation PRs re-read. Two authored merged_at and 32 canonical successor merged_at and merge commit hashes remain unchanged. Previous verified main is ancestor of current main; immutable final commit credit remains valid."
     },
     "scheduledAuditHistory": [
       {
@@ -6256,6 +6256,175 @@
           50639
         ],
         "newSubmission": false
+      },
+      {
+        "observedAt": "2026-11-27T22:15:50Z",
+        "observationTimeMeaning": "Start of non-atomic audit",
+        "main": "5f27429c3c61ac74efa0fc7304229a6c247d29c1",
+        "nonAtomicSnapshot": true,
+        "allAuthoredPRsRead": 51,
+        "allContinuationPRsRead": 33,
+        "previousVerifiedMain": "02115c64fde3c56908f47fa9f73f03ace21b12ac",
+        "previousVerifiedMainAncestry": {
+          "status": "ahead",
+          "aheadBy": 91,
+          "behindBy": 0
+        },
+        "newAuthoredMerges": [],
+        "newMaintainerMerges": [],
+        "accountOpenPRSearchResults": 49,
+        "upstreamActionRequiredPRs": [
+          50594,
+          50668,
+          50607,
+          50507,
+          50543,
+          50560,
+          50562,
+          50532,
+          50688,
+          50536,
+          50686,
+          50539,
+          50581,
+          50637,
+          50639
+        ],
+        "openPRs": [
+          {
+            "number": 50594,
+            "head": "af94d11b764a4c2cb290f36ee7e19013e1cd6104",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50668,
+            "head": "46f894534a81d6e33939c9fc6ee64a2eeed1d8c9",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50607,
+            "head": "64e24ab5fe445acc312b3786a494315c89f279e1",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50507,
+            "head": "9e2acd9f3ea62b265b87af9904adcfa7c18dde5c",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50543,
+            "head": "91a0e6cd9e92c75ddead94d3081737ec0d383d8a",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50560,
+            "head": "a623014fc8481d882cdb169bd280b5e1a3bb18b7",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50562,
+            "head": "aeddc318ba144a52a1d70adc3691ee56cd546ea6",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50532,
+            "head": "41f8fb39ac5cd2ea7d59a684b37482d50dc9a7f1",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50688,
+            "head": "3922a17a93aa048c1e08f257828527ce988594b6",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50536,
+            "head": "7da79774a4ab2738f3e934c221059b203394e9ee",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50686,
+            "head": "c2a8d5ed8388a6abc879ce38c59267127d80e276",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50539,
+            "head": "8e7c2464e6c9feeedb9c0099dce2d01e5addf231",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50581,
+            "head": "c02eb904887adf70d31cb8bf4a482e85ced85dd1",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50637,
+            "head": "8952b3137320118e0b119a5845296f9a2d6fcffc",
+            "mergeable": true,
+            "mergeableState": "unstable",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          },
+          {
+            "number": 50639,
+            "head": "d4086e65cd501133998a54835ecb09cd517da302",
+            "mergeable": false,
+            "mergeableState": "dirty",
+            "mergedAt": null,
+            "workflowConclusion": "action_required"
+          }
+        ],
+        "alternateContinuation": {
+          "originalPr": 50628,
+          "pr": 50752,
+          "state": "closed",
+          "mergedAt": null,
+          "head": "a28da02a07ae258427156e451d0d2f588ce6c25a"
+        },
+        "newSubmission": false,
+        "newTechnicalReviewCorrections": false,
+        "reviewObservation": "Re-read all 15 open PR discussions and the closed #50659 and merged #50781 follow-up discussions. No new actionable technical review or executed CI failure; old #50581 and #50639 review findings have published responses and verified historical fixes.",
+        "conflictObservation": "Raw pull API confirms #50639 dirty, other 14 unstable but mergeable. Current main managed-runtime-release-install.ts blob 0ea25dd06a6cf82f0cd72f3d04ef2364059b9136 is unchanged from previous verified main. Exact repository validation remains unavailable in execution environment (Node 22.16.0, no pnpm or Bun, GitHub DNS failure). No unvalidated source was pushed.",
+        "scopeSearch": "Author search from replacement publication time returned only known #50754. #50656 remains open. Searches for #50656, #50659, #50781 and #50638 returned only known PRs.",
+        "creditObservation": "All 32 canonical maintainer successor merged_at and merge commit SHAs re-read, unchanged; previous verified main is ancestor of current main, so recorded final commit authorship remains applicable."
       }
     ]
   },
